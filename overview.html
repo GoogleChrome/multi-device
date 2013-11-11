@@ -1,0 +1,186 @@
+{% include "chrome/mobile/_local_variables.html" %}
+<html devsite>
+  <head>
+    <title>Google Chrome for Android</title>
+    <meta name="project_path" value="/chrome/mobile/_project.yaml" />
+    <meta name="book_path" value="/chrome/mobile/_book.yaml" />
+  </head>
+  <body>
+
+<p>Your Android users can experience the fast, clean, and easy to use Chrome interface tailored to mobile devices. Chrome for Android lets you develop HTML5 apps across all devices &emdash; desktop, tablet, and mobile.</p>
+
+<p>Google Chrome is available on Android devices with Android 4.0 (Ice Cream Sandwich) and later versions. You can also download it from  <a href="https://play.google.com/store/apps/details?id=com.android.chrome">Google Play</a>.</p>
+
+<p>For a complete list of developer features in Chrome, see <a href="http://chromestatus.com/">chromestatus.com</a>.</p>
+
+<h2 id="html5features">A first-class browsing experience</h2>
+
+<p>When the user signs into Chrome on one device, the tabs and browsing history of that session are available to the user when she signs into Chrome on another device. Note, it's the entire page content that gets synchronized between Chrome instances, not just the URL, so the user doesn't have to resubmit credentials to see a boarding pass or an article on a site that requires a login.</p>
+
+<p>The address bar uses prefetching to fill in URLs and performs search queries with suggestions based on browsing history and local bookmarks. To save bandwidth, this feature only runs when the user is connected to a wifi network.</p>
+
+<p>Highlights of this user experience include:</p>
+
+<ul>
+  <li>Smooth scrolling of independent elements on the same page</li>
+  <li>Fixed-position elements that hold their spot while the user scrolls through the page</li>
+  <li>Native inertial scrolling by default</li>
+  <li>A much improved <a href="http://www.html5rocks.com/mobile/touch.html">multi-touch</a> implementation</li>
+  <li>HTML date/time pickers</li>
+  <li><a href="https://bugs.webkit.org/show_bug.cgi?id=84186">Text auto-sizing</a>, also known as font boosting
+</ul>
+
+<p>With these improvements, Chrome for Android enables interactive mobile web experiences, as illustrated in these snapshots:</p>
+
+<div class="foo">
+<p>
+<style>
+  .foo img {
+    float: left;
+    width: 180px;
+    margin: 0 10px 20px 0;
+  }
+  div.clr { clear: both; }
+</style>
+
+<img src="/chrome/mobile/images/samples/gmail.png"/>
+<img src="/chrome/mobile/images/samples/soundcloud.png"/>
+<img src="/chrome/mobile/images/samples/grooveshark.png"/>
+<img src="/chrome/mobile/images/samples/twitter.png"/>
+<img src="/chrome/mobile/images/samples/workflowy.png"/>
+</p>
+</div>
+
+<div class="clr"></div>
+
+<p>See all the <a href="http:/www.google.com/intl/en/chrome/android/features.html">Chrome for Android features</a> such as tabs, incognito mode, and sync across devices for the user's Google account.</p>
+
+<p>Enter <code>chrome://about</code> in the Chrome address bar to see more information about Chrome features.</li>
+
+<h2>Performance</h2>
+
+<p>Chrome for Android brings to small devices the same multi-process architecture, GPU-accelerated rendering, and the V8 JavaScript engine - all optimized for mobile architectures. Chrome for Android delivers fast graphics performance through:</p>
+
+<ul>
+  <li>GPU acceleration for the <a href="http://www.html5rocks.com/tutorials/canvas/performance"><code>canvas</code> element</a></li>
+  <li>Fluid CSS3 transforms and transitions</li>
+  <li>Support for <code>requestAnimationFrame</code> for more efficient animations</li>
+</ul>
+
+<h2>Use Developer Tools to find problems&mdash;and fix them</h2>
+
+<p>Debugging web pages on the small screen is difficult. There's just not enough real estate to inspect elements and resources on the device. Now you can debug mobile web sites with the full suite of <a href="chrome-developer-tools">Chrome Developer Tools</a> running on a desktop browser that's connected to your phone via USB. See <a href="/chrome/mobile/docs/debugging">Remote Debugging</a> for further details.</p>
+
+<p>In addition to the powerful Chrome Developer Tools, Chrome for Android
+provides more advanced developer features:</p>
+<ul>
+  <li>GPU diagnostics: <code>chrome://gpu-internals</code></li>
+  <li>AppCache debugging: <code>chrome://appcache-internals</code></li>
+  <li>Net stack debugging: <code>chrome://net-internals</code></li>
+</ul>
+
+<p>You can also use the <a href="http://docs.webplatform.org/wiki/apis/resource_timing">Resource Timing</a> and <a href="http://docs.webplatform.org/wiki/apis/user_timing">User Timing</a> APIs to analyze application performance.</p>
+
+<h2>Working offline</h2>
+
+<p>Working online is convenient, but connections sometimes fail when the signal
+is blocked or nonexistent. Chrome for Android supports the latest open web
+HTML5 features that address this concern, including:</p>
+
+<ul>
+  <li><a href="http://docs.webplatform.org/wiki/tutorials/appcache_beginner
+    ">AppCache</a> or application cache.</li>
+  <li><a href="http://docs.webplatform.org/wiki/apis/filesystem">FileSystem</a> and <a href="http://docs.webplatform.org/wiki/apis/file">File APIs</a> (File, FileList, FileReader, Blob)</li>
+  <li><a href="http://docs.webplatform.org/wiki/tutorials/offline_storage">localStorage</a> for storing simple key-value pairs</li>
+  <li><a href="http://docs.webplatform.org/wiki/tutorials/web_databases">WebSQL</a> for relational data (deprecated)</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/IndexedDB">IndexedDB</a>, a standard indexed data store</li>
+</ul>
+
+<p>For more about off-line storage, see <a
+  href="http://docs.webplatform.org/wiki/tutorials/offline_and_storage">these articles</a>.</p>
+
+<h2>Standards and APIs</h2>
+
+<p>Chrome for Android supports HTML5 development with many features.</p>
+
+<h3>CSS and presentation</h3>
+
+<p>New CSS3 artifacts are available:</p>
+
+<ul>
+  <li>Support for the standard <a href="http://docs.webplatform.org/wiki/css/functions/calc">CSS calc</a> function (prefixed as -webkit-calc)</li>
+  <li><a href="http://docs.webplatform.org/wiki/tutorials/css_filters">CSS Filters</a> are supported (prefixed as -webkit-filter)</li>
+  <li>The <a href="https://developer.mozilla.org/en-US/docs/CSS/Using_CSS_flexible_boxes">Flexbox</a> layout model is fully supported (prefixed as -webkit-flex)</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/CSS/length">Viewport units</a>, <code>vh</code>, <code>vmin</code>, and <code>vw</code> for responsive design</li>
+  <li><a href="http://docs.webplatform.org/wiki/css/atrules/@supports">@supports</a> conditional blocks to test whether Chromium supports certain property/value pairs</li>
+  <li>The <a href="https://plus.google.com/+EricBidelman/posts/bbK5scDoPnc">:unresolved CSS pseudo-class</a> that lets you style a custom element that hasn’t been registered in the browser yet (custom elements are part of the <a href="https://dvcs.w3.org/hg/webcomponents/raw-file/tip/explainer/index.html#introduction">Web Components</a> standard in development)</li>
+</ul>
+
+<h3>Elements</h3>
+
+<p>Newer standard HTML5 elements supported include the following:</p>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/HTML/Element/iframe">iframe</a> elements with seamless, srcdoc, and sandbox attributes</li>
+  <li><a href="http://www.html5rocks.com/tutorials/webcomponents/shadowdom/">Shadow DOM</a> is now exposed via <code>element.webkitCreateShadowRoot()</code>.</li>
+  <li>The <a href="https://developer.mozilla.org/en-US/docs/HTML/Element/track">track</a> element, for use with the audio and video tags, lets you set metadata, subtitles, and so forth</li>
+  <li>The <a href="http://docs.webplatform.org/wiki/tutorials/mobile_viewport">viewport</a> element that provides for a better presentation of web pages on mobile devices</li>
+</ul> 
+
+
+<h3>Device APIs</h3>
+
+<p>In a mobile world, it's important to be able to access your user's
+contextual surroundings, from location and device orientation to camera access. Chrome for Android provides:</p>
+
+<ul>
+  <li><a href="http://docs.webplatform.org/wiki/apis/geolocation">Geolocation API</a> for accessing location</li>
+  <li><a href="http://www.w3.org/TR/2010/WD-html-media-capture-20100928/">HTML media capture</a> for camera access</li>
+  <li><a href="http://www.html5rocks.com/tutorials/device/orientation/">Device orientation</a> for portrait vs. landscape orientation</li>
+  <li><a href="http://developer.android.com/guide/appendix/g-app-intents.html">Android Intent URIs</a> such as <code>tel:</code> and <code>geo:</code> that give access to the dialer and Google maps</li>
+</ul>
+
+<h3>Standard APIs</h3>
+
+<p>Chrome for Android supports many HTML5 APIs that are ready to use in your apps.</p>
+<ul>
+  <li><a href="http://www.html5rocks.com/en/tutorials/speed/animations/">requestAnimationFrame</a> to achieve optimum animation performance</li>
+  <li>Interactive communication between server and client with <a href="https://developer.mozilla.org/en-US/docs/WebSockets">WebSockets</a>.</li>
+  <li>Multi-threading with <a href="http://www.html5rocks.com/en/tutorials/workers/basics/">Web Workers</a> (dedicated only)</li>
+  <li><a href="http://docs.webplatform.org/wiki/dom/methods/requestFullscreen">requestFullscreen</a> method (presently via the prefixed call, <code>webkitRequestFullScreen()</code>) to allow you to hide the browser UI (chrome)</li>
+  <li><a href="http://docs.webplatform.org/wiki/apis/webrtc">WebRTC</a> for real-time communication without a plug-in</li>
+  <li><a href="http://docs.webplatform.org/wiki/apis/webaudio">WebAudio</a> to process and synthesize audio signals</li>
+  <li>Experimental support (via <code>chrome://flags</code> in the Chrome address bar) for the following APIs:
+    <ul>
+      <li><a href="http://docs.webplatform.org/wiki/tutorials/getting_started_with_webgl">WebGL</a> for creating three-dimensional graphics for web browsers</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Security</h3>
+
+<p>Chrome for Android supports <a href="http://docs.webplatform.org/wiki/tutorials/content-security-policy">Content Security Policy</a> to significantly reduce the risk and impact of XSS attacks, using the standard (non-prefixed) HTTP header, <code>Content-Security-Policy</code>.</p>
+
+<h2>More resources</h3>
+
+<p>For a complete list of developer features in Chrome, see <a href="http://chromestatus.com/">chromestatus.com</a>.</p>
+
+<p>Find more information about open web platform APIs and technologies for mobile on <a href="http://docs.webplatform.org/wiki/concepts/mobile_web">WebPlatform.org</a>.</p>
+
+<h2>Known issues</h2>
+
+<p>Development is still underway, and there are many
+additional features being added to Google Chrome for Android.  For current
+status, see the issues list at <a href="http://mcrbug.com">mcrbug.com</a> and
+star the ones you need the most. If you find a new issue, log it using
+<a href="http://new.mcrbug.com">new.mcrbug.com</a>.</p>
+
+<h2>Share your thoughts</h2>
+
+<p>If you run into a mobile web development problem and would like help, please post it to <a href="http://stackoverflow.com/questions/tagged/google-chrome+android">Stack Overflow</a> using the <a href="http://stackoverflow.com/questions/tagged/google-chrome">[google-chrome]</a> and <a href="http://stackoverflow.com/questions/tagged/android">[android]</a> tags.</p>
+
+
+
+  </body>
+</html>
+

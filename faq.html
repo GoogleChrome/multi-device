@@ -1,0 +1,119 @@
+{% include "chrome/mobile/_local_variables.html" %}
+<html devsite>
+  <head>
+    <title>FAQ</title>
+    <meta name="project_path" value="/chrome/mobile/_project.yaml" />
+    <meta name="book_path" value="/chrome/mobile/_book.yaml" />
+  </head>
+  <body>
+
+<h1>Chrome for Android</h1>
+
+
+<dl>
+<dt>Is Chrome for Android open source?</dt>
+<dd>Chrome for Android is derived from Chromium. Since the launch of the first version, we have steadily open sourced all the critical components. You can build various Chromium components for Android as used in Chrome for Android using the instructions <a href="http://code.google.com/p/chromium/wiki/AndroidBuildInstructions">here</a>.</dd>
+
+<dt>Does Chrome for Android follow the same release cycles as desktop Chrome?</dt>
+<dd>Chrome for Android is expected to follow the desktop Chrome release cycles starting early 2013. </dd>
+
+<dt>Can I make Chrome for Android auto-update?</dt>
+<dd>You can make it auto-update by checking either the per-app or global auto-update setting in Android Market.</dd>
+
+<dt>What are the differences between Android Browser and Chrome for Android?</dt>
+<dd>Chrome for Android provides the same fast, secure, and stable web browsing experience you’ve come to enjoy when using Chrome on desktop.  We’ve taken a different approach to tabs and overall navigation. By signing in to Chrome on Android, users can have a unified, personalized Chrome experience across all their devices.</dd>
+<dd>From a developer perspective, we are introducing support for Chrome Developer Tools, Indexed DB, requestAnimationFrame, WebSockets and Web Workers.</dd>
+
+<dt>How do I add a bookmark in Chrome to my home screen?</dt>
+<dd>Create a bookmark via the menu, find it in the bookmark list, long-press on it, and tap "Add to home screen".
+
+<dt>I’ve written my mobile web app to use feature X, but Chrome for Android doesn’t support it.</dt>
+<dd>Please see if this is already a <a href="http://code.google.com/p/chromium/issues/list?q=label%3AOS-Android">known issue</a> and star it if it is. Otherwise, please log a bug.</dd>
+
+<dt>Does Chrome for Android now support the embedded WebView for a hybrid native/web app?</dt>
+<dd>We are evaluating ways we can support WebView with Chrome but do not have any plans to announce at this time.</dd>
+
+<dt>Does Chrome for Android support apps and extensions?</dt>
+<dd>Chrome apps and extensions are currently not supported on Chrome for Android. We have no plans to announce at this time.</dd>
+
+<dt>Can I write and deploy web apps on Chrome for Android?</dt>
+<dd>Though Chrome apps are not currently supported, we would love to see great interactive web sites accessible by URL.</dd>
+
+<dt>What version of Flash is supported on Chrome for Android?</dt>
+<dd>Chrome for Android will not be supporting Flash. As you may have seen in November, 2011, Adobe <a href="http://blogs.adobe.com/conversations/2011/11/flash-focus.html">announced</a> it has stopped investing in Flash for mobile browsing. Google has long been committed to making the web platform more powerful through open web technologies like HTML5 and is working with Adobe and other partners to further advance the web standard.</dd>
+
+<dt>What HTML5 features does Chrome for Android support?</dt>
+<dd>See this <a href="/chrome/mobile/docs/overview">overview</a>.</dd>
+
+<dt>How do I debug my mobile web page?</dt>
+<dd>Chrome Developer Tools are available for remote debugging with Chrome for Android. See the article on <a href="/chrome/mobile/docs/debugging">Remote Debugging</a> for more information.</dd>
+
+<dt>Can I hide the URL bar?</dt>
+<dd>The URL bar in Chrome for Android is Chrome’s Omnibox, with all of the built-in search and navigation features. For this initial release, we decided to show the Omnibox at all times. We are monitoring usage patterns and feedback to decide how to evolve this feature in future iterations of the application.</dd>
+
+<dt>How similar is Chrome for Android with the desktop/laptop version of Chrome?</dt>
+<dd>Chrome for Android is based on the same source as Chrome for desktop. Chrome for Android brings desktop-class browsing to mobile devices. We plan to continually evaluate applicability of other features from desktop to the mobile platform.</dd>
+
+<dt>Is Canvas hardware accelerated?</dt>
+<dd>Yes.</dd>
+
+<dt>What about WebGL support?</dt>
+<dd>WebGL is currently not supported, and we have no plans to announce at this time.</dd>
+
+<dt>Does Native Client work on Chrome for Android?</dt>
+<dd>It does not, and we have no plans to announce at this time.</dd>
+
+<dt>What is Chrome for Android’s User Agent string?</dt>
+<dd>See the <a href="/chrome/mobile/docs/user-agent">user agent article</a> for an
+in-depth discussion.</dd>
+
+<dt>Will Chrome Web Store be available on Android?</dt>
+<dd>We have no plans to announce at this time.</dd>
+
+<dt>Are you still working on the Android browser, or are you dropping support in favor of Chrome?</dt>
+<dd>Android Browser and Chrome for Android are both derived from Chromium and already share a lot of code. We will continue to evaluate where it makes sense to harmonize our efforts; for instance, Google now has just one port of WebKit to maintain.</dd>
+
+<dt>Will Chrome for Android work on my Android device?</dt>
+<dd>Chrome for Android is supported only on Android 4.0 and higher.</dd>
+
+<dt>Is Chrome for Android hardware accelerated?</dt>
+<dd>Yes, hardware acceleration is an essential capability in Android 4.0 and is heavily utilized by Chrome for Android as well.</dd>
+
+<dt>When will Chrome for Android launch in my country?</dt>
+<dd>We are launching in a large <a href="http://goo.gl/6ARvc">set of countries</a> and hope to expand it to other countries in the future.</dd>
+
+</dl>
+
+
+<h1>Chrome for iOS</h1>
+
+<dl>
+<dt>Why is it called Incognito* and not just Incognito?</dt>
+<dd>The difference is that HTML5 local storage is shared between regular and Incognito* tabs. Chrome must use Apple's UIWebView for loading and rendering web content.  This class does not provide any API to inspect, save, restore, or clear HTML5 local storage.<br/>
+
+As expected, cookies and cache are fully separated in Incognito*.  History is not kept, passwords are not remembered, and OmniBox search suggestions are disabled. The only difference is local storage. Incognito* provides users with the best Incognito mode possible given platform limitations.
+</dd>
+
+<dt>Chrome seems slower when handling Javascript compared to Safari.</dt>
+<dd>Rendering and the Javascript engine are provided by iOS through UIWebView. Because Chrome does not have access to Safari’s Nitro engine, Chrome may have slower javascript performance.</dd>
+
+<dt>Chrome doesn't implement some HTML5 features such as WebGL and some CSS.</dt>
+<dd>Since Chrome for iOS uses the UIWebView, it provides the same HTML5/OWP features that this component provides.</dd>
+
+<dt>What are the differences between UIWebView and Safari?</dt>
+<dd>Mobile Safari uses the Nitro JS engine, which is often faster than the one in the UIWebView. UIWebView scrolling may appear slower, since it renders on the main thread, while Mobile Safari renders in a background thread. There are other differences, some of which are described in this <a href="http://stackoverflow.com/questions/3496505/differences-between-uiwebview-and-mobile-safari">StackOverflow question</a>.</dd>
+
+<dt>I can’t get RSS feeds or XML to load.</dt>
+<dd>UIWebView does not support XML or RSS.</dd>
+
+<dt>How can I get my iOS application to open URLs in Chrome?<dt>
+<dd>
+Use the <code>googlechrome/googlechromes</code> schemes instead of
+<code>http/https</code>. More information can be found in
+<a href="/chrome/mobile/docs/ios-links">the article on this topic</a>.
+</dd>
+</dl>
+
+  </body>
+</html>
+
