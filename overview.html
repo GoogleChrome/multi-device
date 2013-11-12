@@ -1,180 +1,105 @@
-<head>
-  <title>Google Chrome for Android</title>
-</head>
-<body>
-<h1>Google Chrome for Android</h1>
+<p>Project: /chrome/mobile/_project.yaml
+Book: /chrome/mobile/_book.yaml</p>
 
-<p>Your Android users can experience the fast, clean, and easy to use Chrome interface tailored to mobile devices. Chrome for Android lets you develop HTML5 apps across all devices &emdash; desktop, tablet, and mobile.</p>
+<h1 id="webview_for_android">WebView for Android</h1>
 
-<p>Google Chrome is available on Android devices with Android 4.0 (Ice Cream Sandwich) and later versions. You can also download it from  <a href="https://play.google.com/store/apps/details?id=com.android.chrome">Google Play</a>.</p>
+<p>Android 4.4 (KitKat) includes a new WebView component based on the Chromium
+open source project. The new WebView includes an updated version of the V8
+JavaScript engine and support for modern web standards that were missing in 
+the old WebView. It also shares the same rendering engine as Chrome for Android,
+so rendering should be much more consistent between the WebView and Chrome.</p>
 
-<p>For a complete list of developer features in Chrome, see <a href="http://chromestatus.com/">chromestatus.com</a>.</p>
+<p>If you&#39;re a web developer looking to start developing a WebView-based Android application, see <a href="/chrome/mobile/docs/webview/gettingstarted">Getting Started: WebView-based Applications for Web Developers</a>.</p>
 
-<h2 id="html5features">A first-class browsing experience</h2>
+<p>For tips on scaling WebView content for mobile devices, see <a href="/chrome/mobile/docs/webview/pixelperfect">Pixel-Perfect UI in the WebView</a>. </p>
 
-<p>When the user signs into Chrome on one device, the tabs and browsing history of that session are available to the user when she signs into Chrome on another device. Note, it's the entire page content that gets synchronized between Chrome instances, not just the URL, so the user doesn't have to resubmit credentials to see a boarding pass or an article on a site that requires a login.</p>
+<p>The new WebView also supports <a href="/chrome-developer-tools/docs/remote-debugging">remote debugging</a>
+using the Chrome DevTools.</p>
 
-<p>The address bar uses prefetching to fill in URLs and performs search queries with suggestions based on browsing history and local bookmarks. To save bandwidth, this feature only runs when the user is connected to a wifi network.</p>
+<p>[[TOC]]</p>
 
-<p>Highlights of this user experience include:</p>
+<h2 id="webview_faq">WebView FAQ</h2>
+
+<h3 id="what_version_of_chrome_is_it_based_on_">What version of Chrome is it based on?</h3>
+
+<p>The WebView shipped with Android 4.4 (KitKat) is based on the same code as
+Chrome for Android version 30.  The WebView does not have full feature parity with 
+Chrome for Android and is currently given the version number 30.0.0.0.</p>
+
+<h3 id="what_is_the_default_user_agent_">What is the default user-agent?</h3>
+
+<p>The new WebView adds <strong>Chrome/_version_</strong> to the user-agent string. Sample
+old and new user-agent strings:</p>
 
 <ul>
-  <li>Smooth scrolling of independent elements on the same page</li>
-  <li>Fixed-position elements that hold their spot while the user scrolls through the page</li>
-  <li>Native inertial scrolling by default</li>
-  <li>A much improved <a href="http://www.html5rocks.com/mobile/touch.html">multi-touch</a> implementation</li>
-  <li>HTML date/time pickers</li>
-  <li><a href="https://bugs.webkit.org/show_bug.cgi?id=84186">Text auto-sizing</a>, also known as font boosting
+<li><p><strong>Old UA</strong>: Mozilla/5.0 (Linux; U; Android 4.1.1; en-gb; Build/KLP) 
+AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30</p></li>
+<li><p><strong>New UA</strong>: Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_) 
+AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile 
+Safari/537.36</p></li>
 </ul>
 
-<p>With these improvements, Chrome for Android enables interactive mobile web experiences, as illustrated in these snapshots:</p>
+<p>If you&#39;re attempting to differentiate between the WebView and Chrome for Android, 
+you should look for the presence of the <strong>Version/_X.X_</strong> string in the WebView
+user-agent string. Don&#39;t rely on the specific Chrome version number, 
+<strong>30.0.0.0</strong> as this may change with future releases.</p>
 
-<div class="foo">
-<p>
-<style>
-  .foo img {
-    float: left;
-    width: 180px;
-    margin: 0 10px 20px 0;
-  }
-  div.clr { clear: both; }
-</style>
+<h3 id="how_do_i_set_the_user_agent_of_the_webview_">How do I set the user-agent of the WebView?</h3>
 
-<img src="images/samples/gmail.png"/>
-<img src="images/samples/soundcloud.png"/>
-<img src="images/samples/grooveshark.png"/>
-<img src="images/samples/twitter.png"/>
-<img src="images/samples/workflowy.png"/>
-</p>
-</div>
+<p>You can set the user-agent by using the Java <a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setUserAgentString(java.lang.String">setUserAgentString 
+ API</a>) 
+method. This method only changes the user-agent string for requests sent by the WebView itself.</p>
 
-<div class="clr"></div>
+<p>You can&#39;t set the user-agent string used for <code>XMLHttpRequest</code>s made from JavaScript. Those 
+requests always use the default user-agent string.</p>
 
-<p>See all the <a href="http:/www.google.com/intl/en/chrome/android/features.html">Chrome for Android features</a> such as tabs, incognito mode, and sync across devices for the user's Google account.</p>
+<h3 id="does_this_mean_chrome_for_android_is_using_the_webview_">Does this mean Chrome for Android is using the WebView?</h3>
 
-<p>Enter <code>chrome://about</code> in the Chrome address bar to see more information about Chrome features.</li>
+<p>No, Chrome for Android is separate from WebView. They&#39;re both based on the same
+code, including a common JavaScript engine and rendering engine.</p>
 
-<h2>Performance</h2>
+<h3 id="does_the_new_webview_have_feature_parity_with_chrome_for_android_">Does the new WebView have feature parity with Chrome for Android?</h3>
 
-<p>Chrome for Android brings to small devices the same multi-process architecture, GPU-accelerated rendering, and the V8 JavaScript engine - all optimized for mobile architectures. Chrome for Android delivers fast graphics performance through:</p>
+<p>For the most part, features that work in Chrome for Android should work in 
+the new WebView.</p>
+
+<p>Chrome for Android supports a few features which aren&#39;t enabled in the 
+WebView, including: </p>
 
 <ul>
-  <li>GPU acceleration for the <a href="http://www.html5rocks.com/tutorials/canvas/performance"><code>canvas</code> element</a></li>
-  <li>Fluid CSS3 transforms and transitions</li>
-  <li>Support for <code>requestAnimationFrame</code> for more efficient animations</li>
+<li>WebGL 3D canvas</li>
+<li>WebRTC</li>
+<li>WebAudio</li>
+<li>Fullscreen API</li>
+<li>Form validation</li>
 </ul>
 
-<h2>Use Developer Tools to find problems&mdash;and fix them</h2>
+<h3 id="will_the_webview_have_a_six_week_release_cycle_like_chrome_">Will the WebView have a six-week release cycle like Chrome?</h3>
 
-<p>Debugging web pages on the small screen is difficult. There's just not enough real estate to inspect elements and resources on the device. Now you can debug mobile web sites with the full suite of <a href="https://developers.google.com/chrome-developer-tools/">Chrome Developer Tools</a> running on a desktop browser that's connected to your phone via USB. See <a href="debugging.html">Remote Debugging</a> for further details.</p>
+<p>WebView will continue to be tied to releases of the Android platform for the 
+time being. However, sharing code with Chrome for Android will make it easier to keep 
+the WebView up to date.</p>
 
-<p>In addition to the powerful Chrome Developer Tools, Chrome for Android
-provides more advanced developer features:</p>
-<ul>
-  <li>GPU diagnostics: <code>chrome://gpu-internals</code></li>
-  <li>AppCache debugging: <code>chrome://appcache-internals</code></li>
-  <li>Net stack debugging: <code>chrome://net-internals</code></li>
-</ul>
+<h3 id="what_does_the_new_webview_mean_for_developers_">What does the new WebView mean for developers?</h3>
 
-<p>You can also use the <a href="http://docs.webplatform.org/wiki/apis/resource_timing">Resource Timing</a> and <a href="http://docs.webplatform.org/wiki/apis/user_timing">User Timing</a> APIs to analyze application performance.</p>
+<p>This is a big change from the original WebView as it brings a new set of HTML5 
+feature support, improved JavaScript performance, and remote debugging of web 
+content using the Chrome DevTools. </p>
 
-<h2>Working offline</h2>
+<p>There <strong>are</strong> some changes that will affect existing apps. Please read the 
+<a href="http://developer.android.com/guide/webapps/migrating.html">migration guide</a> to understand 
+the small number of changes that might impact you.</p>
 
-<p>Working online is convenient, but connections sometimes fail when the signal
-is blocked or nonexistent. Chrome for Android supports the latest open web
-HTML5 features that address this concern, including:</p>
+<h3 id="how_do_i_enable_remote_debugging_">How do I enable remote debugging?</h3>
 
-<ul>
-  <li><a href="http://docs.webplatform.org/wiki/tutorials/appcache_beginner
-    ">AppCache</a> or application cache.</li>
-  <li><a href="http://docs.webplatform.org/wiki/apis/filesystem">FileSystem</a> and <a href="http://docs.webplatform.org/wiki/apis/file">File APIs</a> (File, FileList, FileReader, Blob)</li>
-  <li><a href="http://docs.webplatform.org/wiki/tutorials/offline_storage">localStorage</a> for storing simple key-value pairs</li>
-  <li><a href="http://docs.webplatform.org/wiki/tutorials/web_databases">WebSQL</a> for relational data (deprecated)</li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/IndexedDB">IndexedDB</a>, a standard indexed data store</li>
-</ul>
+<p>See the <a href="/chrome-developer-tools/docs/remote-debugging">remote debugging guide</a>.</p>
 
-<p>For more about off-line storage, see <a
-  href="http://docs.webplatform.org/wiki/tutorials/offline_and_storage">these articles</a>.</p>
+<h3 id="does_the_webview_support_the_chrome_apps_apis_">Does the WebView support the Chrome Apps APIs?</h3>
 
-<h2>Standards and APIs</h2>
+<p>No. The Chrome Apps platform isn&#39;t yet supported on Android.</p>
 
-<p>Chrome for Android supports HTML5 development with many features.</p>
+<h3 id="should_i_enable_hardware_acceleration_">Should I enable hardware acceleration?</h3>
 
-<h3>CSS and presentation</h3>
-
-<p>New CSS3 artifacts are available:</p>
-
-<ul>
-  <li>Support for the standard <a href="http://docs.webplatform.org/wiki/css/functions/calc">CSS calc</a> function (prefixed as -webkit-calc)</li>
-  <li><a href="http://docs.webplatform.org/wiki/tutorials/css_filters">CSS Filters</a> are supported (prefixed as -webkit-filter)</li>
-  <li>The <a href="https://developer.mozilla.org/en-US/docs/CSS/Using_CSS_flexible_boxes">Flexbox</a> layout model is fully supported (prefixed as -webkit-flex)</li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/CSS/length">Viewport units</a>, <code>vh</code>, <code>vmin</code>, and <code>vw</code> for responsive design</li>
-  <li><a href="http://docs.webplatform.org/wiki/css/atrules/@supports">@supports</a> conditional blocks to test whether Chromium supports certain property/value pairs</li>
-  <li>The <a href="https://plus.google.com/+EricBidelman/posts/bbK5scDoPnc">:unresolved CSS pseudo-class</a> that lets you style a custom element that hasn’t been registered in the browser yet (custom elements are part of the <a href="https://dvcs.w3.org/hg/webcomponents/raw-file/tip/explainer/index.html#introduction">Web Components</a> standard in development)</li>
-</ul>
-
-<h3>Elements</h3>
-
-<p>Newer standard HTML5 elements supported include the following:</p>
-
-<ul>
-  <li><a href="https://developer.mozilla.org/en-US/docs/HTML/Element/iframe">iframe</a> elements with seamless, srcdoc, and sandbox attributes</li>
-  <li><a href="http://www.html5rocks.com/tutorials/webcomponents/shadowdom/">Shadow DOM</a> is now exposed via <code>element.webkitCreateShadowRoot()</code>.</li>
-  <li>The <a href="https://developer.mozilla.org/en-US/docs/HTML/Element/track">track</a> element, for use with the audio and video tags, lets you set metadata, subtitles, and so forth</li>
-  <li>The <a href="http://docs.webplatform.org/wiki/tutorials/mobile_viewport">viewport</a> element that provides for a better presentation of web pages on mobile devices</li>
-</ul> 
-
-
-<h3>Device APIs</h3>
-
-<p>In a mobile world, it's important to be able to access your user's
-contextual surroundings, from location and device orientation to camera access. Chrome for Android provides:</p>
-
-<ul>
-  <li><a href="http://docs.webplatform.org/wiki/apis/geolocation">Geolocation API</a> for accessing location</li>
-  <li><a href="http://www.w3.org/TR/2010/WD-html-media-capture-20100928/">HTML media capture</a> for camera access</li>
-  <li><a href="http://www.html5rocks.com/tutorials/device/orientation/">Device orientation</a> for portrait vs. landscape orientation</li>
-  <li><a href="http://developer.android.com/guide/appendix/g-app-intents.html">Android Intent URIs</a> such as <code>tel:</code> and <code>geo:</code> that give access to the dialer and Google maps</li>
-</ul>
-
-<h3>Standard APIs</h3>
-
-<p>Chrome for Android supports many HTML5 APIs that are ready to use in your apps.</p>
-<ul>
-  <li><a href="http://www.html5rocks.com/en/tutorials/speed/animations/">requestAnimationFrame</a> to achieve optimum animation performance</li>
-  <li>Interactive communication between server and client with <a href="https://developer.mozilla.org/en-US/docs/WebSockets">WebSockets</a>.</li>
-  <li>Multi-threading with <a href="http://www.html5rocks.com/en/tutorials/workers/basics/">Web Workers</a> (dedicated only)</li>
-  <li><a href="http://docs.webplatform.org/wiki/dom/methods/requestFullscreen">requestFullscreen</a> method (presently via the prefixed call, <code>webkitRequestFullScreen()</code>) to allow you to hide the browser UI (chrome)</li>
-  <li><a href="http://docs.webplatform.org/wiki/apis/webrtc">WebRTC</a> for real-time communication without a plug-in</li>
-  <li><a href="http://docs.webplatform.org/wiki/apis/webaudio">WebAudio</a> to process and synthesize audio signals</li>
-  <li>Experimental support (via <code>chrome://flags</code> in the Chrome address bar) for the following APIs:
-    <ul>
-      <li><a href="http://docs.webplatform.org/wiki/tutorials/getting_started_with_webgl">WebGL</a> for creating three-dimensional graphics for web browsers</li>
-    </ul>
-  </li>
-</ul>
-
-<h3>Security</h3>
-
-<p>Chrome for Android supports <a href="http://docs.webplatform.org/wiki/tutorials/content-security-policy">Content Security Policy</a> to significantly reduce the risk and impact of XSS attacks, using the standard (non-prefixed) HTTP header, <code>Content-Security-Policy</code>.</p>
-
-<h3>More resources</h3>
-
-<p>For a complete list of developer features in Chrome, see <a href="http://chromestatus.com/">chromestatus.com</a>.</p>
-
-<p>Find more information about open web platform APIs and technologies for mobile on <a href="http://docs.webplatform.org/wiki/concepts/mobile_web">WebPlatform.org</a>.</p>
-
-<h2>Known issues</h2>
-
-<p>Development is still underway, and there are many
-additional features being added to Google Chrome for Android.  For current
-status, see the issues list at <a href="http://mcrbug.com">mcrbug.com</a> and
-star the ones you need the most. If you find a new issue, log it using
-<a href="http://new.mcrbug.com">new.mcrbug.com</a>.</p>
-
-<h2>Share your thoughts</h2>
-
-<p>If you run into a mobile web development problem and would like help, please post it to <a href="http://stackoverflow.com/questions/tagged/google-chrome+android">Stack Overflow</a> using the <a href="http://stackoverflow.com/questions/tagged/google-chrome">[google-chrome]</a> and <a href="http://stackoverflow.com/questions/tagged/android">[android]</a> tags.</p>
-
-</body>
-
+<p>Hardware acceleration is enabled by default. If you are explicitly disabling 
+it for older versions of Android you should try enabling it for KitKat based 
+devices and see if it improves performance. </p>

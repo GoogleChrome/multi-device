@@ -1,0 +1,77 @@
+<p>Project: /chrome/mobile/_project.yaml
+Book: /chrome/mobile/_book.yaml</p>
+
+<h1 id="chrome_for_android_user_agent">Chrome for Android User-Agent</h1>
+
+<p>Chrome for Android reports its user agent string (UA) in the following
+formats, depending on whether the device is a phone or a tablet:</p>
+
+<p>Phone UA:</p>
+
+<pre><pre>Mozilla/5.0 (Linux; &lt;Android Version&gt;; &lt;Build Tag etc.&gt;)
+AppleWebKit/&lt;WebKit Rev&gt; (KHTML, like Gecko) Chrome/&lt;Chrome Rev&gt; Mobile
+Safari/&lt;WebKit Rev&gt;
+</pre></pre>
+
+Tablet UA:
+
+<pre><pre>Mozilla/5.0 (Linux; &lt;Android Version&gt;; &lt;Build Tag etc.&gt;)
+AppleWebKit/&lt;WebKit Rev&gt;(KHTML, like Gecko) Chrome/&lt;Chrome Rev&gt;
+Safari/&lt;WebKit Rev&gt;
+</pre></pre>
+
+Here&#39;s an example of the Chrome user agent string on a Galaxy Nexus:
+
+<pre><pre>Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B)
+AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile
+Safari/535.19
+</pre></pre>
+
+<p>For comparison, here are examples of other popular user agent strings:</p>
+
+<p>Desktop Chrome: <pre>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3)
+AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.151
+Safari/535.19</pre></p>
+
+<p>Desktop Safari: <pre>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3)
+AppleWebKit/534.53.11 (KHTML, like Gecko) Version/5.1.3
+Safari/534.53.10</pre></p>
+
+<p>iPhone Safari: <pre>Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en)
+AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543
+Safari/419.3</pre></p>
+
+<p>iPad Safari: <pre>Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us)
+AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b
+Safari/531.21.10</pre></p>
+
+<h2 id="user_agent_mechanics">User agent mechanics</h2>
+
+<p>Like all other browsers, Chrome for Android sends this information
+in the <code>User-Agent</code> HTTP header every time it makes a request to any
+site. It’s also available in the client through JavaScript using the
+<code>navigator.userAgent</code> call.</p>
+
+<p>If you are parsing user agent strings using regular expressions, the
+following can be used to check against Chrome for Android phones and
+Android tablets:</p>
+
+<ul>
+<li>Phone pattern: <code>&#39;Android&#39; + &#39;Chrome/[.0-9]* Mobile&#39;</code></li>
+<li>Tablet pattern: <code>&#39;Android&#39; + &#39;Chrome/[.0-9]* (?!Mobile)&#39;</code></li>
+</ul>
+
+<h1 id="chrome_for_ios_user_agent">Chrome for iOS User-Agent</h1>
+
+<p>The User-Agent string in Chrome for iOS is the same as the Mobile Safari
+User-Agent, with <code>CriOS/&lt;ChromeRevision&gt;</code> instead of
+<code>Version/&lt;VersionNum&gt;</code>.</p>
+
+<p>Here&#39;s an example of a Chrome for iPhone User-Agent string:</p>
+
+<p><pre>Mozilla/5.0 (iPhone; U; CPU iPhone OS 5_1_1 like Mac OS X; en)
+AppleWebKit/534.46.0 (KHTML, like Gecko) CriOS/19.0.1084.60 Mobile/9B206
+Safari/7534.48.3</pre></p>
+
+<p>For more information about Mobile Safari user agent strings, see <a href="http://developer.apple.com/library/safari/#documentation/appleapplications/reference/safariwebcontent/OptimizingforSafarioniPhone/OptimizingforSafarioniPhone.html">this
+article</a>.</p>
