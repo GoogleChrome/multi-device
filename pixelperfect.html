@@ -1,6 +1,8 @@
-<p>Project: /chrome/mobile/_project.yaml
-Book: /chrome/mobile/_book.yaml</p>
+<head>
+  <title>Pixel-Perfect UI in the WebView</title>
+</head>
 
+<body>
 <style>
 figure { text-align: center }
 </style>
@@ -10,8 +12,6 @@ figure { text-align: center }
 <p>There are a number of options you can use to create the perfect UI, this article 
 will outline some of the best practices for the mobile web in general and then 
 some specific tricks you could use for hybrid applications.</p>
-
-<p>[[TOC]]</p>
 
 <h2 id="viewport">Viewport</h2>
 
@@ -23,7 +23,7 @@ overview version of the page that requires the user to pan and zoom to actually
 read content, like the image on the left.</p>
 
 <figure>
-<img src="/chrome/mobile/images/webview/viewports.jpg" width="640px" alt=""/> 
+<img src="images/webview/viewports.jpg" width="640px" alt=""/> 
 </figure>
 
 <p>If you want the width of your site to be 100% of the WebView&#39;s width, as shown 
@@ -58,7 +58,7 @@ introduced in Android 4.4, which increases the font size to make it more readabl
 device. See <a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setLayoutAlgorithm(android.webkit.WebSettings.LayoutAlgorithm">setLayoutAlgorithm</a>). 
 
 <figure>
-<img src="/chrome/mobile/images/webview/text-autosize.jpg" width="658" alt=""/> 
+<img src="images/webview/text-autosize.jpg" width="658" alt=""/> 
 </figure>
 
 <h2 id="responsive_design">Responsive Design</h2>
@@ -105,7 +105,7 @@ property based on the orientation:
 </pre></pre>
 
 <figure>
-<img src="/chrome/mobile/images/webview/orientation-changes.jpg" width="826px" alt=""/> 
+<img src="images/webview/orientation-changes.jpg" width="826px" alt=""/> 
 </figure>
 
 This technique can be used to change layout based on the width of the screen.
@@ -134,7 +134,7 @@ smaller as the physical screen size gets larger.
 </pre></pre>
 
 <figure>
-<img src="/chrome/mobile/images/webview/button-width.jpg" width="580" alt=""/> 
+<img src="images/webview/button-width.jpg" width="580" alt=""/> 
 </figure>
 
 These are minor changes, but depending on your UI, media queries can help you to 
@@ -160,7 +160,7 @@ The images below show the blurring that occurs when you scale a low-density imag
 high-denity screen, compared with the crisp display of an appropriately-sized image.
 
 <figure>
-<img src="/chrome/mobile/images/webview/ship1xand2x.png" width="820px" alt=""/>
+<img src="images/webview/ship1xand2x.png" width="820px" alt=""/>
 </figure>
 
 Here are a few tips and tricks to make sure your images look crisp and clear on any screen:
@@ -204,8 +204,7 @@ compression you find acceptable. And resizing the image in CSS can be an
 expensive operation.
 
 If high compression is not suitable for your needs, try the WebP format, 
-which gives a high quality image with relatively small file size. See <a href="/speed/webp/">the 
-official WebP site</a> for details. Don&#39;t forget that you&#39;ll 
+which gives a high quality image with relatively small file size. See <a href="https://developers.google.com/speed/webp/">the official WebP site</a> for details. Don&#39;t forget that you&#39;ll 
 need to provide a fallback for older versions of Android where WebP isn&#39;t supported.
 
 For more information on this topic:
@@ -300,7 +299,7 @@ To swap this out for a larger image on devices with device pixel ratio of 1.5 (h
 </pre></pre>
 
 <figure>
-<img src="/chrome/mobile/images/webview/device-pixel-ratio.png" width="808px" alt=""/> 
+<img src="images/webview/device-pixel-ratio.png" width="808px" alt=""/> 
 </figure>
 
 You can then merge this technique with other media queries like <code>min-width</code>, which 
@@ -399,3 +398,4 @@ page to define the relative URLs for images.
 <p>The major downsides to this are that it blocks the page load and forces you to 
 use absolute paths for scripts, CSS files, links and so on, since the base URL points to 
 a density-specific directory.</p>
+</body>

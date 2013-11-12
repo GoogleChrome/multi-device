@@ -1,9 +1,11 @@
-<p>Project: /chrome/mobile/_project.yaml
-Book: /chrome/mobile/_book.yaml</p>
+<head>
+  <title>Opening links in Chrome for iOS</title>
+</head>
 
+<body>
 <h1 id="opening_links_in_chrome_for_ios">Opening links in Chrome for iOS</h1>
 
-<p><img src="/chrome/mobile/images/integrate-chrome-with-your-ios-app.png" alt="Opening a link in Chrome from an iOS app" title="Opening a link in Chrome from an iOS app"></p>
+<p><img src="images/integrate-chrome-with-your-ios-app.png" alt="Opening a link in Chrome from an iOS app" title="Opening a link in Chrome from an iOS app"></p>
 
 <p>The easiest way to have your iOS app open links in Chrome is to use the OpenInChromeController class. This API is described here along with the URI schemes it supports.</p>
 
@@ -105,8 +107,8 @@ Chrome for iOS also supports <a href="http://x-callback-url.com/specifications/"
 See the following case studies for examples in the wild:
 
 <ul>
-<li><a href="/chrome/mobile/docs/case_studies/pocket">Pocket</a></li>
-<li><a href="/chrome/mobile/docs/case_studies/feedly">Feedly</a></li>
+<li><a href="pocket.html">Pocket</a></li>
+<li><a href="feedly.html">Feedly</a></li>
 </ul>
 
 The URI scheme that Chrome registers for x-callback-url is:
@@ -194,3 +196,4 @@ For example:
 
 <pre><pre>googlechrome-x-callback://x-callback-url/open/?x-source=MyApp&amp;x-success=com.myapp.callback%3A%2F%2F&amp;url=http%3A%2F%2Fwww.google.com&amp;create-new-tab
 </pre></pre>
+</body>

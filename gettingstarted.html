@@ -1,5 +1,8 @@
-<p>Project: /chrome/mobile/_project.yaml
-Book: /chrome/mobile/_book.yaml</p>
+<head>
+  <title>Getting Started: WebView-based Applications for Web Developers</title>
+</head
+
+<body>
 
 <h1 id="getting_started_webview_based_applications_for_web_developers">Getting Started: WebView-based Applications for Web Developers</h1>
 
@@ -15,8 +18,6 @@ If you&#39;re already familiar with programming for Android, you may want to ref
 <a href="http://developer.android.com/guide/webapps/webview.html"> Building Web Apps in WebView</a>
 on the Android developer site instead.</aside></p>
 
-<p>[[TOC]]</p>
-
 <h2 id="install_android_studio">Install Android Studio</h2>
 
 <p>This tutorial uses <a href="http://developer.android.com/sdk/installing/studio.html">Android 
@@ -31,7 +32,7 @@ Studio, as described here:</p>
 <p>When the installation completes, Android Studio launches and displays the 
 welcome screen.</p>
 
-<p><img src="/chrome/mobile/images/webview/welcome-screen.png" alt=""/> </p>
+<p><img src="images/webview/welcome-screen.png" alt=""/> </p>
 
 <p>To create a new project:</p>
 
@@ -40,7 +41,7 @@ welcome screen.</p>
 <li><p>On the next page, enter your application name, package name and target SDKs, 
 and click <strong>Next</strong>.</p>
 
-<p><img src="/chrome/mobile/images/webview/projectwizard1.png" alt=""/> </p>
+<p><img src="images/webview/projectwizard1.png" alt=""/> </p>
 
 <p><aside class="note"><strong>Note:</strong> If you only intend to support the Chromium WebView 
 (rather than the old WebKit WebView) set <strong>Minimum required SDK</strong> to API 19: 
@@ -49,11 +50,11 @@ Android 4.4 (KitKat).</aside></p></li>
 change the icon later, so don&#39;t worry if you don&#39;t have one right now.) When 
 you&#39;re done, click <strong>Next</strong>.</p>
 
-<p><img src="/chrome/mobile/images/webview/projectwizard2.png" alt=""/> </p></li>
+<p><img src="images/webview/projectwizard2.png" alt=""/> </p></li>
 <li><p>The next page lets you select the main Android activity for your application. 
 For the purposes of this guide, select <strong>Blank Activity **and click **Next</strong>.</p>
 
-<p><img src="/chrome/mobile/images/webview/projectwizard3.png" alt=""/> </p>
+<p><img src="images/webview/projectwizard3.png" alt=""/> </p>
 
 <p><aside class="note"><strong>Note:</strong> An Android 
 <a href="http://developer.android.com/reference/android/app/Activity.html">Activity</a> can 
@@ -67,12 +68,12 @@ Android Activities API guide</a>
 <a href="http://developer.android.com/guide/components/activities.html">Activity</a> and 
 layout. Click <strong>Finish</strong> to accept the defaults and create the project.</p>
 
-<p><img src="/chrome/mobile/images/webview/projectwizard4.png" alt=""/> </p>
+<p><img src="images/webview/projectwizard4.png" alt=""/> </p>
 
 <p>You now have a new Android project. Next, to add the WebView!</p></li>
 </ol>
 
-<p><img src="/chrome/mobile/images/webview/projectwizard5.png" alt=""/> </p>
+<p><img src="images/webview/projectwizard5.png" alt=""/> </p>
 
 <p><aside class="note"><b>Note:</b> After you have your project created, you might want to 
 make sure you have the KitKat SDK installed. Go to <b>Tools</b> &gt; <b>Android</b> &gt; <b>SDK Manager</b> and make sure you have <b>Android 4.4 (API 19)</b> installed.</aside></p>
@@ -82,7 +83,7 @@ make sure you have the KitKat SDK installed. Go to <b>Tools</b> &gt; <b>Android<
 <p>Android Studio will give you some boilerplate code to set up your application. Your project&#39;s 
 structure should look something like this:</p>
 
-<p><img src="/chrome/mobile/images/webview/projectlayout.png" alt=""/> </p>
+<p><img src="images/webview/projectlayout.png" alt=""/> </p>
 
 <p>A few of the more import folders are identified in the picture:</p>
 
@@ -111,7 +112,7 @@ as it&#39;s not required for this tutorial.)</p>
 <p>Select the <strong>Text</strong> tab at the bottom of the of the <code>activity_main.xml</code> editor to see 
 the XML markup.</p>
 
-<p><img src="/chrome/mobile/images/webview/xmllayout.png" alt=""/> </p>
+<p><img src="images/webview/xmllayout.png" alt=""/> </p>
 
 <p>This file defines the layout for your main activity, and the <strong>Preview</strong> panes show the
 a preview of the activity. The <strong>Blank Activity</strong> layout doesn&#39;t include any children. 
@@ -175,7 +176,7 @@ help you fill in the missing classes. The easiest way to do
 this is click and hover over an unknown class name and wait for a popup 
 showing a &quot;quick fix&quot; -- in this case, adding an <code>import</code> statment for the <code>WebView</code> class.
 
-<img src="/chrome/mobile/images/webview/quick-fix-popup.png" alt=""/> 
+<img src="images/webview/quick-fix-popup.png" alt=""/> 
 
 Press <kbd>Alt</kbd> + <kbd>Enter</kbd> (<kbd>Option</kbd> + </kbd>Enter</kbd> on Mac) to 
 accept the quick fix.
@@ -259,7 +260,7 @@ scheme -- that is, the user&#39;s default browser. If you have more than one bro
 you may see a dialog at this point.</li>
 </ol>
 
-<img src="/chrome/mobile/images/webview/browser-selection.png" width="482" alt="browser selection dialog"/> 
+<img src="images/webview/browser-selection.png" width="482" alt="browser selection dialog"/> 
 
 If you&#39;re using a WebView inside an Android application to display some simple 
 web content (for example, a help page), this may be exactly what you want to do. 
@@ -289,7 +290,7 @@ Create a new class:
 
 1.  Right-click the package name of your app and select **New** > **Java Class**.
 
-    <img src="/chrome/mobile/images/webview/new-java-class.png" alt=""/> 
+    <img src="images/webview/new-java-class.png" alt=""/> 
 
 2.  Enter `MyAppWebViewClient` as the class name and click **OK**. 
 
@@ -423,6 +424,7 @@ for non-local pages:
 
 <p>Now you are set to build a great WebView app!</p>
 
-<p>For tips on getting the visuals just right, see <a href="/chrome/mobile/docs/webview/pixelperfect">Pixel-Perfect UI in the WebView</a>.</p>
+<p>For tips on getting the visuals just right, see <a href="pixelperfect.html">Pixel-Perfect UI in the WebView</a>.</p>
 
-<p>If you run into trouble, the Chrome DevTools are your friends. See <a href="/chrome-developer-tools/docs/remote-debugging">Remote Debugging on Android</a> to get started.</p>
+<p>If you run into trouble, the Chrome DevTools are your friends. See <a href="https://developers.google.com/chrome-developer-tools/docs/remote-debugging">Remote Debugging on Android</a> to get started.</p>
+</body>
