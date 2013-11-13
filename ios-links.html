@@ -53,9 +53,9 @@ This API is described here along with the URI schemes it supports.</p>
 
 <p>To check if Chrome is installed, an app can simply check if either of these URI schemes is available:</p>
 
-<pre><pre>[[UIApplication sharedApplication] canOpenURL:
+<pre>[[UIApplication sharedApplication] canOpenURL:
     [NSURL URLWithString:@&quot;googlechrome://&quot;]];
-</pre></pre>
+</pre>
 
 <p>This step is useful in case an app would like to change the UI depending
 on if Chrome is installed or not. For instance the app could add an
@@ -66,7 +66,7 @@ must be changed from http or https to the Google Chrome equivalent. The
 following sample code opens a URL in Chrome:
 </p>
 
-<pre><pre>NSURL *inputURL = &lt;the URL to open&gt;;
+<pre>NSURL *inputURL = &lt;the URL to open&gt;;
 NSString *scheme = inputURL.scheme;
 
 // Replace the URL Scheme with the Chrome equivalent.
@@ -90,7 +90,7 @@ if (chromeScheme) {
   // Open the URL with Chrome.
   [[UIApplication sharedApplication] openURL:chromeURL];
 }
-</pre></pre>
+</pre>
 
 <p>If Chrome is installed, the above code converts the URI scheme found in
 the URL to the Google Chrome equivalent. When Google Chrome opens, the
@@ -98,9 +98,9 @@ URL passed as a parameter will be opened in a new tab.</p>
 
 <p>If Chrome is not installed the user can be prompted to download it from the App Store. If the user agrees, the app can open the App Store download page using the following:</p>
 
-<pre><pre>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:
+<pre>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:
     @&quot;itms-apps://itunes.apple.com/us/app/chrome/id535886823&quot;]];
-</pre></pre>
+</pre>
 
 <h2 id="_a_id_callback_a_using_the_x_callback_url_registration_scheme_to_return"><a id="callback"></a>Using the x-callback-url registration scheme to return</h2>
 
@@ -130,8 +130,8 @@ URL passed as a parameter will be opened in a new tab.</p>
 
 <p>For example:</p>
 
-<pre><pre>googlechrome-x-callback://x-callback-url/open/?url=http%3A%2F%2Fwww.google.com
-</pre></pre>
+<pre>googlechrome-x-callback://x-callback-url/open/?url=http%3A%2F%2Fwww.google.com
+</pre>
 
 <h3 id="checking_if_x_callback_url_is_available_in_chrome">Checking if x-callback-url is available in Chrome</h3>
 
@@ -139,13 +139,13 @@ URL passed as a parameter will be opened in a new tab.</p>
 
 <p>To check if Chrome with x-callback-url is installed, an app can use the following code:</p>
 
-<pre><pre>[[UIApplication sharedApplication] canOpenURL:
+<pre>[[UIApplication sharedApplication] canOpenURL:
     [NSURL URLWithString:@&quot;googlechrome-x-callback://&quot;]];
-</pre></pre>
+</pre>
 
 <p>Once it has been determined that Google Chrome with x-callback-url is installed, the app can then open a URL in Chrome specifying a callback URL as in the following example.</p>
 
-<pre><pre>// Method to escape parameters in the URL.
+<pre>// Method to escape parameters in the URL.
 static NSString * encodeByAddingPercentEscapes(NSString *input) {
   NSString *encodedValue =
       (NSString *)CFURLCreateStringByAddingPercentEscapes(
@@ -177,7 +177,7 @@ if ([scheme isEqualToString:@&quot;http&quot;] ||
   // Open the URL with Google Chrome.
   [[UIApplication sharedApplication] openURL:chromeURL];
 }
-</pre></pre>
+</pre>
 
 <h3 id="enabling_a_callback_with_x_success">Enabling a callback with x-success</h3>
 
@@ -185,8 +185,8 @@ if ([scheme isEqualToString:@&quot;http&quot;] ||
 
 <p>For example:</p>
 
-<pre><pre>googlechrome-x-callback://x-callback-url/open/?x-source=MyApp&amp;x-success=com.myapp.callback%3A%2F%2F&amp;url=http%3A%2F%2Fwww.google.com
-</pre></pre>
+<pre>googlechrome-x-callback://x-callback-url/open/?x-source=MyApp&amp;x-success=com.myapp.callback%3A%2F%2F&amp;url=http%3A%2F%2Fwww.google.com
+</pre>
 
 <p>In this case the callback URL specified is <strong>com.myapp.callback://</strong> and Chrome will call back to the calling app on that URL when the user has finished the navigation. The application name, specified using the x-source parameter, is <strong>MyApp</strong>, and it will be shown as a replacement of the back button when the user can return to the calling application.</p>
 
@@ -196,6 +196,6 @@ if ([scheme isEqualToString:@&quot;http&quot;] ||
 
 <p>For example:</p>
 
-<pre><pre>googlechrome-x-callback://x-callback-url/open/?x-source=MyApp&amp;x-success=com.myapp.callback%3A%2F%2F&amp;url=http%3A%2F%2Fwww.google.com&amp;create-new-tab
-</pre></pre>
+<pre>googlechrome-x-callback://x-callback-url/open/?x-source=MyApp&amp;x-success=com.myapp.callback%3A%2F%2F&amp;url=http%3A%2F%2Fwww.google.com&amp;create-new-tab
+</pre>
 </body>
