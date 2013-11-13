@@ -7,7 +7,8 @@
 
 <p><img src="images/integrate-chrome-with-your-ios-app.png" alt="Opening a link in Chrome from an iOS app" title="Opening a link in Chrome from an iOS app"></p>
 
-<p>The easiest way to have your iOS app open links in Chrome is to use the OpenInChromeController class. This API is described here along with the URI schemes it supports.</p>
+<p>The easiest way to have your iOS app open links in Chrome is to use the OpenInChromeController class.
+This API is described here along with the URI schemes it supports.</p>
 
 <h2 id="using_openinchromecontroller_to_open_links">Using OpenInChromeController to open links</h2>
 
@@ -36,13 +37,13 @@
 
 <h2 id="downloading_the_class_file">Downloading the class file</h2>
 
-The OpenInChromeController class file is available <a href="https://github.com/GoogleChrome/OpenInChrome">here</a>. Copy it into your Xcode installation.
+<p>The OpenInChromeController class file is available <a href="https://github.com/GoogleChrome/OpenInChrome">here</a>. Copy it into your Xcode installation.</p>
 
-The rest of this document describes the underpinnings of this API.
+<p>The rest of this document describes the underpinnings of this API.</p>
 
 <h2 id="uri_schemes">URI schemes</h2>
 
-Chrome for iOS handles the following URI Schemes:
+<p>Chrome for iOS handles the following URI Schemes:</p>
 
 <ul>
 <li><strong>googlechrome</strong> for http</li>
@@ -50,19 +51,20 @@ Chrome for iOS handles the following URI Schemes:
 <li><strong>googlechrome-x-callback</strong> for callbacks</li>
 </ul>
 
-To check if Chrome is installed, an app can simply check if either of these URI schemes is available:
+<p>To check if Chrome is installed, an app can simply check if either of these URI schemes is available:</p>
 
 <pre><pre>[[UIApplication sharedApplication] canOpenURL:
     [NSURL URLWithString:@&quot;googlechrome://&quot;]];
 </pre></pre>
 
-This step is useful in case an app would like to change the UI depending
+<p>This step is useful in case an app would like to change the UI depending
 on if Chrome is installed or not. For instance the app could add an
-option to open URLs in Chrome in a share menu or action sheet.
+option to open URLs in Chrome in a share menu or action sheet.</p>
 
-To actually open a URL in Chrome, the URI scheme provided in the URL
+<p>To actually open a URL in Chrome, the URI scheme provided in the URL
 must be changed from http or https to the Google Chrome equivalent. The
 following sample code opens a URL in Chrome:
+</p>
 
 <pre><pre>NSURL *inputURL = &lt;the URL to open&gt;;
 NSString *scheme = inputURL.scheme;
@@ -90,11 +92,11 @@ if (chromeScheme) {
 }
 </pre></pre>
 
-If Chrome is installed, the above code converts the URI scheme found in
+<p>If Chrome is installed, the above code converts the URI scheme found in
 the URL to the Google Chrome equivalent. When Google Chrome opens, the
-URL passed as a parameter will be opened in a new tab.
+URL passed as a parameter will be opened in a new tab.</p>
 
-If Chrome is not installed the user can be prompted to download it from the App Store. If the user agrees, the app can open the App Store download page using the following:
+<p>If Chrome is not installed the user can be prompted to download it from the App Store. If the user agrees, the app can open the App Store download page using the following:</p>
 
 <pre><pre>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:
     @&quot;itms-apps://itunes.apple.com/us/app/chrome/id535886823&quot;]];
@@ -102,22 +104,22 @@ If Chrome is not installed the user can be prompted to download it from the App 
 
 <h2 id="_a_id_callback_a_using_the_x_callback_url_registration_scheme_to_return"><a id="callback"></a>Using the x-callback-url registration scheme to return</h2>
 
-Chrome for iOS also supports <a href="http://x-callback-url.com/specifications/">x-callback-url</a>, an open specification for inter-app communications and messaging between iOS apps that provides a way for the application opened in Chrome to specify a callback URL to return to the calling app. Applications supporting x-callback-url have to register a URL scheme that will be used to call the app with compliant URLs.
+<p>Chrome for iOS also supports <a href="http://x-callback-url.com/specifications/">x-callback-url</a>, an open specification for inter-app communications and messaging between iOS apps that provides a way for the application opened in Chrome to specify a callback URL to return to the calling app. Applications supporting x-callback-url have to register a URL scheme that will be used to call the app with compliant URLs.</p>
 
-See the following case studies for examples in the wild:
+<p>See the following case studies for examples in the wild:</p>
 
 <ul>
 <li><a href="pocket.html">Pocket</a></li>
 <li><a href="feedly.html">Feedly</a></li>
 </ul>
 
-The URI scheme that Chrome registers for x-callback-url is:
+<p>The URI scheme that Chrome registers for x-callback-url is:</p>
 
 <ul>
 <li><strong>googlechrome-x-callback</strong></li>
 </ul>
 
-This scheme will accept x-callback-url compliant URLs with the “open” action and the following parameters:
+<p>This scheme will accept x-callback-url compliant URLs with the “open” action and the following parameters:</p>
 
 <ul>
 <li><strong>url</strong>: (required) the URL to open</li>
@@ -126,22 +128,22 @@ This scheme will accept x-callback-url compliant URLs with the “open” action
 <li><strong>create-new-tab</strong>: (optional) forces the creation of a new tab in the calling app</li>
 </ul>
 
-For example:
+<p>For example:</p>
 
 <pre><pre>googlechrome-x-callback://x-callback-url/open/?url=http%3A%2F%2Fwww.google.com
 </pre></pre>
 
 <h3 id="checking_if_x_callback_url_is_available_in_chrome">Checking if x-callback-url is available in Chrome</h3>
 
-The x-callback-url parameters are supported in Google Chrome as of version 23.0. Previous versions of Chrome are not registered for the googlechrome-x-callback URL scheme. It’s important for apps to check if the URL scheme is registered before trying to invoke the googlechrome-x-callback scheme.
+<p>The x-callback-url parameters are supported in Google Chrome as of version 23.0. Previous versions of Chrome are not registered for the googlechrome-x-callback URL scheme. It’s important for apps to check if the URL scheme is registered before trying to invoke the googlechrome-x-callback scheme.</p>
 
-To check if Chrome with x-callback-url is installed, an app can use the following code:
+<p>To check if Chrome with x-callback-url is installed, an app can use the following code:</p>
 
 <pre><pre>[[UIApplication sharedApplication] canOpenURL:
     [NSURL URLWithString:@&quot;googlechrome-x-callback://&quot;]];
 </pre></pre>
 
-Once it has been determined that Google Chrome with x-callback-url is installed, the app can then open a URL in Chrome specifying a callback URL as in the following example.
+<p>Once it has been determined that Google Chrome with x-callback-url is installed, the app can then open a URL in Chrome specifying a callback URL as in the following example.</p>
 
 <pre><pre>// Method to escape parameters in the URL.
 static NSString * encodeByAddingPercentEscapes(NSString *input) {
@@ -179,20 +181,20 @@ if ([scheme isEqualToString:@&quot;http&quot;] ||
 
 <h3 id="enabling_a_callback_with_x_success">Enabling a callback with x-success</h3>
 
-The calling application can also specify a URL as callback when the user finishes the navigation using the <strong>x-success</strong> parameter in the x-callback-url. When specifying x-success with the callback URL you must also specify the application name (via the <strong>x-source</strong> parameter), which will be displayed in Chrome as a hint to the user for how to return to the calling application. Failing to provide the app name will result in the x-success parameter to be discarded and ignored.
+<p>The calling application can also specify a URL as callback when the user finishes the navigation using the <strong>x-success</strong> parameter in the x-callback-url. When specifying x-success with the callback URL you must also specify the application name (via the <strong>x-source</strong> parameter), which will be displayed in Chrome as a hint to the user for how to return to the calling application. Failing to provide the app name will result in the x-success parameter to be discarded and ignored.</p>
 
-For example:
+<p>For example:</p>
 
 <pre><pre>googlechrome-x-callback://x-callback-url/open/?x-source=MyApp&amp;x-success=com.myapp.callback%3A%2F%2F&amp;url=http%3A%2F%2Fwww.google.com
 </pre></pre>
 
-In this case the callback URL specified is <strong>com.myapp.callback://</strong> and Chrome will call back to the calling app on that URL when the user has finished the navigation. The application name, specified using the x-source parameter, is <strong>MyApp</strong>, and it will be shown as a replacement of the back button when the user can return to the calling application.
+<p>In this case the callback URL specified is <strong>com.myapp.callback://</strong> and Chrome will call back to the calling app on that URL when the user has finished the navigation. The application name, specified using the x-source parameter, is <strong>MyApp</strong>, and it will be shown as a replacement of the back button when the user can return to the calling application.</p>
 
 <h3 id="creating_a_new_tab">Creating a new tab</h3>
 
-By default, Chrome reuses the same tab when opened by the same application. To override this default behavior, the calling app should provide the <strong>create-new-tab</strong> parameter as part of the action parameter in the x-callback-url URL.
+<p>By default, Chrome reuses the same tab when opened by the same application. To override this default behavior, the calling app should provide the <strong>create-new-tab</strong> parameter as part of the action parameter in the x-callback-url URL.</p>
 
-For example:
+<p>For example:</p>
 
 <pre><pre>googlechrome-x-callback://x-callback-url/open/?x-source=MyApp&amp;x-success=com.myapp.callback%3A%2F%2F&amp;url=http%3A%2F%2Fwww.google.com&amp;create-new-tab
 </pre></pre>
