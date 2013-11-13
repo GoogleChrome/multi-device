@@ -7,7 +7,7 @@
 figure { text-align: center }
 </style>
 
-<h1 id="pixel_perfect_ui_in_the_webview">Pixel-Perfect UI in the WebView</h1>
+<h1>Pixel-Perfect UI in the WebView</h1>
 
 <p>There are a number of options you can use to create the perfect UI, this article 
 will outline some of the best practices for the mobile web in general and then 
@@ -23,61 +23,61 @@ overview version of the page that requires the user to pan and zoom to actually
 read content, like the image on the left.</p>
 
 <figure>
-<img src="images/webview/viewports.jpg" width="640px" alt=""/> 
+<img src="images/webview/viewports.jpg" width="640px"/> 
 </figure>
 
 <p>If you want the width of your site to be 100% of the WebView&#39;s width, as shown 
 on the right, you need to set the viewport meta tag:</p>
 
-<pre><pre>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-</pre></pre>
+<pre>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+</pre>
 
-Setting width to the special value device-width will give you more control over 
-the page layout. 
+<p>Setting width to the special value device-width will give you more control over 
+the page layout.</p>
 
-By default the WebView will set the viewport to device-width, rather than 
+<p>By default the WebView will set the viewport to device-width, rather than 
 defaulting to a desktop viewport. However, for reliable and controlled behaviour 
-it&#39;s good practice to include the viewport meta tag.
+it&#39;s good practice to include the viewport meta tag.</p>
 
 <h3 id="desktop_sites">Desktop Sites</h3>
 
-In some cases, you may need to display content that isn&#39;t designed for mobile 
+<p>In some cases, you may need to display content that isn&#39;t designed for mobile 
 devices -- for example, if you&#39;re displaying content you don&#39;t control. In this 
-case, you need to force the WebView to use a desktop-size viewport:
+case, you need to force the WebView to use a desktop-size viewport:</p>
 
 <ul>
 <li><a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setUseWideViewPort(boolean">setUseWideViewPort(true)</a>)</li>
 <li><a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setLoadWithOverviewMode(boolean">setLoadWithOverviewMode(true)</a>)</li>
 </ul>
 
-Without these methods being set and no viewport the WebView will try and set the 
-viewport width based on the content size. 
+<p>Without these methods being set and no viewport the WebView will try and set the 
+viewport width based on the content size.</p> 
 
-In addition to doing this, you may want to use the new layout algorithm <code>TEXT_AUTOSIZING</code> 
-introduced in Android 4.4, which increases the font size to make it more readable on a mobile 
-device. See <a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setLayoutAlgorithm(android.webkit.WebSettings.LayoutAlgorithm">setLayoutAlgorithm</a>). 
+<p>In addition to doing this, you may want to use the new layout algorithm <code>TEXT_AUTOSIZING</code> 
+introduced in Android 4.4, which increases the font size to make it more readable on a mobile device.
+See <a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setLayoutAlgorithm(android.webkit.WebSettings.LayoutAlgorithm">setLayoutAlgorithm</a>).</p>
 
 <figure>
-<img src="images/webview/text-autosize.jpg" width="658" alt=""/> 
+<img src="images/webview/text-autosize.jpg" width="658"/> 
 </figure>
 
 <h2 id="responsive_design">Responsive Design</h2>
 
-Responsive design is the notion of changing your UI depending on the dimensions 
+<p>Responsive design is the notion of changing your UI depending on the dimensions 
 of the screen size. Here we will look at some simple examples of how you can 
 adapt your UI and images, but if you want to dig in to other topics then this 
 article on <a href="http://www.html5rocks.com/en/mobile/responsivedesign/">HTML5Rocks</a> 
-is a good point of reference.
+is a good point of reference.</p>
 
-One of the main CSS features you&#39;ll want to use is media queries.
+<p>One of the main CSS features you&#39;ll want to use is media queries.</p>
 
-A media query is a way of applying CSS to elements based on a device&#39;s 
+<p>A media query is a way of applying CSS to elements based on a device&#39;s 
 characteristics. For example, suppose you  wanted to go from a vertical layout 
-to a horizontal layout based on orientation.
+to a horizontal layout based on orientation.</p>
 
-First, set CSS properties to default to portrait:
+<p>First, set CSS properties to default to portrait:</p>
 
-<pre><pre>.page-container {
+<pre>.page-container {
     display: -webkit-box;
     display: flex;
 
@@ -87,12 +87,12 @@ First, set CSS properties to default to portrait:
     padding: 20px;
     box-sizing: border-box;
 }
-</pre></pre>
+</pre>
 
-Then to switch to a horizontal layout you just need to switch the flex-direction 
-property based on the orientation:
+<p>Then to switch to a horizontal layout you just need to switch the flex-direction 
+property based on the orientation:</p>
 
-<pre><pre>@media screen and (orientation: landscape) {
+<pre>@media screen and (orientation: landscape) {
   .page-container.notification-opened {
     -webkit-box-orient: horizontal;
     flex-direction: row;
@@ -102,18 +102,17 @@ property based on the orientation:
     margin-right: 20px;
   }
 }
-</pre></pre>
+</pre>
 
 <figure>
-<img src="images/webview/orientation-changes.jpg" width="826px" alt=""/> 
+<img src="images/webview/orientation-changes.jpg" width="826px"/> 
 </figure>
 
-This technique can be used to change layout based on the width of the screen.
-
+<p>This technique can be used to change layout based on the width of the screen.
 For example, adjusting the size of the button from being 100% to something 
-smaller as the physical screen size gets larger.
+smaller as the physical screen size gets larger.</p>
 
-<pre><pre>button {
+<pre>button {
   display: block;
   width: 100%;
   ...
@@ -131,39 +130,39 @@ smaller as the physical screen size gets larger.
     max-width: 400px;
   } 
 }
-</pre></pre>
+</pre>
 
 <figure>
-<img src="images/webview/button-width.jpg" width="580" alt=""/> 
+<img src="images/webview/button-width.jpg" width="580"/> 
 </figure>
 
-These are minor changes, but depending on your UI, media queries can help you to 
+<p>These are minor changes, but depending on your UI, media queries can help you to 
 make much larger changes to appearance of your application, while keeping the 
-same HTML.
+same HTML.</p>
 
-<aside class="note"><b>Tip:</b> Try to change the UI based on width as a component 
+<p><b>Tip:</b> Try to change the UI based on width as a component 
 starts to look out of place, rather than focusing on device sizes. By doing this, 
 your app will look great on a range of devices, not just the ones you test on. An 
 easy way to do this is play around with the size of a browser window. But remember that 
 actual devices have different screen densities than your monitor, so always test on a 
-range of devices.</aside>
+range of devices.</p>
 
-There will be best practices for organising CSS and designing for mobiles on 
-<a href="http://www.html5rocks.com/en/">HTML5Rocks</a> soon.
+<p>There will be best practices for organising CSS and designing for mobiles on 
+<a href="http://www.html5rocks.com/en/">HTML5Rocks</a> soon.</p>
 
 <h2 id="images">Images</h2>
 
-The variety of screens sizes and densities also presents challenges for images.
-Smaller images require less memory and are faster to load, but blur if you scale them up.
+<p>The variety of screens sizes and densities also presents challenges for images.
+Smaller images require less memory and are faster to load, but blur if you scale them up.</p>
 
-The images below show the blurring that occurs when you scale a low-density image up for a 
-high-denity screen, compared with the crisp display of an appropriately-sized image.
+<p>The images below show the blurring that occurs when you scale a low-density image up for a 
+high-denity screen, compared with the crisp display of an appropriately-sized image.</p>
 
 <figure>
-<img src="images/webview/ship1xand2x.png" width="820px" alt=""/>
+<img src="images/webview/ship1xand2x.png" width="820px"/>
 </figure>
 
-Here are a few tips and tricks to make sure your images look crisp and clear on any screen:
+<p>Here are a few tips and tricks to make sure your images look crisp and clear on any screen:</p>
 
 <ul>
 <li>Use CSS for scalable effects. </li>
@@ -173,41 +172,43 @@ Here are a few tips and tricks to make sure your images look crisp and clear on 
 
 <h3 id="use_css_for_scalable_effects">Use CSS for scalable effects</h3>
 
-Make use of CSS3 where you can for borders, drop shadows, border-radius, 
+<p>Make use of CSS3 where you can for borders, drop shadows, border-radius, 
 and so on instead of images. These features can scale easily. However, 
 some combinations of CSS properties can be expensive to render, so you 
-should always test the specific combinations you&#39;re using. (For some 
-sample data on fast and slow CSS properties, see: <a href="http://www.html5rocks.com/en/tutorials/speed/css-paint-times/">CSS Paint Times and 
-Page Render Weight</a> 
-on HTML5Rocks.)
+should always test the specific combinations you&#39;re using.
+(For some sample data on fast and slow CSS properties,
+see: <a href="http://www.html5rocks.com/en/tutorials/speed/css-paint-times/">CSS Paint Times and 
+Page Render Weight</a> on HTML5Rocks.)</p>
 
 <h3 id="use_vector_graphics">Use vector graphics</h3>
 
-Scalable Vector Graphics (SVGs)  are a great way of providing scalable 
+<p>Scalable Vector Graphics (SVGs)  are a great way of providing scalable 
 version of images. For images that are well-suited to vector graphics, SVG 
 provides high quality images with very small file sizes. For more 
-information, see <a href="http://www.html5rocks.com/en/tutorials/svg/mobile_fundamentals/">Splash Vector Graphics on your Responsive 
-Site</a> on 
-HTML5Rocks.
+information, see
+<a href="http://www.html5rocks.com/en/tutorials/svg/mobile_fundamentals/">Splash Vector Graphics on your Responsive 
+Site</a> on HTML5Rocks.</p>
 
 <h3 id="provide_high_resolution_photos">Provide high-resolution photos</h3>
 
-Use a version suitable for a high-DPI device and scale the image using CSS.
+<p>Use a version suitable for a high-DPI device and scale the image using CSS.
 This way the image has a high quality across devices. If you use
 high compression (low quality setting) when generating the image, you 
-may be able to acheive good visual results with a reasonable file size.
+may be able to acheive good visual results with a reasonable file size.</p>
 
-This approach is simple, but has a couple of 
+<p>This approach is simple, but has a couple of 
 potential downsides: highly-compressed images may show some visual 
 artifacts, so you need to experiment to determine what level of 
 compression you find acceptable. And resizing the image in CSS can be an 
-expensive operation.
+expensive operation.</p>
 
-If high compression is not suitable for your needs, try the WebP format, 
-which gives a high quality image with relatively small file size. See <a href="https://developers.google.com/speed/webp/">the official WebP site</a> for details. Don&#39;t forget that you&#39;ll 
-need to provide a fallback for older versions of Android where WebP isn&#39;t supported.
+<p>If high compression is not suitable for your needs, try the WebP format, 
+which gives a high quality image with relatively small file size.
+See <a href="https://developers.google.com/speed/webp/">the official WebP site</a> for details.
+Don&#39;t forget that you&#39;ll need to provide a fallback for older versions of Android
+where WebP isn&#39;t supported.</p>
 
-For more information on this topic:
+<p>For more information on this topic:</p>
 
 <ul>
 <li><a href="http://www.html5rocks.com/en/mobile/high-dpi/">High DPI Images for Variable 
@@ -217,18 +218,22 @@ Pixel Densities</a> on HTML5Rocks.</li>
 
 <h3 id="fine_grained_control">Fine grained control</h3>
 
-In many cases, you can&#39;t use a single image for all devices. In this case, you can
+<p>In many cases, you can&#39;t use a single image for all devices. In this case, you can
 select different images based on the screen size and density. You can use media queries to select 
-background images by screen size and density. You can also use JavaScript to control how images load.
+background images by screen size and density. You can also use JavaScript to control how images load.</p>
 
 <h4 id="media_queries_and_screen_density">Media queries and screen density</h4>
 
-To select an image based on the screen density, you need to use <code>dpi</code> or 
-<code>dppx</code> units in your media query. The <code>dpi</code> unit represents dots per inch, while <code>dppx</code> 
-represents dots per pixel.
+<p>To select an image based on the screen density,
+you need to use <code>dpi</code> or 
+<code>dppx</code> units in your media query.
+The <code>dpi</code> unit represents dots per inch,
+while <code>dppx</code> represents dots per pixel.</p>
 
-Looking at the table below you can see the relation between <code>dpi</code> and <code>dppx</code>. 1<code>dppx</code> 
-is equivalent to 96<code>dpi</code>, 2<code>dppx</code> == 192<code>dpi</code> == 2 x 96<code>dpi</code>, and so on.
+<p>Looking at the table below,
+you can see the relation between <code>dpi</code> and <code>dppx</code>.
+1<code>dppx</code> is equivalent to 96<code>dpi</code>,
+2<code>dppx</code> == 192<code>dpi</code> == 2 x 96<code>dpi</code>, and so on.</p>
 
 <table>
 <tr>
@@ -257,17 +262,17 @@ is equivalent to 96<code>dpi</code>, 2<code>dppx</code> == 192<code>dpi</code> =
 </tr>
 </table>
 
-The generalized screen density buckets are defined by the Android native platform 
+<p>The generalized screen density buckets are defined by the Android native platform 
 and are used in other places to express screen density (for example, 
-<a href="http://screensiz.es/phone">http://screensiz.es</a>).
+<a href="http://screensiz.es/phone">http://screensiz.es</a>).</p>
 
 <h4 id="background_images">Background Images</h4>
 
-You can use media queries to assign background images to elements. For example, 
+<p>You can use media queries to assign background images to elements. For example, 
 if you have a logo image with 256px x 256px size on a device with a pixel ratio 
-of 1.0, you might use the following CSS rules:
+of 1.0, you might use the following CSS rules:</p>
 
-<pre><pre>.welcome-header &gt; h1 {
+<pre>.welcome-header &gt; h1 {
   flex: 1;
 
   width: 100%;
@@ -280,12 +285,12 @@ of 1.0, you might use the following CSS rules:
   background-position: center;
   background-size: contain;
 }
-</pre></pre>
+</pre>
 
-To swap this out for a larger image on devices with device pixel ratio of 1.5 (hdpi) and 2.0 
-(xhdpi), you can add the following rules:
+<p>To swap this out for a larger image on devices with device pixel ratio of 1.5 (hdpi) and 2.0 
+(xhdpi), you can add the following rules:</p>
 
-<pre><pre>@media screen and (min-resolution: 1.5dppx) {
+<pre>@media screen and (min-resolution: 1.5dppx) {
   .welcome-header &gt; h1{
       background-image: url(&#39;../images/html5_384x384.png&#39;);
   }
@@ -296,16 +301,16 @@ To swap this out for a larger image on devices with device pixel ratio of 1.5 (h
       background-image: url(&#39;../images/html5_512x512.png&#39;);
   }
 }
-</pre></pre>
+</pre>
 
 <figure>
-<img src="images/webview/device-pixel-ratio.png" width="808px" alt=""/> 
+<img src="images/webview/device-pixel-ratio.png" width="808px"/> 
 </figure>
 
-You can then merge this technique with other media queries like <code>min-width</code>, which 
-is useful as you start to account for different form factors.
+<p>You can then merge this technique with other media queries like <code>min-width</code>, which 
+is useful as you start to account for different form factors.</p>
 
-<pre><pre>@media screen and (min-resolution: 2dppx) {
+<pre>@media screen and (min-resolution: 2dppx) {
   .welcome-header &gt; h1{
           background-image: url(&#39;../images/html5_512x512.png&#39;);
   }
@@ -319,19 +324,19 @@ is useful as you start to account for different form factors.
       max-width: 512px;
   }
 }
-</pre></pre>
+</pre>
 
-You might notice that the <code>max-height</code> and <code>max-width</code> are set to 512px for 2<code>ddpx</code>
+<p>You might notice that the <code>max-height</code> and <code>max-width</code> are set to 512px for 2<code>ddpx</code>
 resolution, with an image of 1024x1024px. this is because a CSS &quot;pixel&quot; actually takes 
-into account the device pixel ratio (512px * 2 = 1024px).
+into account the device pixel ratio (512px * 2 = 1024px).</p>
 
 <h4 id="what_about_lt_img_gt_">What About &lt;img /&gt;?</h4>
 
-The web today doesn&#39;t have a solution for this. There are some proposals in the works, but 
-they aren&#39;t available in current browsers or in the WebView.
+<p>The web today doesn&#39;t have a solution for this. There are some proposals in the works, but 
+they aren&#39;t available in current browsers or in the WebView.</p>
 
-In the mean time, if you generate your DOM in JavaScript, you can create 
-multiple image resources in a sane directory structure:
+<p>In the mean time, if you generate your DOM in JavaScript, you can create 
+multiple image resources in a sane directory structure:</p>
 
 <pre>
 images/
@@ -343,9 +348,9 @@ images/
         imagename.png
 </pre>
 
-Then use the pixel ratio to try and pull the most appropriate image:
+<p>Then use the pixel ratio to try and pull the most appropriate image:</p>
 
-<pre><pre>function getDensityDirectoryName() {
+<pre>function getDensityDirectoryName() {
   if(!window.devicePixelRatio) {
     return &#39;mdpi&#39;;
   }
@@ -358,12 +363,12 @@ Then use the pixel ratio to try and pull the most appropriate image:
 
   return &#39;mdpi&#39;;
 }
-</pre></pre>
+</pre>
 
-The alternative to implementing the above in JS, is to alter the base URL of the 
-page to define the relative URLs for images.
+<p>The alternative to implementing the above in JS, is to alter the base URL of the 
+page to define the relative URLs for images.</p>
 
-<pre><pre>&lt;!doctype html&gt;
+<pre>&lt;!doctype html&gt;
 &lt;html class=&quot;no-js&quot;&gt;
 &lt;head&gt;
   &lt;script&gt;
@@ -393,7 +398,7 @@ page to define the relative URLs for images.
     ...
 &lt;/body&gt;
 &lt;/html&gt;
-</pre></pre>
+</pre>
 
 <p>The major downsides to this are that it blocks the page load and forces you to 
 use absolute paths for scripts, CSS files, links and so on, since the base URL points to 
