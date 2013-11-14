@@ -9,13 +9,13 @@
 a remote URL or display pages stored in your app.</p>
 
 <p>This tutorial walks you through creating a new Android Project, adding a 
-WebView, loading a remote URL and then loading a local HTML page.</p>
+WebView, loading a remote URL, and then loading a local HTML page.</p>
 
 <p><strong>Note:</strong> This tutorial assumes you&#39;re a developer with limited 
 or no experience with the Android development environment, but have some experience with Java. 
 If you&#39;re already familiar with programming for Android, you may want to refer to to 
 <a href="http://developer.android.com/guide/webapps/webview.html"> Building Web Apps in WebView</a>
-on the Android developer site instead.</aside></p>
+on the Android developer site instead.</p>
 
 <h2 id="install_android_studio">Install Android Studio</h2>
 
@@ -42,9 +42,9 @@ and click <strong>Next</strong>.</p>
 
 <p><img src="images/webview/projectwizard1.png"/> </p>
 
-<p><aside class="note"><strong>Note:</strong> If you only intend to support the Chromium WebView 
+<p><strong>Note:</strong> If you only intend to support the Chromium WebView 
 (rather than the old WebKit WebView) set <strong>Minimum required SDK</strong> to API 19: 
-Android 4.4 (KitKat).</aside></p></li>
+Android 4.4 (KitKat).</p></li>
 <li><p>On the next page, you&#39;re prompted to enter an application icon. (You can 
 change the icon later, so don&#39;t worry if you don&#39;t have one right now.) When 
 you&#39;re done, click <strong>Next</strong>.</p>
@@ -55,14 +55,13 @@ For the purposes of this guide, select <strong>Blank Activity **and click **Next
 
 <p><img src="images/webview/projectwizard3.png"/> </p>
 
-<p><aside class="note"><strong>Note:</strong> An Android 
+<p><strong>Note:</strong> An Android 
 <a href="http://developer.android.com/reference/android/app/Activity.html">Activity</a> can 
 be viewed as a screen of an app. In this case, the application&#39;s main activity 
 will hold the web view. If you&#39;re planning to venture further into native 
 Android development, you can find more information in the 
 <a href="http://developer.android.com/guide/components/activities.html](http://developer.android.com/guide/components/activities.html">
-Android Activities API guide</a>
-</aside></p></li>
+Android Activities API guide</a></p></li>
 <li><p>The next page lets you change the names for the default 
 <a href="http://developer.android.com/guide/components/activities.html">Activity</a> and 
 layout. Click <strong>Finish</strong> to accept the defaults and create the project.</p>
@@ -74,8 +73,10 @@ layout. Click <strong>Finish</strong> to accept the defaults and create the proj
 
 <p><img src="images/webview/projectwizard5.png"/> </p>
 
-<p><aside class="note"><b>Note:</b> After you have your project created, you might want to 
-make sure you have the KitKat SDK installed. Go to <b>Tools</b> &gt; <b>Android</b> &gt; <b>SDK Manager</b> and make sure you have <b>Android 4.4 (API 19)</b> installed.</aside></p>
+<p><b>Note:</b> After you have your project created,
+make sure you have the KitKat SDK installed.
+Go to <b>Tools</b> &gt; <b>Android</b> &gt; <b>SDK Manager</b> and
+make sure you have <b>Android 4.4 (API 19)</b> installed.</p>
 
 <h2 id="add_the_webview">Add the WebView</h2>
 
