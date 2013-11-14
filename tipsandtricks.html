@@ -32,7 +32,7 @@ button:active {
 }
 </style>
 
-<h1 id="webview_tips_amp_tricks">WebView Tips &amp; Tricks</h1>
+<h1>WebView Tips &amp; Tricks</h1>
 
 <p>This article outlines some useful tips to enhance your application&#39;s
 user experience.</p>
@@ -55,28 +55,28 @@ pages CSS.</p>
 removes the white flash. The only delay in displaying this color will be in 
 the native app to draw the WebView:</p>
 
-<pre><pre>mWebView.setBackgroundColor(Color.parseColor(&quot;#3498db&quot;));
-</pre></pre>
+<pre>mWebView.setBackgroundColor(Color.parseColor(&quot;#3498db&quot;));
+</pre>
 
-In Android it&#39;s generally good practice to define color values 
+<p>In Android, it&#39;s generally good practice to define color values 
 in a <code>res/values/colors.xml</code> file, as described in 
 <a href="http://developer.android.com/guide/topics/resources/more-resources.html#Color">
-the Android App Resource guide</a>. Using a color defined in the application&#39;s resources,
-the above line would become:
+the Android App Resource guide</a>.
+Using a color defined in the application&#39;s resources,
+the above line would become:</p>
+
 <pre>
 mWebView.setBackgroundColor(getResources().getColor(R.color.my_color_name));
 </pre>
 
 <h2 id="touch_feedback">Touch Feedback</h2>
 
-One of the common differences between native and web applications is the lack 
+<p>One of the common differences between native and web applications is the lack 
 of touch feedback in many web apps.
-
 The solution is simple, you need to support the :active pseudo class.
+If you have a simple button with the following styling:</p>
 
-If you have a simple button with the following styling:
-
-<pre><pre>.btn {
+<pre>.btn {
   display: inline-block;
   background-color: #f39c12;
   padding: 14px;
@@ -86,57 +86,58 @@ If you have a simple button with the following styling:
   border-width: 4px;
   border-color: #DA8300;
 }
-</pre></pre>
+</pre>
 
-<img src="images/webview/1-button.png" width="320" alt=""/> 
+<img src="images/webview/1-button.png" width="320"/> 
 
-The pressed state may look like:
+<p>The pressed state may look like:</p>
 
-<pre><pre>.btn:active {
+<pre>.btn:active {
   margin-top: 2px;
   background-color: #E68F05;
   border-color: #CD7600;
   border-width: 2px;
 }
-</pre></pre>
+</pre>
 
-<img src="images/webview/2-button-touched.png" width="320" alt=""/> 
+<img src="images/webview/2-button-touched.png" width="320"/> 
 
-All this does is darken the background color and border color slightly, decrease the 
+<p>All this does is darken the background color and border color slightly, decrease the 
 border size, so it looks like the button is sinking into the UI. The added margin 
-balances the smaller border.
+balances the smaller border.</p>
 
 <h3 id="lighten_darken">Lighten / Darken</h3>
 
-If you use Sass you can use the darken / lighten mixins to alter the colors of 
+<p>If you use Sass you can use the darken / lighten mixins to alter the colors of 
 elements without needing to know the exact hex value. Or you can make use of 
 online tools such as <a href="http://hexcolortool.com/">http://hexcolortool.com/</a>.
+</p>
 
 <h3 id="system_highlights">System highlights</h3>
 
-Many user agents will add some form of touch feedback to elements, preventing 
+<p>Many user agents will add some form of touch feedback to elements, preventing 
 the need for the page to define anything specific. In the WebView you may notice 
-an orange color on elements or an orange ring around links and elements.
+an orange color on elements or an orange ring around links and elements.</p>
 
-For example a button element in the new WebView is given an orange outline:
+<p>For example a button element in the new WebView is given an orange outline:</p>
 
 <img src="images/webview/3-outline.png" width="300" alt="button with outline highlight"/> 
 
-In the old webview a highlight color is applied on top of certain 
-elements:
+<p>In the old webview a highlight color is applied on top of certain 
+elements:</p>
 
-<img src="images/webview/4-tap-highlighting.png" width="469" alt=""/> 
+<img src="images/webview/4-tap-highlighting.png" width="469"/> 
 
-If you are taking care of the touch and focus feedback yourself, you can 
-override the defaults with the following CSS properties:
+<p>If you are taking care of the touch and focus feedback yourself, you can 
+override the defaults with the following CSS properties:</p>
 
-<pre><pre>-webkit-tap-highlight-color: rgba(0,0,0, 0.0);
+<pre>-webkit-tap-highlight-color: rgba(0,0,0, 0.0);
 outline: none;
-</pre></pre>
+</pre>
 
-And set your own colors like so:
+<p>And set your own colors like so:</p>
 
-<pre><pre>button {
+<pre>button {
   …
   outline: 0;
   -webkit-tap-highlight-color: rgba(0,0,0, 0.0);
@@ -151,7 +152,7 @@ button:active {
   background-color: #FFA91F;
   border-color: #E68F05;
 }
-</pre></pre>
+</pre>
 
 <p>This causes the button to have different colors depending on the state, so there 
 is the default state, a focused color and then a pressed (or active) state.</p>
