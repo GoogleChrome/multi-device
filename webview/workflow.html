@@ -14,7 +14,7 @@ creating a production-ready build.</p>
 boilerplate, bringing in libraries from <a href="http://bower.io/">Bower</a> and 
 <a href="https://npmjs.org/">npm</a>, and creating a Grunt file with predefined tasks.</p>
 
-<p><img src="/chrome/mobile/images/webview/0-yeoman.png&#8221; width="920&#8221; alt="&#8221; /></p>
+<p><img src="/multidevice/images/webview/0-yeoman.png"; width="920"; alt=""; /></p>
 
 <p>In this tutorial you&#8217;ll use Yeoman to create a new basic web application, then integrate 
 the Android Studio build system (<a href="http://www.gradle.org/">Gradle</a>) with Grunt, to build your 
@@ -45,7 +45,7 @@ page each time you change an HTML, CSS or JavaScript file.</p>
 <p>Name the directory <code>webapp</code>.</p></li>
 </ul>
 
-<p><img src="/chrome/mobile/images/webview/1-web-app-dir.png&#8221; width="562&#8221; alt="&#8221; /></p>
+<p><img src="/multidevice/images/webview/1-web-app-dir.png&#8221; width="562&#8221; alt="&#8221; /></p>
 
 <h2>Step 3. Create a Yeoman project in your new directory</h2>
 
@@ -74,7 +74,7 @@ is compressed, optimised and made into a production ready version inside this fo
 
 <p>In your <code>webapp</code> directory create a new file called <code>build.gradle</code>.</p>
 
-<p><img src="/chrome/mobile/images/webview/2-new-build-file.png&#8221; width="546&#8221; alt="&#8221; /></p>
+<p><img src="/multidevice/images/webview/2-new-build-file.png&#8221; width="546&#8221; alt="&#8221; /></p>
 
 <p>In your new <code>build.gradle</code> file, add the following:</p>
 
@@ -207,14 +207,14 @@ md5-2f1e9c65542d69c465ba361c9c42fa09
 Gradle will now offer you the ability to create a version of your app with a liveserver package name, and one with your normal package name. To check 
 it’s all worked, click **Sync Project with Gradle Files** (on the top bar to the right of the **Run** button).
 
-<img src="/chrome/mobile/images/webview/3-sync-gradle-files.png" width="290" alt="" />
+<img src="/multidevice/images/webview/3-sync-gradle-files.png" width="290" alt="" />
 
-<img src="/chrome/mobile/images/webview/4-sync-gradle-button.png" width="27" alt="" />
+<img src="/multidevice/images/webview/4-sync-gradle-button.png" width="27" alt="" />
 
 Then view the **Build Variants** which are in the bottom left corner of Android Studio and essentially shows you what versions of your 
 app you can build.
 
-<img src="/chrome/mobile/images/webview/5-build-variants.png" width="346" alt="" />
+<img src="/multidevice/images/webview/5-build-variants.png" width="346" alt="" />
 
 For each **_productFlavor_** there are **_Debug_** and **_Release_** versions, which the Android plugin for Gradle gives you by 
 default. This determines whether the build should be a debug build or a release build suitable to deploy on the Play store.
@@ -234,12 +234,12 @@ In this case, you'll define the URL as a string resource, and use that resource 
 <ol>
 <li><p>Create the folders <code>src/liveserver</code> and <code>src/staticbuild</code>.</p>
 
-<p><img src="/chrome/mobile/images/webview/6-product-flavor-dirs.png&#8221; width="247&#8221; alt="&#8221; /></p></li>
+<p><img src="/multidevice/images/webview/6-product-flavor-dirs.png&#8221; width="247&#8221; alt="&#8221; /></p></li>
 <li><p>In the <code>liveserver</code> folder, create a new folder named <code>res</code> with a subfolder 
 named <code>values</code>. Inside this create a file named <code>config.xml</code>. Repeat this process for the
 <code>staticbuild</code> folder.</p>
 
-<p><img src="/chrome/mobile/images/webview/7-config-product-flavors.png&#8221; width="274&#8221; alt="&#8221; /></p></li>
+<p><img src="/multidevice/images/webview/7-config-product-flavors.png&#8221; width="274&#8221; alt="&#8221; /></p></li>
 <li><p>Now inside your config files add the following lines:</p>
 
 <p><code>src/liveserver/res/values/config.xml</code>:</p>
