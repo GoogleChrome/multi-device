@@ -82,10 +82,9 @@ is compressed, optimised and made into a production ready version inside this fo
 
 task buildWebApp(type: Exec) {
 
-    executable = Os.isFamily(Os.FAMILY_WINDOWS) ? "grunt.cmd" : "grunt"
+  executable = Os.isFamily(Os.FAMILY_WINDOWS) ? "grunt.cmd" : "grunt"
 
-    args = ["build"]
-
+  args = ["build"]
 }
 </code></pre>
 
@@ -118,20 +117,19 @@ Copy the following into the Android apps <code>build.gradle</code> file:
 </p>
 
 <pre><code>task copyWebApplication(type: Copy) {
-    from '../webapp/dist'
-    into 'src/main/assets/www'
+  from '../webapp/dist'
+  into 'src/main/assets/www'
 }
 
 task deleteWebApplication(type: Delete) {
-    delete 'src/main/assets/www'
+  delete 'src/main/assets/www'
 }
 
 copyWebApplication.dependsOn ':webapp:buildWebApp'
 copyWebApplication.dependsOn deleteWebApplication
 
 android.applicationVariants.all { variant -&gt;
-    tasks.getByPath(":${project.name}:assemble${variant.buildType.name.capitalize()}").dependsOn copyWebApplication
-
+  tasks.getByPath(":${project.name}:assemble${variant.buildType.name.capitalize()}").dependsOn copyWebApplication
 }
 </code></pre>
 
@@ -142,8 +140,8 @@ Let’s examine each part of this.
 <h3>task copyWebApplication</h3>
 
 <pre><code>task copyWebApplication(type: Copy) {
-    from '../webapp/dist'
-    into 'src/main/assets/www'
+  from '../webapp/dist'
+  into 'src/main/assets/www'
 }
 </code></pre>
 
@@ -156,7 +154,7 @@ also creates the necessary file structure if any of the required directories don
 <h3>task deleteWebApplication</h3>
 
 <pre><code>task deleteWebApplication(type: Delete) {
-    delete 'src/main/assets/www'
+  delete 'src/main/assets/www'
 }
 </code></pre>
 
@@ -186,7 +184,7 @@ sure we build the web app and also delete the current contents of the <code>asse
 <h3>android.applicationVariants.all</h3>
 
 <pre><code>android.applicationVariants.all { variant -&gt;
-    tasks.getByPath(":${project.name}:assemble${variant.buildType.name.capitalize()}").dependsOn copyWebApplication
+  tasks.getByPath(":${project.name}:assemble${variant.buildType.name.capitalize()}").dependsOn copyWebApplication
 }
 </code></pre>
 
@@ -238,19 +236,19 @@ In your Android app's <code>build.gradle</code> add the following lines in bold 
 <code>android</code> element:
 
 <pre><code>android {
+  ...
+  defaultConfig {
     ...
-    defaultConfig {
-        ...
+  }
+  <b>productFlavors {
+    staticbuild {
+      packageName "com.google.chrome.myapplication"
     }
-    productFlavors {
-        staticbuild {
-            packageName "com.google.chrome.myapplication"**
-        }
 
-        liveserver {
-            packageName "com.google.chrome.myapplication.liveserver"**
-        }
+    liveserver {
+      packageName "com.google.chrome.myapplication.liveserver"
     }
+  }</b>
 
 }</code></pre>
 
@@ -316,7 +314,7 @@ Repeat this process for the <code>staticbuild</code> folder.</p>
 
 <pre>&lt;?xml version="1.0" encoding="utf-8"?>
 &lt;resources>
-    &lt;string name="init_url">http://&lt;Your Local Machine IP Address>:9000&lt;/string>
+  &lt;string name="init_url">http://&lt;Your Local Machine IP Address>:9000&lt;/string>
 &lt;/resources>
 </pre>
 
@@ -324,7 +322,7 @@ Repeat this process for the <code>staticbuild</code> folder.</p>
 
 <pre>&lt;?xml version="1.0" encoding="utf-8"?>
 &lt;resources>
-    &lt;string name="init_url">file:///android_asset/www/index.html&lt;/string>
+  &lt;string name="init_url">file:///android_asset/www/index.html&lt;/string>
 &lt;/resources>
 </pre></li>
 <li><p>Now set your WebView to use the <code>init_url</code> from these config files.</p>
@@ -336,7 +334,7 @@ lines:</p>
 
 <pre>&lt;?xml version="1.0" encoding="utf-8"?>
 &lt;manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    &lt;uses-permission android:name="android.permission.INTERNET" />
+  &lt;uses-permission android:name="android.permission.INTERNET" />
 &lt;/manifest>
 </pre>
 
@@ -344,26 +342,26 @@ lines:</p>
 <li><p>Finally, inside <code>webapp/Gruntfile.js</code> look for:</p>
 
 <pre><code>connect: {
-    options: {
-        port: 9000,
-        livereload: 35729,
-        // change this to '0.0.0.0' to access the server from outside
-        hostname: **'localhost'**
-    },
-    ...
+  options: {
+    port: 9000,
+    livereload: 35729,
+    // change this to '0.0.0.0' to access the server from outside
+    hostname: **'localhost'**
+  },
+  ...
 }
 </code></pre>
 
 <p>Replace <code>localhost</code> with <code>0.0.0.0</code> so your local server is accessible from the local network:</p>
 
 <p><pre><code>connect: {
-    options: {
-        port: 9000,
-        livereload: 35729,
-        // change this to '0.0.0.0' to access the server from outside
-        hostname: ‘**0.0.0.0’**
-    },
-    ...
+  options: {
+    port: 9000,
+    livereload: 35729,
+    // change this to '0.0.0.0' to access the server from outside
+    hostname: ‘**0.0.0.0’**
+  },
+  ...
 }
 </code></pre></li>
 </ol></p>
