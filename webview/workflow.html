@@ -51,7 +51,7 @@ page each time you change an HTML, CSS or JavaScript file.</p>
 
 <p>In a terminal <code>cd</code> to the the <code>webapp</code> directory in the project.</p>
 
-<pre><b>cd &lt<i>path-to-project</i>>/webapp/</b></pre>
+<pre><strong>cd &lt<i>path-to-project</i>>/webapp/</strong></pre>
 
 <p>Then create a new web app with Yeoman:</p>
 
@@ -78,15 +78,15 @@ is compressed, optimised and made into a production ready version inside this fo
 
 <p>In your new <code>build.gradle</code> file, add the following:</p>
 
-<pre><code>import org.apache.tools.ant.taskdefs.condition.Os
+<pre><code>
+import org.apache.tools.ant.taskdefs.condition.Os
 
 task buildWebApp(type: Exec) {
 
   executable = Os.isFamily(Os.FAMILY_WINDOWS) ? "grunt.cmd" : "grunt"
 
   args = ["build"]
-}
-</code></pre>
+}</code></pre>
 
 <p>
 This creates a new task called <code>buildWebApp</code> with a predefined type <code>Exec</code>. 
@@ -104,8 +104,7 @@ Before we can use this new task we need to make the project aware of the new
 Open <code>settings.gradle</code> in the root directory and add the following line:
 </p>
 
-<pre><code>include ':webapp'
-</code></pre>
+<pre><code>include ':webapp'</code></pre>
 
 <h2>Step 5. Build your WebApp when you build the android app</h2>
 
@@ -116,7 +115,8 @@ Open <code>settings.gradle</code> in the root directory and add the following li
 Copy the following into the Android apps <code>build.gradle</code> file:
 </p>
 
-<pre><code>task copyWebApplication(type: Copy) {
+<pre><code>
+task copyWebApplication(type: Copy) {
   from '../webapp/dist'
   into 'src/main/assets/www'
 }
@@ -130,8 +130,7 @@ copyWebApplication.dependsOn deleteWebApplication
 
 android.applicationVariants.all { variant -&gt;
   tasks.getByPath(":${project.name}:assemble${variant.buildType.name.capitalize()}").dependsOn copyWebApplication
-}
-</code></pre>
+}</code></pre>
 
 <p>
 Let’s examine each part of this.
@@ -142,8 +141,7 @@ Let’s examine each part of this.
 <pre><code>task copyWebApplication(type: Copy) {
   from '../webapp/dist'
   into 'src/main/assets/www'
-}
-</code></pre>
+}</code></pre>
 
 <p>
 This <code>Copy</code> task copies your application from the <code>webapp/dist</code> directory, 
@@ -155,8 +153,7 @@ also creates the necessary file structure if any of the required directories don
 
 <pre><code>task deleteWebApplication(type: Delete) {
   delete 'src/main/assets/www'
-}
-</code></pre>
+}</code></pre>
 
 <p>
 This delete task deletes all the files in the <code>assets/www</code> directory.
@@ -165,8 +162,7 @@ This delete task deletes all the files in the <code>assets/www</code> directory.
 <h3>copyWebApplication.dependsOn</h3>
 
 <pre><code>copyWebApplication.dependsOn ':webapp:buildWebApp'
-copyWebApplication.dependsOn deleteWebApplication
-</code></pre>
+copyWebApplication.dependsOn deleteWebApplication</code></pre>
 
 <p>
 The first line of this states that the <code>copyWebApplication</code> has a dependency on the 
@@ -185,8 +181,7 @@ sure we build the web app and also delete the current contents of the <code>asse
 
 <pre><code>android.applicationVariants.all { variant -&gt;
   tasks.getByPath(":${project.name}:assemble${variant.buildType.name.capitalize()}").dependsOn copyWebApplication
-}
-</code></pre>
+}</code></pre>
 
 <p>
 This task specifies the dependencies for all of your project’s builds, for each version 
