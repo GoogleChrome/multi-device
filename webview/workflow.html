@@ -14,7 +14,7 @@ creating a production-ready build.</p>
 boilerplate, bringing in libraries from <a href="http://bower.io/">Bower</a> and 
 <a href="https://npmjs.org/">npm</a>, and creating a Grunt file with predefined tasks.</p>
 
-<p><img src="/multidevice/images/webview/0-yeoman.png"; width="920"; alt=""; /></p>
+<p><img src="/multidevice/images/webview/0-yeoman.png" width="920" alt="" /></p>
 
 <p>In this tutorial you&#8217;ll use Yeoman to create a new basic web application, then integrate 
 the Android Studio build system (<a href="http://www.gradle.org/">Gradle</a>) with Grunt, to build your 
@@ -45,7 +45,7 @@ page each time you change an HTML, CSS or JavaScript file.</p>
 <p>Name the directory <code>webapp</code>.</p></li>
 </ul>
 
-<p><img src="/multidevice/images/webview/1-web-app-dir.png&#8221; width="562&#8221; alt="&#8221; /></p>
+<p><img src="/multidevice/images/webview/1-web-app-dir.png" width="562" alt="" /></p>
 
 <h2>Step 3. Create a Yeoman project in your new directory</h2>
 
@@ -74,7 +74,7 @@ is compressed, optimised and made into a production ready version inside this fo
 
 <p>In your <code>webapp</code> directory create a new file called <code>build.gradle</code>.</p>
 
-<p><img src="/multidevice/images/webview/2-new-build-file.png&#8221; width="546&#8221; alt="&#8221; /></p>
+<p><img src="/multidevice/images/webview/2-new-build-file.png" width="546" alt="" /></p>
 
 <p>In your new <code>build.gradle</code> file, add the following:</p>
 
@@ -89,26 +89,33 @@ task buildWebApp(type: Exec) {
 }
 </code></pre>
 
-This creates a new task called `buildWebApp` with a predefined type `Exec`. 
-You then set the `executable` variable in `Exec` to the relevant grunt command depending 
-on the current OS. `args` are set to `"build"` which equates to `grunt build` being 
-run on the command line. Finally, the import at the top is to make use of 
-`Os.isFamily(Os.FAMILY_WINDOWS)`.
+<p>
+This creates a new task called <code>buildWebApp</code> with a predefined type <code>Exec</code>. 
+You then set the <code>executable</code> variable in <code>Exec</code> to the relevant grunt 
+command depending on the current OS. <code>args</code> are set to <code>"build"</code> which 
+equates to <code>grunt build</code> being run on the command line. Finally, the import at the 
+top is to make use of <code>Os.isFamily(Os.FAMILY_WINDOWS)</code>.</p>
 
-Before we can use this new task we need to make the project aware of the new `build.gradle` 
-file.
+<p>
+Before we can use this new task we need to make the project aware of the new 
+<code>build.gradle</code> file.
+</p>
 
-Open `settings.gradle` in the root directory and add the following line:
+<p>
+Open <code>settings.gradle</code> in the root directory and add the following line:
+</p>
 
 <pre><code>include ':webapp'
 </code></pre>
 
 <h2>Step 5. Build your WebApp when you build the android app</h2>
 
-The final step is to get the webapp to build and then copy the app into the `assets` directory 
-of our Android app.
+<p>The final step is to get the webapp to build and then copy the app into the 
+<code>assets</code> directory of our Android app.</p>
 
-Copy the following into the Android apps `build.gradle` file:
+<p>
+Copy the following into the Android apps <code>build.gradle</code> file:
+</p>
 
 <pre><code>task copyWebApplication(type: Copy) {
     from '../webapp/dist'
@@ -128,7 +135,9 @@ android.applicationVariants.all { variant -&gt;
 }
 </code></pre>
 
+<p>
 Let’s examine each part of this.
+</p>
 
 <h3>task copyWebApplication</h3>
 
@@ -138,8 +147,11 @@ Let’s examine each part of this.
 }
 </code></pre>
 
-This `Copy` task copies your application from the `webapp/dist` directory, we want to copy the files to `src/main/assets/www`. This task 
-also creates the necessary file structure if any directories don't exist.
+<p>
+This <code>Copy</code> task copies your application from the <code>webapp/dist</code> directory, 
+we want to copy the files to <code>src/main/assets/www</code>. This task 
+also creates the necessary file structure if any of the required directories don't exist.
+</p>
 
 <h3>task deleteWebApplication</h3>
 
@@ -148,7 +160,9 @@ also creates the necessary file structure if any directories don't exist.
 }
 </code></pre>
 
-This delete task deletes all the files in the `assets/www` directory .
+<p>
+This delete task deletes all the files in the <code>assets/www</code> directory.
+</p>
 
 <h3>copyWebApplication.dependsOn</h3>
 
@@ -156,13 +170,18 @@ This delete task deletes all the files in the `assets/www` directory .
 copyWebApplication.dependsOn deleteWebApplication
 </code></pre>
 
-The first line of this states that the `copyWebApplication` has a dependency on the `buildWebApp` task from our web app’s 
-`build.gradle` file.
+<p>
+The first line of this states that the <code>copyWebApplication</code> has a dependency on the 
+<code>buildWebApp</code> task from our web app’s <code>build.gradle</code> file.
+</p>
 
-The second line states there is a dependency on the `deleteWebApplication `task.
+<p>
+The second line states there is a dependency on the <code>deleteWebApplication</code> task.
+</p>
 
-In other words, before we actually copy any files to the `assets `directory, make sure we build the web app and also delete
-the current contents of the `assets directory.
+<p>
+In other words, before we actually copy any files to the <code>assets </code>directory, make 
+sure we build the web app and also delete the current contents of the <code>assets</code> directory.
 
 <h3>android.applicationVariants.all</h3>
 
@@ -171,75 +190,126 @@ the current contents of the `assets directory.
 }
 </code></pre>
 
-This task determines the dependencies for all of your project’s builds, for each version 
-of our app, and set a dependency on the `assemble` tasks to run `copyWebApplication`.
+<p>
+This task specifies the dependencies for all of your project’s builds, for each version 
+of your app. Here it sets a dependency on the <code>assemble</code> tasks to run 
+<code>copyWebApplication</code>.
+</p>
 
-The `assemble` tasks "assemble the output(s) of the project" o before we do that, we copy our application over to the Android project.
+<p>
+The <code>assemble</code> tasks "assemble the output(s) of the project", so before you do that, 
+you need to copy your application over to the Android project.
+</p>
 
 <h2>Step 6. Make sure everything works</h2>
 
-In Android Studio, you should have no `assets` directory in your Android applications `src` folder.
+<p>
+In Android Studio, you should have no <code>assets</code> directory in your Android applications 
+<code>src</code> folder.
+</p>
 
-Don’t forget you’ll need to set the WebView to use the `index.html` page and enable JS you want to use it. For details, see 
-the [Getting Started Guide](/chrome/mobile/docs/webview/gettingstarted/).
+<p>
+Don’t forget you’ll need to set the WebView to use the <code>index.html</code> page and enable 
+JavaScript if you want to use it. For details, see 
+the <a href="gettingstarted.html">Getting Started Guide</a>.
+</p>
 
-`mWebView.loadUrl("file:///android_asset/www/index.html");`
+<code>mWebView.loadUrl("file:///android_asset/www/index.html");</code>
 
-Now press **Run** and let your application build. You should see an `assets` directory with your web application in the 
-`www` subdirectory.
+<p>
+Now press <b>Run</b> and let your application build. You should see an <code>assets</code> directory with your web application in the 
+<code>www</code> subdirectory.
+</p>
 
 <h2>Step 7. What about live server and live reload?</h2>
 
-So now you have a good build process for your Android application. But what about developing and debugging the web content?
-Live reloading can be pretty useful for making quick changes.
+<p>
+So now you have a good build process for your Android application. But what about developing and 
+debugging the web content?  Live reloading can be pretty useful for making quick changes.
+</p>
 
-To enable this, you can create two "product flavors" for your app, one a _live server version_ and one a _static version_,
-where the web content is packaged into the Android application.
+<p>
+To enable this, you can create two "product flavors" for your app, one a <em>live server version</em>
+and one a <em>static version</em>, where the web content is packaged into the Android application.
+</p>
 
-In your Android app's `build.gradle` add the following lines in bold at the end of the `android` element:
+<p>
+In your Android app's <code>build.gradle</code> add the following lines in bold at the end of the 
+<code>android</code> element:
+
+<pre><code>android {
+    ...
+    defaultConfig {
+        ...
+    }
+    productFlavors {
+        staticbuild {
+            packageName "com.google.chrome.myapplication"**
+        }
+
+        liveserver {
+            packageName "com.google.chrome.myapplication.liveserver"**
+        }
+    }
+
+}</code></pre>
 
 
-
-md5-2f1e9c65542d69c465ba361c9c42fa09
-
-
-
-Gradle will now offer you the ability to create a version of your app with a liveserver package name, and one with your normal package name. To check 
-it’s all worked, click **Sync Project with Gradle Files** (on the top bar to the right of the **Run** button).
-
+<p>
+Gradle will now offer you the ability to create a version of your app with a liveserver package 
+name, and one with your normal package name. To check if it worked, click 
+<b>Sync Project with Gradle Files</b> (on the top bar next to the <b>Run</b> button).
+</p>
 <img src="/multidevice/images/webview/3-sync-gradle-files.png" width="290" alt="" />
 
 <img src="/multidevice/images/webview/4-sync-gradle-button.png" width="27" alt="" />
 
-Then view the **Build Variants** which are in the bottom left corner of Android Studio and essentially shows you what versions of your 
+<p>
+Then view the <b>Build Variants</b> which are in the bottom left corner of Android Studio and essentially shows you what versions of your 
 app you can build.
+</p>
 
 <img src="/multidevice/images/webview/5-build-variants.png" width="346" alt="" />
 
-For each **_productFlavor_** there are **_Debug_** and **_Release_** versions, which the Android plugin for Gradle gives you by 
-default. This determines whether the build should be a debug build or a release build suitable to deploy on the Play store.
+<p>
+For each <b><em>productFlavor</em></b> there are <b><em>Debug</em></b> and <b><em>Release</em></b> 
+versions, which the Android plugin for Gradle gives you by default. This determines whether the 
+build should be a debug build or a release build suitable to deploy on the Play store.
+</p>
 
+<p>
 Now you have two versions, but they don't actually do anything different yet.
+</p>
 
 <h2>Step 8. Load from a live server</h2>
 
-In this step, you'll configure your application to load a different URL depending on which product flavor you build.
+<p>
+In this step, you'll configure your application to load a different URL depending on which product 
+flavor you build.
+</p>
 
-In your Android application, the files common to all product flavors are in `src/main`. To add code or resources specific to one 
-product flavor, you create another directory under `src` with the same name as your **_productFlavor_**. When you build for that
-build variant,  Gradle and the android plugin merge these additional files on top of the files in `src/main`.
+<p>
+In your Android application, the files common to all product flavors are in <code>src/main</code>. 
+To add code or resources specific to one product flavor, you create another directory under 
+<code>src</code> with the same name as your <b><em>productFlavor</em></b>. When you build for that
+build variant, Gradle and the Android plugin merge these additional files on top of the files in 
+<code>src/main</code>.
+</p>
 
-In this case, you'll define the URL as a string resource, and use that resource in your code instead of a hard-coded URL.
+<p>
+In this case, you'll define the URL as a string resource, and use that resource in your code 
+instead of a hard-coded URL.
+</p>
 
 <ol>
 <li><p>Create the folders <code>src/liveserver</code> and <code>src/staticbuild</code>.</p>
 
-<p><img src="/multidevice/images/webview/6-product-flavor-dirs.png&#8221; width="247&#8221; alt="&#8221; /></p></li>
-<li><p>In the <code>liveserver</code> folder, create a new folder named <code>res</code> with a subfolder 
-named <code>values</code>. Inside this create a file named <code>config.xml</code>. Repeat this process for the
-<code>staticbuild</code> folder.</p>
+<p><img src="/multidevice/images/webview/6-product-flavor-dirs.png" width="247" alt="" /></p></li>
+<li><p>In the <code>liveserver</code> folder, create a new folder named <code>res</code> with a 
+subfolder named <code>values</code>. Inside this create a file named <code>config.xml</code>. 
+Repeat this process for the <code>staticbuild</code> folder.</p>
 
-<p><img src="/multidevice/images/webview/7-config-product-flavors.png&#8221; width="274&#8221; alt="&#8221; /></p></li>
+<p><img src="/multidevice/images/webview/7-config-product-flavors.png" width="274" alt="" /></p></li>
 <li><p>Now inside your config files add the following lines:</p>
 
 <p><code>src/liveserver/res/values/config.xml</code>:</p>
@@ -305,13 +375,14 @@ lines:</p>
 
 <pre><code>`grunt server`
 </code></pre></li>
-<li><p>In Android Studio, in the <strong>Build Variant</strong> selection, select <strong>LiveserverDebug</strong>. Then click <strong>Run</strong>.</p>
+<li><p>In Android Studio, in the <strong>Build Variant</strong> selection, select 
+<strong>LiveserverDebug</strong>. Then click <strong>Run</strong>.</p>
 
 <p>You should be able to edit your HTML, CSS and JavaScript content and see it reflected immediately 
 in the browser.</p></li>
 </ol>
 
-<p>You now have two versions of your application: a development version with live reload from the Grunt server; and 
-a static version, packaged locally in the Android App.</p>
+<p>You now have two versions of your application: a development version with live reload from the 
+Grunt server; and a static version, packaged locally in the Android App.</p>
 
 {{/partials.standard_multidevice_article}}
