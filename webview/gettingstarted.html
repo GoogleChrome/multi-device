@@ -1,87 +1,91 @@
 {{+bindTo:partials.standard_multidevice_article}}
-<h1 id="getting-started-webview-based-applications-for-web-developers">Getting Started: WebView-based Applications for Web Developers</h1>
+
+<h1>Getting Started: WebView-based Applications for Web Developers</h1>
 
 <p>Getting started with the Android WebView is fairly simple, whether you want load 
 a remote URL or display pages stored in your app.</p>
 
 <p>This tutorial walks you through creating a new Android Project, adding a 
-WebView, loading a remote URL and then loading a local HTML page. </p>
+WebView, loading a remote URL, and then loading a local HTML page.</p>
 
-<p class="note"><strong>Note:</strong> This tutorial assumes you're a developer with limited 
+<p><strong>Note:</strong> This tutorial assumes you&#39;re a developer with limited 
 or no experience with the Android development environment, but have some experience with Java. 
-If you're already familiar with programming for Android, you may want to refer to to 
+If you&#39;re already familiar with programming for Android, you may want to refer to to 
 <a href="http://developer.android.com/guide/webapps/webview.html"> Building Web Apps in WebView</a>
 on the Android developer site instead.</p>
 
-<h2 id="install-android-studio">Install Android Studio</h2>
+<section class="collapsible">
+<h2 id="install_android_studio">Install Android Studio</h2>
 
 <p>This tutorial uses <a href="http://developer.android.com/sdk/installing/studio.html">Android 
 Studio</a>, the new 
-design-and-build IDE for Android. So you&#8217;ll need start off by installing Android 
+design-and-build IDE for Android. So you&#39;ll need start off by installing Android 
 Studio, as described here:</p>
 
 <p><a href="http://developer.android.com/sdk/installing/studio.html">http://developer.android.com/sdk/installing/studio.html</a></p>
 
-<h2 id="create-a-new-android-project">Create a New Android Project</h2>
+</section><section class="collapsible">
+<h2 id="create_a_new_android_project">Create a New Android Project</h2>
 
 <p>When the installation completes, Android Studio launches and displays the 
 welcome screen.</p>
 
-<p><img src="/multidevice/images/webview/welcome-screen.png" alt=""/> </p>
+<p><img src="/multidevice/images/webview/welcome-screen.png"/> </p>
 
 <p>To create a new project:</p>
 
 <ol>
-<li>Click <strong>New Project</strong>.</li>
+<li> Click <strong>New Project</strong>.</li>
 <li><p>On the next page, enter your application name, package name and target SDKs, 
 and click <strong>Next</strong>.</p>
 
-<p><img src="/multidevice/images/webview/projectwizard1.png" alt=""/> </p>
+<p><img src="/multidevice/images/webview/projectwizard1.png"/> </p>
 
-<aside class="note"><strong>Note:</strong> If you only intend to support the Chromium WebView 
+<p><strong>Note:</strong> If you only intend to support the Chromium WebView 
 (rather than the old WebKit WebView) set <strong>Minimum required SDK</strong> to API 19: 
-Android 4.4 (KitKat).</aside></li>
-<li><p>On the next page, you&#8217;re prompted to enter an application icon. (You can 
-change the icon later, so don&#8217;t worry if you don&#8217;t have one right now.) When 
-you&#8217;re done, click <strong>Next</strong>.</p>
+Android 4.4 (KitKat).</p></li>
+<li><p>On the next page, you&#39;re prompted to enter an application icon. (You can 
+change the icon later, so don&#39;t worry if you don&#39;t have one right now.) When 
+you&#39;re done, click <strong>Next</strong>.</p>
 
-<p><img src="/multidevice/images/webview/projectwizard2.png" alt=""/> </p></li>
+<p><img src="/multidevice/images/webview/projectwizard2.png"/> </p></li>
 <li><p>The next page lets you select the main Android activity for your application. 
-For the purposes of this guide, select <strong>Blank Activity <em>*and click *</em>Next</strong>.</p>
+For the purposes of this guide, select <strong>Blank Activity **and click **Next</strong>.</p>
 
-<p><img src="/multidevice/images/webview/projectwizard3.png" alt=""/> </p>
+<p><img src="/multidevice/images/webview/projectwizard3.png"/> </p>
 
-<aside class="note"><strong>Note:</strong> An Android 
-[Activity](http://developer.android.com/reference/android/app/Activity.html) can 
-be viewed as a screen of an app. In this case, the application's main activity 
-will hold the web view. If you're planning to venture further into native 
+<p><strong>Note:</strong> An Android 
+<a href="http://developer.android.com/reference/android/app/Activity.html">Activity</a> can 
+be viewed as a screen of an app. In this case, the application&#39;s main activity 
+will hold the web view. If you&#39;re planning to venture further into native 
 Android development, you can find more information in the 
 <a href="http://developer.android.com/guide/components/activities.html](http://developer.android.com/guide/components/activities.html">
-Android Activities API guide</a>
-</aside></li>
+Android Activities API guide</a></p></li>
 <li><p>The next page lets you change the names for the default 
 <a href="http://developer.android.com/guide/components/activities.html">Activity</a> and 
 layout. Click <strong>Finish</strong> to accept the defaults and create the project.</p>
 
-<p><img src="/multidevice/images/webview/projectwizard4.png" alt=""/> </p>
+<p><img src="/multidevice/images/webview/projectwizard4.png"/> </p>
 
 <p>You now have a new Android project. Next, to add the WebView!</p></li>
 </ol>
 
-<p><img src="/multidevice/images/webview/projectwizard5.png" alt=""/> </p>
+<p><img src="/multidevice/images/webview/projectwizard5.png"/> </p>
 
-<aside class="note"><b>Note:</b> After you have your project created, you might want to 
-make sure you have the KitKat SDK installed. Go to <b>Tools</b> > <b>Android</b> > <b>SDK Manager</b> and make sure you have <b>Android 4.4 (API 19)</b> installed.</aside>
+<p><b>Note:</b> After you have your project created,
+make sure you have the KitKat SDK installed.
+Go to <b>Tools</b> &gt; <b>Android</b> &gt; <b>SDK Manager</b> and
+make sure you have <b>Android 4.4 (API 19)</b> installed.</p>
 
+</section><section class="collapsible">
+<h2 id="add_the_webview">Add the WebView</h2>
 
-## Add the WebView
+<p>Android Studio will give you some boilerplate code to set up your application. Your project&#39;s 
+structure should look something like this:</p>
 
-Android Studio will give you some boilerplate code to set up your application. Your project's 
-structure should look something like this:
+<p><img src="/multidevice/images/webview/projectlayout.png"/> </p>
 
-<img src="/multidevice/images/webview/projectlayout.png" alt=""/> 
-
-A few of the more import files and folders:
+<p>A few of the more import folders are identified in the picture:</p>
 
 <ol>
 <li><code>src/main/java</code>. Android Java source code.</li>
@@ -96,157 +100,158 @@ to hard-code in your application.</li>
 application: activities, permissions, themes, and so on.</li>
 </ol>
 
-You need to add a 
-[WebView](http://developer.android.com/reference/android/webkit/WebView.html) to 
-the main activity's layout.
+<p>You need to add a 
+<a href="http://developer.android.com/reference/android/webkit/WebView.html">WebView</a> to 
+the main activity&#39;s layout.</p>
 
-1.  Open the `activity_main.xml` file in the `src/main/res/layout` directory if it 
-    is not already open. (You may also see a `fragment_main.xml` file. You can ignore this, 
-    as it's not required for this tutorial.)
+<ol>
+<li><p>Open the <code>activity_main.xml</code> file in the <code>src/main/res/layout</code> directory if it 
+is not already open. (You may also see a <code>fragment_main.xml</code> file. You can ignore this, 
+as it&#39;s not required for this tutorial.)</p>
 
-    Select the **Text** tab at the bottom of the of the `activity_main.xml` editor to see 
-    the XML markup.
+<p>Select the <strong>Text</strong> tab at the bottom of the of the <code>activity_main.xml</code> editor to see 
+the XML markup.</p>
 
-    <img src="/multidevice/images/webview/xmllayout.png" alt=""/> 
+<p><img src="/multidevice/images/webview/xmllayout.png"</p>
 
-    This file defines the layout for your main activity, and the **Preview** panes show the
-    a preview of the activity. The **Blank Activity** layout doesn't include any children. 
-    You'll need to add the WebView.
+<p>This file defines the layout for your main activity, and the <strong>Preview</strong> panes show the
+a preview of the activity. The <strong>Blank Activity</strong> layout doesn&#39;t include any children. 
+You&#39;ll need to add the WebView.</p></li>
+<li><p>In the XML pane, remove the self-closing slash from the end of the <code>FrameLayout</code> element,
+and add the &lt;WebView&gt; element and a new closing tag, as shown:</p>
 
-2.  In the XML markup, add the &lt;WebView&gt; element and a new closing tag, as shown:
-
-    <pre>&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-         xmlns:tools="http://schemas.android.com/tools"
-         android:id="@+id/container"
+<pre>&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:id="@+id/container"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     tools:context=".MainActivity"&gt;
+     tools:ignore="MergeRootFrame">
+     <strong>
+         &lt;WebView
+         android:id="@+id/activity_main_webview"
          android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         tools:context=".MainActivity"
-         tools:ignore="MergeRootFrame"<strong>>
-             &lt;WebView
-             android:id="@+id/activity_main_webview"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent" /&gt;
-    &lt;/FrameLayout&gt;</strong></pre>
+         android:layout_height="match_parent" /&gt;
+&lt;/FrameLayout&gt;</strong></pre></li>
+<li><p>To use the WebView you need to reference it in the Activity. Open the Java 
+source file for the main activity, <code>MainActivity.java</code> in the 
+<code>src/main/java/&lt;PackageName&gt;</code> directory.</p> 
 
-    (Note that the **/>** at the end of the `FrameLayout` tag is replaced with **>** 
-    since the tag now has contents.) 
+<p>Add the lines shown in bold.</p> 
 
-4.  To use the WebView you need to reference it in the Activity. Open the Java 
-    source file for the main activity, `MainActivity.java` in the 
-    `src/main/java/<PackageName>` directory. 
-
-    Add the lines shown in bold. 
-
-    <pre>public class MainActivity extends Activity {
+<pre>public class MainActivity extends Activity {
+    <strong>
+    private WebView mWebView;
+    </strong>
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         <strong>
-        private WebView mWebView;
-        </strong>
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            <strong>
-            mWebView = (WebView) findViewById(R.id.activity_main_webview);</strong>
-    </pre>
+        mWebView = (WebView) findViewById(R.id.activity_main_webview);</strong>
+</pre>
 
-    The existing code in the `onCreate` method does the work of hooking up the 
-    Activity with the layout. The added lines create a new member variable, 
-    `mWebView`, to refer to the web view. 
+<p>The existing code in the <code>onCreate</code> method does the work of hooking up the 
+Activity with the layout. The added lines create a new member variable, 
+<code>mWebView</code>, to refer to the web view.</p> 
 
-    Remove the following code:
+<p>Remove the following code:</p>
 
-    <pre>if (savedInstanceState == null) {
-        getSupportFragmentManager().beginTransaction()
-            .add(R.id.container, new PlaceholderFragment())
-            .commit();
-    }
-    </pre>
+<pre>if (savedInstanceState == null) {
+    getSupportFragmentManager().beginTransaction()
+        .add(R.id.container, new PlaceholderFragment())
+        .commit();
+}
+</pre>
 
-    The WebView is identified by the resource ID, which is specified by this line in 
-    the layout file:
+<p>The WebView is identified by the resource ID, which is specified by this line in 
+the layout file:</p>
 
-        android:id="@+id/activity_main_webview"
+<pre>android:id=&quot;@+id/activity_main_webview&quot;
+</pre>
 
-    After adding the code, you'll see some warning messages in the margin of the editor.
-    This is because you haven't imported the right classes for WebView. Luckily Android Studio can
-    help you fill in the missing classes. The easiest way to do 
-    this is click and hover over an unknown class name and wait for a popup 
-    showing a "quick fix" -- in this case, adding an `import` statment for the `WebView` class.
+<p>After adding the code, you&#39;ll see some warning messages in the margin of the editor.
+This is because you haven&#39;t imported the right classes for WebView. Luckily Android Studio can
+help you fill in the missing classes. The easiest way to do 
+this is click and hover over an unknown class name and wait for a popup 
+showing a &quot;quick fix&quot; -- in this case,
+adding an <code>import</code> statment for the <code>WebView</code> class.
+</p>
+<img src="/multidevice/images/webview/quick-fix-popup.png"/> 
 
-    <img src="/multidevice/images/webview/quick-fix-popup.png" alt=""/> 
+<p>Press <kbd>Alt</kbd> + <kbd>Enter</kbd> (<kbd>Option</kbd> + </kbd>Enter</kbd> on Mac) to 
+accept the quick fix.</p>
 
-    Press <kbd>Alt</kbd> + <kbd>Enter</kbd> (<kbd>Option</kbd> + </kbd>Enter</kbd> on Mac) to 
-    accept the quick fix.
+<p>WebView in hand you can move on to setting it up and and loading some juicy web 
+content.</p></li>
+</ol>
 
-    WebView in hand you can move on to setting it up and and loading some juicy web 
-    content.
+</section><section class="collapsible">
+<h2 id="enable_javascript">Enable JavaScript</h2>
 
-## Enable JavaScript
+<p>WebViews don&#39;t allow JavaScript by default. To run a web application in the web 
+view, you need to explicitly enable JavaScript by adding the following lines to 
+the <code>onCreate</code> method:</p>
 
-WebViews don't allow JavaScript by default. To run a web application in the web 
-view, you need to explicitly enable JavaScript.
+<pre><strong>// Enable Javascript
+WebSettings webSettings = mWebView.getSettings();
+webSettings.setJavaScriptEnabled(true);</strong>
+</pre>
 
-1.  Add the following lines to the `onCreate` method:
+</section><section class="collapsible">
+<h2 id="load_a_remote_url">Load a Remote URL</h2>
 
-    <pre><strong>// Enable Javascript
-    WebSettings webSettings = mWebView.getSettings();
-    webSettings.setJavaScriptEnabled(true);</strong>
-    </pre>
-
-2.  After entering the text, click on `WebSettings` and press <kbd>Alt</kbd> + <kbd>Enter</kbd> 
-    (<kbd>Option</kbd> + </kbd>Enter</kbd> on Mac) to add an import statement for `WebSettings`.
-
-## Load a Remote URL
-
-If you're going to load data from a remote URL, your application needs 
-[permission](http://developer.android.com/guide/topics/security/permissions.html) 
-to access the internet. This permission needs to be added in the [application's 
+<p>If you&#39;re going to load data from a remote URL, your application needs 
+<a href="http://developer.android.com/guide/topics/security/permissions.html">permission</a> 
+to access the internet. This permission needs to be added in the <a href="http://developer.android.com/guide/topics/manifest/manifest-intro.html">application&#39;s 
 manifest 
-file](http://developer.android.com/guide/topics/manifest/manifest-intro.html). 
+file</a>.</p> 
 
-1.  Open the `AndroidManifest.xml` file in the `src/res` directory. Add the line 
-    in bold before the closing &lt;/manifest&gt; tag.
+<ol>
+<li><p>Open the <code>AndroidManifest.xml</code> file in the <code>src/res</code> directory. Add the line 
+in bold before the closing &lt;/manifest&gt; tag.</p>
 
-    <pre>&lt;?xml version="1.0" encoding="utf-8"?>
-    &lt;manifest ...>
-    ...
-    &nbsp;
-        &lt;/application>
-        <strong>
-        &lt;uses-permission android:name="android.permission.INTERNET" />
-        </strong>
-    &lt;/manifest>
-    </pre>
+<pre>&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;manifest ...>
+...
+&nbsp;
+    &lt;/application>
+    <strong>
+    &lt;uses-permission android:name="android.permission.INTERNET" />
+    </strong>
+&lt;/manifest>
+</pre></li>
+<li><p>The next step is to call the <code>loadUrl</code> method on the webview. Add the following 
+line to the end of the <code>onCreate</code> method.</p>
 
-2.  The next step is to call the `loadUrl` method on the webview. Add the following 
-    line to the end of the `onCreate` method.
+<code><strong>mWebView.loadUrl(&quot;<a href="http://beta.html5test.com/">http://beta.html5test.com/</a>&quot;);</strong></code>
 
-    <code><strong>mWebView.loadUrl("[http://beta.html5test.com/](http://beta.html5test.com/)");</strong></code>
+<p>Now try running the project. If you don&#39;t have a device handy, you can create an emulator
+(AVD or Android Virtual Device) by going to <strong>Tools</strong> &gt;
+<strong>Android</strong> &gt; <strong>AVD Manager</strong>.</p>
 
-    Now try running the project. If you don't have a device handy, you can create an emulator
-    (AVD or Android Virtual Device) by going to **Tools** > **Android** > **AVD Manager**.
+<!-- <img src="/chrome/mobile/images/webview/html5test.jpg" alt=""/> --></li>
+</ol>
 
-    <img src="/multidevice/images/webview/html5test.jpg" width="318" alt=""/>
-
-<aside class="note"><strong>Note:</strong> To detect when a URL has started and finished loading,
+<p><strong>Note:</strong> To detect when a URL has started and finished loading,
 use 
 <a href="http://developer.android.com/reference/android/webkit/WebViewClient.html#onPageStarted(android.webkit.WebView,%20java.lang.String,%20android.graphics.Bitmap)">
 <code>WebViewClient.onPageStarted</code></a> and 
 <a href="http://developer.android.com/reference/android/webkit/WebViewClient.html#onPageFinished(android.webkit.WebView,%20java.lang.String)">
 <code>WebViewClient.onPageFinished</code>.</a>
-</aside>
+</p>
 
-<h3 id="handling-navigation">Handling Navigation</h3>
+<h3 id="handling_navigation">Handling Navigation</h3>
 
-<p>Now try changing the URL you&#8217;re loading to <code>http://www.html5rocks.com/</code> and rerun your application.
-You&#8217;ll notice something strange.</p>
+<p>Now try changing the URL you&#39;re loading to <code>http://www.html5rocks.com/</code> and rerun your application.
+You&#39;ll notice something strange.</p>
 
 <p>If you run the application now with a site that has a redirect like <code>html5rocks.com</code>, 
 your app ends up opening the site in a browser on 
-the device, not in your WebView &#8211; probably not what you expected. This is 
+the device, not in your WebView -- probably not what you expected. This is 
 because of the way the WebView handles navigation events.</p>
 
-<p>Here&#8217;s the sequence of events:</p>
+<p>Here&#39;s the sequence of events:</p>
 
 <ol>
 <li>The WebView tries to load the original URL from the remote server, and gets a 
@@ -254,19 +259,19 @@ redirect to a new URL.</li>
 <li>The WebView checks if the system can handle a view intent for the URL, if so 
 the system handles the URL navigation, otherwise the WebView will navigate 
 internally (i.e. the user has no browser installed on their device).</li>
-<li>The system picks the user&#8217;s preferred application for handling an <code>http://</code> URL 
-scheme &#8211; that is, the user&#8217;s default browser. If you have more than one browser installed,
+<li>The system picks the user&#39;s preferred application for handling an <code>http://</code> URL 
+scheme -- that is, the user&#39;s default browser. If you have more than one browser installed,
 you may see a dialog at this point.</li>
 </ol>
 
-<p><img src="/multidevice/images/webview/browser-selection.png" width="482" alt="browser selection dialog"/> </p>
+<img src="/multidevice/images/webview/browser-selection.png" width="482" alt="browser selection dialog"/> 
 
-<p>If you&#8217;re using a WebView inside an Android application to display some simple 
+<p>If you&#39;re using a WebView inside an Android application to display some simple 
 web content (for example, a help page), this may be exactly what you want to do. 
 However, for more sophisticated applications, you may want to handle the 
 navigation links yourself.</p>
 
-<p>To handle navigation inside the WebView you need to override the WebView&#8217;s <code>WebViewClient</code>, 
+<p>To handle navigation inside the WebView you need to override the WebView&#39;s <code>WebViewClient</code>, 
 which handles various events generated by the WebView. You can use it to 
 control how the WebView handles link clicks and page redirects.</p>
 
@@ -276,27 +281,25 @@ control how the WebView handles link clicks and page redirects.</p>
 mWebView.setWebViewClient(new WebViewClient());
 </strong></pre>
 
-This is a good step forward, but what if you want to handle links for your site 
-only, while opening other URLs in a browser?
+<p>This is a good step forward, but what if you want to handle links for your site 
+only, while opening other URLs in a browser?</p>
 
-To achieve this you need to extend the `WebViewClient` class and implement the 
+<p>To achieve this you need to extend the `WebViewClient` class and implement the 
 `shouldOverrideUrlLoading` method. This method is called whenever the WebView 
 tries to navigate to a different URL. If it returns false, the WebView opens the 
 URL itself. (The default implementation _always_ returns false, which is why it 
-works in the previous example.)
+works in the previous example.)</p>
 
-Create a new class:
+<p>Create a new class:</p>
 
-1.  Right-click the package name of your app and select **New** > **Java Class**.
+<ol>
+  <li>Right-click the package name of your app and select **New** > **Java Class**.
+  <img src="/multidevice/images/webview/new-java-class.png"/></li>
+  <li>Enter `MyAppWebViewClient` as the class name and click **OK**.</li> 
+  <li><p>In the new `MyAppWebViewClient.java` file, add the following code (changes
+    shown in bold):</p>
 
-    <img src="/multidevice/images/webview/new-java-class.png" alt=""/> 
-
-2.  Enter `MyAppWebViewClient` as the class name and click **OK**. 
-
-3.  In the new `MyAppWebViewClient.java` file, add the following code (changes
-    shown in bold):
-
-    <pre>public class MyAppWebViewClient <strong>extends WebViewClient</strong> {
+<pre>public class MyAppWebViewClient <strong>extends WebViewClient</strong> {
         <strong>
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -309,104 +312,102 @@ Create a new class:
             return true;
         }</strong>
     }
-    </pre>
+</pre>
 
-    The new code defines `MyAppWebViewClient` as a subclass of `WebViewClient` and 
-    implements the <code>shouldOverrideUrlLoading</code> method.
+    <p>The new code defines `MyAppWebViewClient` as a subclass of `WebViewClient` and 
+    implements the <code>shouldOverrideUrlLoading</code> method.</p>
 
-    The `shouldOverrideUrlLoading` method is called whenever the WebView is about to load a URL.
+    <p>The `shouldOverrideUrlLoading` method is called whenever the WebView is about to load a URL.
     This implementation checks for the String "html5rocks.com" at the end of the 
     host name of the URL. If the string exists, the method returns
     false, which tells the platform **not** to override the URL, but to load it in the 
-    WebView. 
+    WebView.</p> 
 
-    For any other hostname, the method makes a request to the system to open the URL. It does 
+    <p>For any other hostname, the method makes a request to the system to open the URL. It does 
     this by creating a new Android 
     [Intent](http://developer.android.com/reference/android/content/Intent.html) and using it
     to launch a new activity. Returning true at the end of the method  prevents the URL from 
-    being loaded into the WebView.
-
-4.  To use your new custom 
+    being loaded into the WebView.</p></li>
+  <li><p>To use your new custom 
     [WebViewClient](http://developer.android.com/reference/android/webkit/WebViewClient.html), add
-    the following lines to your `MainActivity` class:
-
+    the following lines to your `MainActivity` class:</p>
+    
     <pre><strong>// Stop local links and redirects from opening in browser instead of WebView
     mWebView.setWebViewClient(new MyAppWebViewClient());
     </strong></pre>
+    
+    <p>Now, a user can click any of the HTML5Rocks links and stay within the app, but 
+    links to external sites are opened in a browser.</p></li>
+</ol>
 
-    Now, a user can click any of the HTML5Rocks links and stay within the app, but 
-    links to external sites are opened in a browser.
+<h3 id="handling_the_back_button">Handling the Android Back Button</h3>
 
-### Handling the Android back button
+<p>As you start playing around and navigating the awesome HTML5Rocks articles, 
+hitting the back button on Android exits the application, even though we've 
+explored a few pages of the site.</p>
 
-As you start playing around and navigating the awesome HTML5Rocks articles, 
-hitting the back button on Android exits the application, even though you've 
-explored a few pages of the site.
+<p>WebView has a method `canGoBack` which tells you if there is anything on the 
+page stack that can be popped. All you need to do is detect a back button press 
+and determine if you should step back through the WebView's history or allow the platform 
+to determine the correct behaviour. Inside your MainActivity class, add the 
+following method (in bold):</p>
 
-To handle the back button correctly, you can use the WebView `canGoBack` method
-to determine if there are any pages in the WebView's history. If so, you can
-navigate to the previous page. If there's no previous page to go back to, you
-can allow the platform to handle the back button.
+<pre>public class MainActivity extends Activity {
+   
+ private WebView mWebView;
 
-*   Inside your `MainActivity` class, add the following method (in bold):
-
-    <pre>public class MainActivity extends Activity {
-
-    private WebView mWebView;
+ @Override
+ protected void onCreate(Bundle savedInstanceState) {
+     ...
+ }
+   
+<strong>    @Override
+    public void onBackPressed() {
+        if(mWebView.canGoBack()) {
+            mWebView.goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }</strong>
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        ...
+    public boolean onCreateOptionsMenu(Menu menu) {
+       ...
     }
-    <strong>    
-        @Override
-        // Detect when the back button is pressed
-        public void onBackPressed() {
-            if(mWebView.canGoBack()) {
-                mWebView.goBack();
-            } else {
-                // Let the system handle the back button
-                super.onBackPressed();
-            }
-        }</strong>
-        &nbsp;
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-           ...
-        }
+    
+}
+</pre>
 
-    }
-    </pre>
+</section><section class="collapsible">
+<h2 id="loading_html_files_from_the_file_system">Loading HTML files from the file system</h2>
 
-## Loading HTML files from the file system
-
-A big advantage of using a WebView inside an installable application is that you 
+<p>A big advantage of using a WebView inside an installable application is that you 
 can store assets inside the app. This lets your app work offline and 
 improves load times, since the WebView can retrieve assets directly from the local 
-file system.
+file system.</p>
 
-To store files such as HTML, JavaScript, and CSS locally, put them in the 
+<p>To store files such as HTML, JavaScript, and CSS locally, put them in the 
 assets directory. This is a reserved directory that Android uses for raw 
 files that your app may need access to (i.e. files it knows it should minimise 
-or compress).
+or compress).</p>
 
-In your project, create the <code>assets</code> directory in main (<code>src/main/assets</code>).
+<p>In your project, create the <code>assets</code> directory in main (<code>src/main/assets</code>).</p>
 
-Generally it's good practice to keep your web files in a subdirectory, so create 
-a www directory and put all your web content in it.
+<p>Generally it&#39;s good practice to keep your web files in a subdirectory, so create 
+a www directory and put all your web content in it.</p>
 
-<aside class="note">It's worth noting that absolute paths do not work in the WebView when 
+<p><strong>Note:</strong>It&#39;s worth noting that absolute paths do not work in the WebView when 
 referring to other files, such as CSS and JavaScript. So make sure you make all references 
-relative, instead of absolute (for example, instead of  "/pages/somelink.html", use 
-"./pages/somelink.html").</aside>
+relative, instead of absolute (for example, instead of  &quot;/pages/somelink.html&quot;, use 
+&quot;./pages/somelink.html&quot;).</p>
 
-Once you have everything in your assets directory, it's as simple as loading in 
-the appropriate file:
+<p>Once you have everything in your assets directory, it&#39;s as simple as loading in 
+the appropriate file:</p>
 
 <pre><strong>mWebView.loadUrl("file:///android_asset/www/index.html");</strong>
 </pre>
 
-<p>You&#8217;ll want to tweak the <code>shouldOverrideUrlLoading</code> method so it opens a browser 
+<p>You&#39;ll want to tweak the <code>shouldOverrideUrlLoading</code> method so it opens a browser 
 for non-local pages:</p>
 
 <pre>public class MyAppWebViewClient extends WebViewClient {
@@ -426,7 +427,9 @@ for non-local pages:</p>
 
 <p>Now you are set to build a great WebView app!</p>
 
-<p>For tips on getting the visuals just right, see <a href="/multidevice/webview/pixelperfect.html">Pixel-Perfect UI in the WebView</a>.</p>
+<p>For tips on getting the visuals just right, see <a href="pixelperfect.html">Pixel-Perfect UI in the WebView</a>.</p>
 
-<p>If you run into trouble, the Chrome DevTools are your friends. See <a href="/devtools/docs/remote-debugging.html">Remote Debugging on Android</a> to get started.</p>
+<p>If you run into trouble, the Chrome DevTools are your friends. See <a href="/devtools/docs/remote-debugging">Remote Debugging on Android</a> to get started.</p>
+
+</section>
 {{/partials.standard_multidevice_article}}

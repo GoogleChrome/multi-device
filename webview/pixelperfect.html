@@ -222,8 +222,9 @@ background images by screen size and density. You can also use JavaScript to con
 <h4>Media queries and screen density</h4>
 
 <p>To select an image based on the screen density, you need to use <code>dpi</code> or 
-<code>dppx</code> units in your media query. The <code>dpi</code> unit represents dots per inch, while <code>dppx</code> 
-represents dots per pixel.</p>
+<code>dppx</code> units in your media query. The <code>dpi</code> unit represents dots per CSS inch, 
+while <code>dppx</code> 
+represents dots per CSS pixel.</p>
 
 <p>Looking at the table below you can see the relation between <code>dpi</code> and <code>dppx</code>. 1<code>dppx</code> 
 is equivalent to 96<code>dpi</code>, 2<code>dppx</code> == 192<code>dpi</code> == 2 x 96<code>dpi</code>, and so on.</p>
@@ -232,8 +233,8 @@ is equivalent to 96<code>dpi</code>, 2<code>dppx</code> == 192<code>dpi</code> =
 <tr>
 <td>Device pixel ratio</td>
 <td>Generalized screen density</td>
-<td>Dots per inch (<code>dpi</code>)</td>
-<td>Dots per pixel (<code>dppx<code>)</td>
+<td>Dots per CSS inch (<code>dpi</code>)</td>
+<td>Dots per CSS pixel (<code>dppx<code>)</td>
 </tr>
 <tr>
 <td>1x</td>

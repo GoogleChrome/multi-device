@@ -1,77 +1,76 @@
 {{+bindTo:partials.standard_multidevice_article}}
 
-<h1>WebView for Android</h1>
+<h1 id="webview_for_android">WebView for Android</h1>
 
 <p>Android 4.4 (KitKat) includes a new WebView component based on the Chromium
 open source project. The new WebView includes an updated version of the V8
 JavaScript engine and support for modern web standards that were missing in 
-the old WebView. It also shares the same Blink rendering engine as Chrome for Android,
+the old WebView. It also shares the same rendering engine as Chrome for Android,
 so rendering should be much more consistent between the WebView and Chrome.</p>
 
-<p>If you&#8217;re a web developer looking to start developing a WebView-based Android application, see <a href="/multidevice/webview/gettingstarted.html">Getting Started: WebView-based Applications for Web Developers</a>.</p>
+<p>If you&#39;re a web developer looking to start developing a WebView-based Android application, see <a href="gettingstarted.html">Getting Started: WebView-based Applications for Web Developers</a>.</p>
 
-<p>For tips on scaling WebView content for mobile devices, see <a href="/multidevice/webview/pixelperfect.html">Pixel-Perfect UI in the WebView</a>. </p>
+<p>For tips on scaling WebView content for mobile devices, see <a href="pixelperfect.html">Pixel-Perfect UI in the WebView</a>. </p>
 
-<p>The new WebView also supports <a href="/devtools/docs/remote-debugging.html">remote debugging</a>
+<p>The new WebView also supports <a href="/devtools/docs/remote-debugging">remote debugging</a>
 using the Chrome DevTools.</p>
 
+<section class="collapsible">
+<h2 id="webview_faq">WebView FAQ</h2>
 
-<h2>WebView FAQ</h2>
-
-<h3>What version of Chrome is it based on?</h3>
+<h3 id="what_version_of_chrome_is_it_based_on_">What version of Chrome is it based on?</h3>
 
 <p>The WebView shipped with Android 4.4 (KitKat) is based on the same code as
 Chrome for Android version 30.  The WebView does not have full feature parity with 
 Chrome for Android and is currently given the version number 30.0.0.0.</p>
 
-<h3>Will the new WebView auto-update?</h3>
+<h3 id="will_the_new_webview_auto-update_">Will the new WebView auto-update?</h3>
 
-<p>Evergreen browsers (like Chrome and Firefox) auto-update and keep their 
-users up to date so they can view the web through a modern feature set. 
-As a developer, this ensures your choices aren’t limited to a lowest-common 
-denominator browser from years ago, but rather are keeping pace with the modern 
-web. Your apps inside a WebView are just as important and deserve a runtime 
-that keeps users up to date. There are large engineering and logistical 
-challenges. We&#8217;re not quite there yet, but we&#8217;re working on it.</p>
+<p>Evergreen browsers (like Chrome and Firefox) auto-update and keep their users up to date so they 
+can view the web through a modern feature set. As a developer, this ensures your choices aren’t 
+limited to a lowest-common denominator browser from years ago, but rather are keeping pace with the 
+modern web. Your apps inside a WebView are just as important and deserve a runtime that keeps users 
+up to date. There are large engineering and logistical challenges. We're not quite there yet, but 
+we're working on it.</p>
 
-<h3>What is the default user-agent?</h3>
+<h3 id="what_is_the_default_user_agent_">What is the default user-agent?</h3>
 
-<p>The new WebView adds <strong>Chrome/<em>version</em></strong> to the user-agent string. Sample
+<p>The new WebView adds <strong>Chrome/_version_</strong> to the user-agent string. Sample
 old and new user-agent strings:</p>
 
 <ul>
 <li><p><strong>Old UA</strong>: Mozilla/5.0 (Linux; U; Android 4.1.1; en-gb; Build/KLP) 
 AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30</p></li>
-<li><p><strong>New UA</strong>: Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/<em>BuildID</em>) 
+<li><p><strong>New UA</strong>: Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_) 
 AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile 
 Safari/537.36</p></li>
 </ul>
 
-<p>If you&#8217;re attempting to differentiate between the WebView and Chrome for Android, 
-you should look for the presence of the <strong>Version/<em>X.X</em></strong> string in the WebView
-user-agent string. Don&#8217;t rely on the specific Chrome version number, 
+<p>If you&#39;re attempting to differentiate between the WebView and Chrome for Android, 
+you should look for the presence of the <strong>Version/_X.X_</strong> string in the WebView
+user-agent string. Don&#39;t rely on the specific Chrome version number, 
 <strong>30.0.0.0</strong> as this may change with future releases.</p>
 
-<h3>How do I set the user-agent of the WebView?</h3>
+<h3 id="how_do_i_set_the_user_agent_of_the_webview_">How do I set the user-agent of the WebView?</h3>
 
 <p>You can set the user-agent by using the Java <a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setUserAgentString(java.lang.String">setUserAgentString 
  API</a>) 
 method. This method only changes the user-agent string for requests sent by the WebView itself.</p>
 
-<p>You can&#8217;t set the user-agent string used for <code>XMLHttpRequest</code>s made from JavaScript. Those 
+<p>You can&#39;t set the user-agent string used for <code>XMLHttpRequest</code>s made from JavaScript. Those 
 requests always use the default user-agent string.</p>
 
-<h3>Does this mean Chrome for Android is using the WebView?</h3>
+<h3 id="does_this_mean_chrome_for_android_is_using_the_webview_">Does this mean Chrome for Android is using the WebView?</h3>
 
-<p>No, Chrome for Android is separate from WebView. They&#8217;re both based on the same
-code, including a common JavaScript engine (V8) and rendering engine (Blink).</p>
+<p>No, Chrome for Android is separate from WebView. They&#39;re both based on the same
+code, including a common JavaScript engine and rendering engine.</p>
 
-<h3>Does the new WebView have feature parity with Chrome for Android?</h3>
+<h3 id="does_the_new_webview_have_feature_parity_with_chrome_for_android_">Does the new WebView have feature parity with Chrome for Android?</h3>
 
 <p>For the most part, features that work in Chrome for Android should work in 
 the new WebView.</p>
 
-<p>Chrome for Android supports a few features which aren&#8217;t enabled in the 
+<p>Chrome for Android supports a few features which aren&#39;t enabled in the 
 WebView, including: </p>
 
 <ul>
@@ -80,41 +79,40 @@ WebView, including: </p>
 <li>WebAudio</li>
 <li>Fullscreen API</li>
 <li>Form validation</li>
+<li>File input type</li>
+<li>Filesystem API</li>
 </ul>
 
-<h3>What does the new WebView mean for developers?</h3>
+<h3 id="what_does_the_new_webview_mean_for_developers_">What does the new WebView mean for developers?</h3>
 
 <p>This is a big change from the original WebView as it brings a new set of HTML5 
 feature support, improved JavaScript performance, and remote debugging of web 
 content using the Chrome DevTools. </p>
 
-<p>There <strong>are</strong> some changes that will affect existing apps. Please read the 
-<a href="http://developer.android.com/guide/webapps/migrating.html">migration guide</a> to understand 
-the small number of changes that might impact you.</p>
+<p>There <strong>are</strong> some changes that will affect existing apps.</p>
 
-<h3>How do I enable remote debugging?</h3>
+<p>If you are currently using <code>content://</code> URLs to load files from a content provider 
+in your application, note that these URLs only work when accessed from local content. That is, web 
+content hosted outside your application is not allowed to access files built into your application.</p>
 
-<p>See the <a href="/devtools/docs/remote-debugging.html">remote debugging guide</a>.</p>
+<p>
+There are a small number of other changes that might impact your application. Read the 
+<a href="http://developer.android.com/guide/webapps/migrating.html">migration guide</a> for more 
+information.</p>
 
-<h3>Does the WebView support the Chrome Apps APIs?</h3>
+<h3 id="how_do_i_enable_remote_debugging_">How do I enable remote debugging?</h3>
 
-<p>No. The Chrome Apps platform isn&#8217;t yet supported on Android.</p>
+<p>See the <a href="https://developers.google.com/chrome-developer-tools/docs/remote-debugging">remote debugging guide</a>.</p>
 
-<h3>Should I enable hardware acceleration?</h3>
+<h3 id="does_the_webview_support_the_chrome_apps_apis_">Does the WebView support the Chrome Apps APIs?</h3>
+
+<p>No. The Chrome Apps platform isn&#39;t yet supported on Android.</p>
+
+<h3 id="should_i_enable_hardware_acceleration_">Should I enable hardware acceleration?</h3>
 
 <p>Hardware acceleration is enabled by default. If you are explicitly disabling 
 it for older versions of Android you should try enabling it for KitKat based 
 devices and see if it improves performance. </p>
 
-<h3>Is any part of the WebView closed source?</h3>
-
-<p>No. All the source is available in the Android Open Source Project (AOSP).</p>
-
-<h3>How can I contribute to the WebView?</h3>
-
-<p>The WebView is an <em>upstream</em> project, so patches should be submitted to the upstream
-<a href="src.chromium.org"><code>src.chromium.org</code></a> repo, not directly to AOSP. For details on contributing 
-to Chromium , see <a href="http://dev.chromium.org/developers/contributing-code">Contributing Code</a> 
-on <code>chromium.org</code>.</p>
-
+</section>
 {{/partials.standard_multidevice_article}}
