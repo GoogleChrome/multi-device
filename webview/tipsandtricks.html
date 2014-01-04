@@ -7,6 +7,7 @@ body {
 
 .example-button {
     display: inline-block;
+    position: relative;
     width: 45%;
     background-color: #f39c12;
     font-family: "Lobster Two", cursive;
@@ -38,7 +39,7 @@ body {
     background-color: #FFA91F;
     border-color: #E68F05;
     border-width: 2px;
-    margin-bottom: 2px;
+    top: 2px;
 }
 </style>
 
@@ -47,6 +48,7 @@ body {
 <p>This article outlines some useful tips to enhance your application&#8217;s
 user experience.</p>
 
+<section class="collapsible">
 <h2>Flicker of colors when the application loads</h2>
 
 <p>Ever noticed a flash of black and white when an application loads up with a 
@@ -78,6 +80,7 @@ the above line would become:</p></p>
 mWebView.setBackgroundColor(getResources().getColor(R.color.my_color_name));
 </pre>
 
+</section><section class="collapsible">
 <h2>Touch Feedback</h2>
 
 <p>One of the common differences between native and web applications is the lack 
@@ -172,4 +175,5 @@ is the default state, a focused color and then a pressed (or active) state.</p>
 
 <p>The main areas to set these properties are form input fields and 
 anchor tags.</p>
+</section>
 {{/partials.standard_multidevice_article}}
