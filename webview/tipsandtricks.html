@@ -92,6 +92,7 @@ of touch feedback in many web apps.</p>
 
 <pre><code>.btn {
   display: inline-block;
+  position: relative;
   background-color: #f39c12;
   padding: 14px;
 
@@ -107,18 +108,18 @@ of touch feedback in many web apps.</p>
 <p>The pressed state may look like:</p>
 
 <pre><code>.btn:active {
-  margin-top: 2px;
   background-color: #E68F05;
   border-color: #CD7600;
   border-width: 2px;
+  top: 2px;
 }
 </code></pre>
 
 <p><img src="/multidevice/images/webview/2-button-touched.png"; width="320"; alt=""/> </p>
 
 <p>All this does is darken the background color and border color slightly, decrease the 
-border size, so it looks like the button is sinking into the UI. The added margin 
-balances the smaller border.</p>
+border size, so it looks like the button is sinking into the UI. The <code>top</code> property
+adjusts the position to balance the smaller border.</p>
 
 <h3>Lighten / Darken</h3>
 
