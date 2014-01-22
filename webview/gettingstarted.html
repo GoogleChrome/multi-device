@@ -14,7 +14,7 @@ If you&#39;re already familiar with programming for Android, you may want to ref
 <a href="http://developer.android.com/guide/webapps/webview.html"> Building Web Apps in WebView</a>
 on the Android developer site instead.</p>
 
-<section class="collapsible">
+<div class="collapsible">
 <h2 id="install_android_studio">Install Android Studio</h2>
 
 <p>This tutorial uses <a href="http://developer.android.com/sdk/installing/studio.html">Android 
@@ -24,7 +24,7 @@ Studio, as described here:</p>
 
 <p><a href="http://developer.android.com/sdk/installing/studio.html">http://developer.android.com/sdk/installing/studio.html</a></p>
 
-</section><section class="collapsible">
+</div><div class="collapsible">
 <h2 id="create_a_new_android_project">Create a New Android Project</h2>
 
 <p>When the installation completes, Android Studio launches and displays the 
@@ -77,7 +77,7 @@ make sure you have the KitKat SDK installed.
 Go to <b>Tools</b> &gt; <b>Android</b> &gt; <b>SDK Manager</b> and
 make sure you have <b>Android 4.4 (API 19)</b> installed.</p>
 
-</section><section class="collapsible">
+</div><div class="collapsible">
 <h2 id="add_the_webview">Add the WebView</h2>
 
 <p>Android Studio will give you some boilerplate code to set up your application. Your project&#39;s 
@@ -186,7 +186,7 @@ accept the quick fix.</p>
 content.</p></li>
 </ol>
 
-</section><section class="collapsible">
+</div><div class="collapsible">
 <h2 id="enable_javascript">Enable JavaScript</h2>
 
 <p>WebViews don&#39;t allow JavaScript by default. To run a web application in the web 
@@ -198,7 +198,7 @@ WebSettings webSettings = mWebView.getSettings();
 webSettings.setJavaScriptEnabled(true);</strong>
 </pre>
 
-</section><section class="collapsible">
+</div><div class="collapsible">
 <h2 id="load_a_remote_url">Load a Remote URL</h2>
 
 <p>If you&#39;re going to load data from a remote URL, your application needs 
@@ -378,7 +378,7 @@ following method (in bold):</p>
 }
 </pre>
 
-</section><section class="collapsible">
+</div><div class="collapsible">
 <h2 id="loading_html_files_from_the_file_system">Loading HTML files from the file system</h2>
 
 <p>A big advantage of using a WebView inside an installable application is that you 
@@ -431,5 +431,5 @@ for non-local pages:</p>
 
 <p>If you run into trouble, the Chrome DevTools are your friends. See <a href="/devtools/docs/remote-debugging">Remote Debugging on Android</a> to get started.</p>
 
-</section>
+</div>
 {{/partials.standard_multidevice_article}}

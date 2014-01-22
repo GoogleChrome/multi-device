@@ -6,7 +6,7 @@
 
   	<p>The functionality has changed slightly in Chrome for Android, versions 25 and later.  It is no longer possible to launch an Android app by setting an iframe's <code>src</code> attribute. For example, navigating an iframe to a URI with a custom scheme such as <code>paulsawesomeapp://</code> will not work even if the user has the appropriate app installed.  Instead, you should implement a user gesture to launch the app via a custom scheme, or use the “intent:” syntax described in this article.</p>
 
-<section class="collapsible">
+<div class="collapsible">
 	<h2>Syntax</h2>
 
   	<p>The best practice is to construct an intent anchor and embed that into the page so the user can launch the app.  This gives you a lot more flexibility in controlling how apps are launched, including the ability to pass extra information into the app via <a href="http://developer.android.com/guide/components/intents-filters.html#extras">Intent Extras</a>.</p>
@@ -26,7 +26,7 @@
 
   	<p>See the <a href="https://code.google.com/p/android-source-browsing/source/browse/core/java/android/content/Intent.java?repo=platform--frameworks--base#6514">Android source</a> for parsing details.</p>
 
-</section><section class="collapsible">
+</div><div class="collapsible">
 	<h2>Example</h2>
 
   	<p>Here's an intent that launches the Zxing barcode scanner app. It follows the syntax thus:</p>
@@ -47,14 +47,14 @@
 
   	<p>See the <a href="https://code.google.com/p/zxing/source/browse/trunk/android/AndroidManifest.xml#97">Android Zxing Manifest</a>, which defines the package and the host.</p>
 
-</section><section class="collapsible">
+</div><div class="collapsible">
 	<h2>Considerations</h2>
 
   	<p>If the activity you invoke via an intent contains <a href="http://developer.android.com/guide/components/intents-filters.html#extras">extras</a>, you can include these as well.</p>
 
   	<p>Only activities that have the category filter, <a href="http://developer.android.com/reference/android/content/Intent.html#CATEGORY_BROWSABLE">android.intent.category.BROWSABLE</a> are able to be invoked using this method as it indicates that the application is safe to open from the Browser.</p>
 
-</section><section class="collapsible">
+</div><div class="collapsible">
 	<h2>See also</h2>
 
   	<ul>
@@ -62,5 +62,5 @@
   		<li><a href="http://developer.android.com/guide/components/activities.html">Android Activities</a></li>
   	</ul>
 
-</section>
+</div>
 {{/partials.standard_multidevice_article}}

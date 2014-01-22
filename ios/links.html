@@ -7,7 +7,7 @@
 <p>The easiest way to have your iOS app open links in Chrome is to use the OpenInChromeController class.
 This API is described here along with the URI schemes it supports.</p>
 
-<section class="collapsible">
+<div class="collapsible">
 <h2 id="using_openinchromecontroller_to_open_links">Using OpenInChromeController to open links</h2>
 
 <p>The <strong>OpenInChromeController</strong> class provides methods
@@ -36,14 +36,14 @@ to provide a callback URL, and to force opening in a new tab.</p>
 }
 </pre>
 
-</section><section class="collapsible">
+</div><div class="collapsible">
 <h2 id="downloading_the_class_file">Downloading the class file</h2>
 
 <p>The OpenInChromeController class file is available <a href="https://github.com/GoogleChrome/OpenInChrome">here</a>. Copy it into your Xcode installation.</p>
 
 <p>The rest of this document describes the underpinnings of this API.</p>
 
-</section><section class="collapsible">
+</div><div class="collapsible">
 <h2 id="uri_schemes">URI schemes</h2>
 
 <p>Chrome for iOS handles the following URI Schemes:</p>
@@ -106,7 +106,7 @@ If the user agrees, the app can open the App Store download page using the follo
     @&quot;itms-apps://itunes.apple.com/us/app/chrome/id535886823&quot;]];
 </pre>
 
-</section><section class="collapsible">
+</div><div class="collapsible">
 <h2 id="_a_id_callback_a_using_the_x_callback_url_registration_scheme_to_return"><a id="callback"></a>Using the x-callback-url registration scheme to return</h2>
 
 <p>Chrome for iOS also supports
@@ -232,6 +232,6 @@ parameter as part of the action parameter in the x-callback-url URL.</p>
 <pre>googlechrome-x-callback://x-callback-url/open/?x-source=MyApp&amp;x-success=com.myapp.callback%3A%2F%2F&amp;url=http%3A%2F%2Fwww.google.com&amp;create-new-tab
 </pre>
 
-</section>
+</div>
 
 {{/partials.standard_multidevice_article}}
