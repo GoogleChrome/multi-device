@@ -50,7 +50,7 @@ however, they integrate with the Android environment in the following ways.</p>
 <div style="clear:left"></div>
 
 <div class="collapsible">
-<h2>Supporting add to homescreen apps</h2>
+<h2 id="supporting">Supporting add to homescreen apps</h2>
 
 <p>Chrome will look for the following meta tag in the <code>&lt;head&gt;</code> element of the web-page:</p>
 
@@ -58,7 +58,7 @@ however, they integrate with the Android environment in the following ways.</p>
 
 <p>The name attribute MUST be "mobile-web-app-capable" and the content attribute must be "yes" (case in-sensitive). If there is any other value in the content attribute the web app will be added as a regular bookmark.</p>
 
-<h3>Icon</h3>
+<h3 id="icon">Icon</h3>
 
 <p>The icon that is used to install to the homescreen is determined by using the largest icon found in one of the following <code>&lt;link&gt;</code> tags:</p>
 
@@ -71,11 +71,11 @@ however, they integrate with the Android environment in the following ways.</p>
 
 <aside class="caution"><strong>Caution:</strong>The 196px image format is recommended.  The last two formats (<code>apple-touch-*</code>) are deprecated, and will be supported only for a short time.</aside>
 
-<h3>Icon label</h3>
+<h3 id="icon-label">Icon label</h3>
 
 <p>The application’s <code>&lt;title&gt;</code> element serves as the default label for the icon on the homescreen.</p>
 
-<h3>Configuration</h3>
+<h3 id="configuration">Configuration</h3>
 
 <p>The following example is the minimum required configuration to support a homescreen launch experience.</p>
 
@@ -91,7 +91,7 @@ however, they integrate with the Android environment in the following ways.</p>
 &lt;/html&gt;
 
 </div><div class="collapsible">
-<h2>Comparison to iOS Safari Add to Homescreen</h2>
+<h2 id="comparison-to-ios">Comparison to iOS Safari Add to Homescreen</h2>
 
 <p>Chrome will also allow Web Apps to launch in "App mode" if they embed a meta tag using the "apple-mobile-web-app-capable" name.  Chrome will stop supporting this usage in an upcoming release.  Chrome currently shows a deprecation warning in the Developer Tools’ console log when it detects a page with only the "apple-mobile-web-app-capable" meta tag. The warning appears as follows:</p>
 
@@ -106,7 +106,7 @@ however, they integrate with the Android environment in the following ways.</p>
 </ul>
 
 </div><div class="collapsible">
-<h2>Frequently asked questions</h2>
+<h2 id="faq">Frequently asked questions</h2>
 
 <dl>
 	<dt>How do I open links in the user’s browser?</dt>
@@ -123,7 +123,7 @@ however, they integrate with the Android environment in the following ways.</p>
 </dl>
 
 </div><div class="collapsible">
-<h2>Best practices</h2>
+<h2 id="best-practices">Best practices</h2>
 
 <ul>
 	<li>Do not prompt the user to add your app to the homescreen. There is no way to detect if the app is running installed or not.</li>

@@ -107,7 +107,7 @@ If the user agrees, the app can open the App Store download page using the follo
 </pre>
 
 </div><div class="collapsible">
-<h2 id="_a_id_callback_a_using_the_x_callback_url_registration_scheme_to_return"><a id="callback"></a>Using the x-callback-url registration scheme to return</h2>
+<h2 id="using-the-x-callback-url-registration-scheme"><a id="callback"></a>Using the x-callback-url registration scheme to return</h2>
 
 <p>Chrome for iOS also supports
 <a href="http://x-callback-url.com/specifications/">x-callback-url</a>,
@@ -144,7 +144,7 @@ that will be used to call the app with compliant URLs.</p>
 <pre>googlechrome-x-callback://x-callback-url/open/?url=http%3A%2F%2Fwww.google.com
 </pre>
 
-<h3 id="checking_if_x_callback_url_is_available_in_chrome">Checking if x-callback-url is available in Chrome</h3>
+<h3 id="checking-if-x-callback-url-is-available">Checking if x-callback-url is available in Chrome</h3>
 
 <p>The x-callback-url parameters are supported in Google Chrome as of version 23.0.
 Previous versions of Chrome are not registered for the googlechrome-x-callback URL scheme.
@@ -194,7 +194,7 @@ if ([scheme isEqualToString:@&quot;http&quot;] ||
 }
 </pre>
 
-<h3 id="enabling_a_callback_with_x_success">Enabling a callback with x-success</h3>
+<h3 id="enabling-a-callback-with-x-success">Enabling a callback with x-success</h3>
 
 <p>The calling application can also specify a URL as callback
 when the user finishes the navigation using the
@@ -220,7 +220,7 @@ The application name, specified using the x-source parameter, is <strong>MyApp</
 and it will be shown as a replacement of the back button
 when the user can return to the calling application.</p>
 
-<h3 id="creating_a_new_tab">Creating a new tab</h3>
+<h3 id="creating-a-new-tab">Creating a new tab</h3>
 
 <p>By default, Chrome reuses the same tab when opened by the same application.
 To override this default behavior,
