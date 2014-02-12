@@ -49,7 +49,7 @@ body {
 user experience.</p>
 
 <div class="collapsible">
-<h2>Flicker of colors when the application loads</h2>
+<h2 id="flicker">Flicker of colors when the application loads</h2>
 
 <p>Ever noticed a flash of black and white when an application loads up with a 
 WebView?</p>
@@ -61,7 +61,7 @@ pages CSS.</p>
 
 <p>The fix for this white flash is simple.</p>
 
-<h3>Set the background of the layout</h3>
+<h3 id="set-background">Set the background of the layout</h3>
 
 <p>All you need to do is set the background color of the WebView, which 
 removes the white flash. The only delay in displaying this color will be in 
@@ -81,7 +81,7 @@ mWebView.setBackgroundColor(getResources().getColor(R.color.my_color_name));
 </pre>
 
 </div><div class="collapsible">
-<h2>Touch Feedback</h2>
+<h2 id="touch">Touch Feedback</h2>
 
 <p>One of the common differences between native and web applications is the lack 
 of touch feedback in many web apps.</p>
@@ -121,13 +121,13 @@ of touch feedback in many web apps.</p>
 border size, so it looks like the button is sinking into the UI. The <code>top</code> property
 adjusts the position to balance the smaller border.</p>
 
-<h3>Lighten / Darken</h3>
+<h3 id="lighten-darken">Lighten / Darken</h3>
 
 <p>If you use Sass you can use the darken / lighten mixins to alter the colors of 
 elements without needing to know the exact hex value. Or you can make use of 
 online tools such as <a href="http://hexcolortool.com/">http://hexcolortool.com/</a>.</p>
 
-<h3>System highlights</h3>
+<h3 id="system-highlights">System highlights</h3>
 
 <p>Many user agents will add some form of touch feedback to elements, preventing 
 the need for the page to define anything specific. In the WebView you may notice 

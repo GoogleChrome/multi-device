@@ -23,7 +23,7 @@ your application in the browser, so you don&#8217;t have to manually refresh the
 page each time you change an HTML, CSS or JavaScript file.</p>
 
 <div class="collapsible">
-<h2>Prerequisites</h2>
+<h2 id="prereqs">Prerequisites</h2>
 
 <p>Before getting started, you&#8217;ll need to install a few prerequisites:</p>
 
@@ -33,12 +33,12 @@ page each time you change an HTML, CSS or JavaScript file.</p>
 </ol>
 
 </div><div class="collapsible">
-<h2>Step 1. Create a new project in Android Studio with a WebView</h2>
+<h2 id="step1">Step 1. Create a new project in Android Studio with a WebView</h2>
 
 <p>You can find a full instructions on how to do this in the <a href="/multidevice/webview/gettingstarted.html">Getting Started Guide</a>.</p>
 
 </div><div class="collapsible">
-<h2>Step 2. Create a subdirectory in your Android Studio project for the web app content</h2>
+<h2 id="step2">Step 2. Create a subdirectory in your Android Studio project for the web app content</h2>
 
 <p>After you’ve created your project, create a new top level directory:</p>
 
@@ -51,7 +51,7 @@ page each time you change an HTML, CSS or JavaScript file.</p>
 <p><img src="/multidevice/images/webview/1-web-app-dir.png" width="562" alt="" /></p>
 
 </div><div class="collapsible">
-<h2>Step 3. Create a Yeoman project in your new directory</h2>
+<h2 id="step3">Step 3. Create a Yeoman project in your new directory</h2>
 
 <p>In a terminal <code>cd</code> to the the <code>webapp</code> directory in the project.</p>
 
@@ -75,7 +75,7 @@ reloads and updates. If you run <code>grunt build</code> a new directory, <code>
 is compressed, optimised and made into a production ready version inside this folder.</p>
 
 </div><div class="collapsible">
-<h2>Step 4. Configure the Gradle build</h2>
+<h2 id="step4">Step 4. Configure the Gradle build</h2>
 
 <p>In your <code>webapp</code> directory create a new file called <code>build.gradle</code>.</p>
 
@@ -112,7 +112,7 @@ Open <code>settings.gradle</code> in the root directory and add the following li
 <pre><code>include ':webapp'</code></pre>
 
 </div><div class="collapsible">
-<h2>Step 5. Build your WebApp when you build the android app</h2>
+<h2 id="step5">Step 5. Build your WebApp when you build the android app</h2>
 
 <p>The final step is to get the webapp to build and then copy the app into the 
 <code>assets</code> directory of our Android app.</p>
@@ -142,7 +142,7 @@ android.applicationVariants.all { variant -&gt;
 Let’s examine each part of this.
 </p>
 
-<h3>task copyWebApplication</h3>
+<h3 id="copywebapp">task copyWebApplication</h3>
 
 <pre><code>task copyWebApplication(type: Copy) {
   from '../webapp/dist'
@@ -155,7 +155,7 @@ we want to copy the files to <code>src/main/assets/www</code>. This task
 also creates the necessary file structure if any of the required directories don't exist.
 </p>
 
-<h3>task deleteWebApplication</h3>
+<h3 id="deletewebapp">task deleteWebApplication</h3>
 
 <pre><code>task deleteWebApplication(type: Delete) {
   delete 'src/main/assets/www'
@@ -165,7 +165,7 @@ also creates the necessary file structure if any of the required directories don
 This delete task deletes all the files in the <code>assets/www</code> directory.
 </p>
 
-<h3>copyWebApplication.dependsOn</h3>
+<h3 id="dependson">copyWebApplication.dependsOn</h3>
 
 <pre><code>copyWebApplication.dependsOn ':webapp:buildWebApp'
 copyWebApplication.dependsOn deleteWebApplication</code></pre>
@@ -183,7 +183,7 @@ The second line states there is a dependency on the <code>deleteWebApplication</
 In other words, before we actually copy any files to the <code>assets </code>directory, make 
 sure we build the web app and also delete the current contents of the <code>assets</code> directory.
 
-<h3>android.applicationVariants.all</h3>
+<h3 id="applicationvariants">android.applicationVariants.all</h3>
 
 <pre><code>android.applicationVariants.all { variant -&gt;
   tasks.getByPath(":${project.name}:assemble${variant.buildType.name.capitalize()}").dependsOn copyWebApplication
@@ -201,7 +201,7 @@ you need to copy your application over to the Android project.
 </p>
 
 </div><div class="collapsible">
-<h2>Step 6. Make sure everything works</h2>
+<h2 id="test">Step 6. Make sure everything works</h2>
 
 <p>
 In Android Studio, you should have no <code>assets</code> directory in your Android applications 
@@ -222,7 +222,7 @@ Now press <b>Run</b> and let your application build. You should see an <code>ass
 </p>
 
 </div><div class="collapsible">
-<h2>Step 7. What about live server and live reload?</h2>
+<h2 id="live-server">Step 7. What about live server and live reload?</h2>
 
 <p>
 So now you have a good build process for your Android application. But what about developing and 
@@ -283,7 +283,7 @@ Now you have two versions, but they don't actually do anything different yet.
 </p>
 
 </div><div class="collapsible">
-<h2>Step 8. Load from a live server</h2>
+<h2 id="load">Step 8. Load from a live server</h2>
 
 <p>
 In this step, you'll configure your application to load a different URL depending on which product 

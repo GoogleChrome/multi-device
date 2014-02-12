@@ -11,7 +11,7 @@ will outline some of the best practices for the mobile web in general and then
 some specific tricks you could use for hybrid applications.</p>
 
 <div class="collapsible">
-<h2>Viewport</h2>
+<h2 id="viewport">Viewport</h2>
 
 <p>The viewport meta tag is of the most important tags you need to add to your web 
 app. Without it, the WebView may act as if your site is designed for desktop 
@@ -37,7 +37,7 @@ the page layout. </p>
 defaulting to a desktop viewport. However, for reliable and controlled behaviour 
 it&#8217;s good practice to include the viewport meta tag.</p>
 
-<h3>Desktop Sites</h3>
+<h3 id="desktop">Desktop Sites</h3>
 
 <p>In some cases, you may need to display content that isn&#8217;t designed for mobile 
 devices &#8211; for example, if you&#8217;re displaying content you don&#8217;t control. In this 
@@ -60,7 +60,7 @@ device. See <a href="http://developer.android.com/reference/android/webkit/WebSe
 </figure>
 
 </div><div class="collapsible">
-<h2>Responsive Design</h2>
+<h2 id="responsive">Responsive Design</h2>
 
 <p>Responsive design is the notion of changing your UI depending on the dimensions 
 of the screen size. Here we will look at some simple examples of how you can 
@@ -151,7 +151,7 @@ range of devices.</aside>
 <a href="http://www.html5rocks.com/en/">HTML5Rocks</a> soon.</p>
 
 </div><div class="collapsible">
-<h2>Images</h2>
+<h2 id="images">Images</h2>
 
 <p>The variety of screens sizes and densities also presents challenges for images.
 Smaller images require less memory and are faster to load, but blur if you scale them up.</p>
@@ -171,7 +171,7 @@ high-denity screen, compared with the crisp display of an appropriately-sized im
 <li>Provide high-resolution photos.</li>
 </ul>
 
-<h3>Use CSS for scalable effects</h3>
+<h3 id="css">Use CSS for scalable effects</h3>
 
 <p>Make use of CSS3 where you can for borders, drop shadows, border-radius, 
 and so on instead of images. These features can scale easily. However, 
@@ -181,7 +181,7 @@ sample data on fast and slow CSS properties, see: <a href="http://www.html5rocks
 Page Render Weight</a> 
 on HTML5Rocks.)</p>
 
-<h3>Use vector graphics</h3>
+<h3 id="vector">Use vector graphics</h3>
 
 <p>Scalable Vector Graphics (SVGs)  are a great way of providing scalable 
 version of images. For images that are well-suited to vector graphics, SVG 
@@ -190,7 +190,7 @@ information, see <a href="http://www.html5rocks.com/en/tutorials/svg/mobile_fund
 Site</a> on 
 HTML5Rocks.</p>
 
-<h3>Provide high-resolution photos</h3>
+<h3 id="hires">Provide high-resolution photos</h3>
 
 <p>Use a version suitable for a high-DPI device and scale the image using CSS.
 This way the image has a high quality across devices. If you use
@@ -216,13 +216,13 @@ Pixel Densities</a> on HTML5Rocks.</li>
 <li><a href="https://developers.google.com/events/io/sessions/350992350">Seeing the World Through High DPI</a> video from Google I/O 2013.</li>
 </ul>
 
-<h3>Fine grained control</h3>
+<h3 id="fine-grained-control">Fine grained control</h3>
 
 <p>In many cases, you can&#8217;t use a single image for all devices. In this case, you can
 select different images based on the screen size and density. You can use media queries to select 
 background images by screen size and density. You can also use JavaScript to control how images load.</p>
 
-<h4>Media queries and screen density</h4>
+<h4 id="media-queries">Media queries and screen density</h4>
 
 <p>To select an image based on the screen density, you need to use <code>dpi</code> or 
 <code>dppx</code> units in your media query. The <code>dpi</code> unit represents dots per CSS inch, 
@@ -263,7 +263,7 @@ is equivalent to 96<code>dpi</code>, 2<code>dppx</code> == 192<code>dpi</code> =
 and are used in other places to express screen density (for example, 
 <a href="http://screensiz.es/phone">http://screensiz.es</a>).</p>
 
-<h4>Background Images</h4>
+<h4 id="background-images">Background Images</h4>
 
 <p>You can use media queries to assign background images to elements. For example, 
 if you have a logo image with 256px x 256px size on a device with a pixel ratio 
@@ -327,7 +327,7 @@ is useful as you start to account for different form factors.</p>
 resolution, with an image of 1024x1024px. this is because a CSS &#8220;pixel&#8221; actually takes 
 into account the device pixel ratio (512px * 2 = 1024px).</p>
 
-<h4>What About &lt;img />?</h4>
+<h4 id="img">What About &lt;img />?</h4>
 
 <p>The web today doesn&#8217;t have a solution for this. There are some proposals in the works, but 
 they aren&#8217;t available in current browsers or in the WebView.</p>
