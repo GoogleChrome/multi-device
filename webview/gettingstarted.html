@@ -50,20 +50,18 @@ you&#39;re done, click <strong>Next</strong>.</p>
 
 <p><img src="/multidevice/images/webview/projectwizard2.png"/> </p></li>
 <li><p>The next page lets you select the main Android activity for your application. 
-For the purposes of this guide, select <strong>Blank Activity **and click **Next</strong>.</p>
+For the purposes of this guide, select <strong>Blank Activity</strong> and click <strong>Next</strong>.</p>
 
 <p><img src="/multidevice/images/webview/projectwizard3.png"/> </p>
 
-<p><strong>Note:</strong> An Android 
-<a href="http://developer.android.com/reference/android/app/Activity.html">Activity</a> can 
+<p><strong>Note:</strong> An Android Activity can 
 be viewed as a screen of an app. In this case, the application&#39;s main activity 
 will hold the web view. If you&#39;re planning to venture further into native 
 Android development, you can find more information in the 
-<a href="http://developer.android.com/guide/components/activities.html](http://developer.android.com/guide/components/activities.html">
+<a href="http://developer.android.com/guide/components/activities.html">
 Android Activities API guide</a></p></li>
 <li><p>The next page lets you change the names for the default 
-<a href="http://developer.android.com/guide/components/activities.html">Activity</a> and 
-layout. Click <strong>Finish</strong> to accept the defaults and create the project.</p>
+Activity and layout. Click <strong>Finish</strong> to accept the defaults and create the project.</p>
 
 <p><img src="/multidevice/images/webview/projectwizard4.png"/> </p>
 
@@ -230,7 +228,7 @@ line to the end of the <code>onCreate</code> method.</p>
 (AVD or Android Virtual Device) by going to <strong>Tools</strong> &gt;
 <strong>Android</strong> &gt; <strong>AVD Manager</strong>.</p>
 
-<!-- <img src="/chrome/mobile/images/webview/html5test.jpg" alt=""/> --></li>
+<img src="/multidevice/images/webview/html5test.jpg" alt=""/> 
 </ol>
 
 <p><strong>Note:</strong> To detect when a URL has started and finished loading,
@@ -284,19 +282,19 @@ mWebView.setWebViewClient(new WebViewClient());
 <p>This is a good step forward, but what if you want to handle links for your site 
 only, while opening other URLs in a browser?</p>
 
-<p>To achieve this you need to extend the `WebViewClient` class and implement the 
-`shouldOverrideUrlLoading` method. This method is called whenever the WebView 
+<p>To achieve this you need to extend the <code>WebViewClient</code> class and implement the 
+<code>shouldOverrideUrlLoading</code> method. This method is called whenever the WebView 
 tries to navigate to a different URL. If it returns false, the WebView opens the 
-URL itself. (The default implementation _always_ returns false, which is why it 
+URL itself. (The default implementation <em>always</em> returns false, which is why it 
 works in the previous example.)</p>
 
 <p>Create a new class:</p>
 
 <ol>
-  <li>Right-click the package name of your app and select **New** > **Java Class**.
+  <li>Right-click the package name of your app and select <strong>New</strong> > <strong>Java Class</strong>
   <img src="/multidevice/images/webview/new-java-class.png"/></li>
-  <li>Enter `MyAppWebViewClient` as the class name and click **OK**.</li> 
-  <li><p>In the new `MyAppWebViewClient.java` file, add the following code (changes
+  <li>Enter <code>MyAppWebViewClient</code> as the class name and click <strong>OK</strong></li> 
+  <li><p>In the new <code>MyAppWebViewClient.java</code> file, add the following code (changes
     shown in bold):</p>
 
 <pre>public class MyAppWebViewClient <strong>extends WebViewClient</strong> {
@@ -314,23 +312,23 @@ works in the previous example.)</p>
     }
 </pre>
 
-    <p>The new code defines `MyAppWebViewClient` as a subclass of `WebViewClient` and 
+    <p>The new code defines <code>MyAppWebViewClient</code> as a subclass of <code>WebViewClient</code> and 
     implements the <code>shouldOverrideUrlLoading</code> method.</p>
 
-    <p>The `shouldOverrideUrlLoading` method is called whenever the WebView is about to load a URL.
+    <p>The <code>shouldOverrideUrlLoading</code> method is called whenever the WebView is about to load a URL.
     This implementation checks for the String "html5rocks.com" at the end of the 
     host name of the URL. If the string exists, the method returns
-    false, which tells the platform **not** to override the URL, but to load it in the 
+    false, which tells the platform <strong>not</strong> to override the URL, but to load it in the 
     WebView.</p> 
 
     <p>For any other hostname, the method makes a request to the system to open the URL. It does 
     this by creating a new Android 
-    [Intent](http://developer.android.com/reference/android/content/Intent.html) and using it
+    <a href="http://developer.android.com/reference/android/content/Intent.html">Intent</a> and using it
     to launch a new activity. Returning true at the end of the method  prevents the URL from 
     being loaded into the WebView.</p></li>
   <li><p>To use your new custom 
-    [WebViewClient](http://developer.android.com/reference/android/webkit/WebViewClient.html), add
-    the following lines to your `MainActivity` class:</p>
+    <a href="http://developer.android.com/reference/android/webkit/WebViewClient.html">WebViewClient</a>, add
+    the following lines to your <code>MainActivity</code> class:</p>
     
     <pre><strong>// Stop local links and redirects from opening in browser instead of WebView
     mWebView.setWebViewClient(new MyAppWebViewClient());
@@ -343,10 +341,10 @@ works in the previous example.)</p>
 <h3 id="handling_the_back_button">Handling the Android Back Button</h3>
 
 <p>As you start playing around and navigating the awesome HTML5Rocks articles, 
-hitting the back button on Android exits the application, even though we've 
+hitting the back button on Android exits the application, even though you've 
 explored a few pages of the site.</p>
 
-<p>WebView has a method `canGoBack` which tells you if there is anything on the 
+<p>WebView has a method <code>canGoBack</code> which tells you if there is anything on the 
 page stack that can be popped. All you need to do is detect a back button press 
 and determine if you should step back through the WebView's history or allow the platform 
 to determine the correct behaviour. Inside your MainActivity class, add the 
@@ -396,7 +394,7 @@ or compress).</p>
 <p>Generally it&#39;s good practice to keep your web files in a subdirectory, so create 
 a www directory and put all your web content in it.</p>
 
-<p><strong>Note:</strong>It&#39;s worth noting that absolute paths do not work in the WebView when 
+<p><strong>Note:</strong> Absolute paths do not work in the WebView when 
 referring to other files, such as CSS and JavaScript. So make sure you make all references 
 relative, instead of absolute (for example, instead of  &quot;/pages/somelink.html&quot;, use 
 &quot;./pages/somelink.html&quot;).</p>
@@ -427,7 +425,7 @@ for non-local pages:</p>
 
 <p>Now you are set to build a great WebView app!</p>
 
-<p>For tips on getting the visuals just right, see <a href="pixelperfect.html">Pixel-Perfect UI in the WebView</a>.</p>
+<p>For tips on getting the visuals just right, see <a href="pixelperfect">Pixel-Perfect UI in the WebView</a>.</p>
 
 <p>If you run into trouble, the Chrome DevTools are your friends. See <a href="/devtools/docs/remote-debugging">Remote Debugging on Android</a> to get started.</p>
 

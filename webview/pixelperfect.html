@@ -44,16 +44,16 @@ devices &#8211; for example, if you&#8217;re displaying content you don&#8217;t 
 case, you need to force the WebView to use a desktop-size viewport:</p>
 
 <ul>
-<li><a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setUseWideViewPort(boolean">setUseWideViewPort(true)</a>)</li>
-<li><a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setLoadWithOverviewMode(boolean">setLoadWithOverviewMode(true)</a>)</li>
+<li><a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setUseWideViewPort(boolean)">setUseWideViewPort(true)</a></li>
+<li><a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setLoadWithOverviewMode(boolean)">setLoadWithOverviewMode(true)</a></li>
 </ul>
 
-<p>Without these methods being set and no viewport the WebView will try and set the 
+<p>If these methods are not set <em>and</em> no viewport is specified, the WebView will try and set the 
 viewport width based on the content size. </p>
 
 <p>In addition to doing this, you may want to use the new layout algorithm <code>TEXT_AUTOSIZING</code> 
 introduced in Android 4.4, which increases the font size to make it more readable on a mobile 
-device. See <a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setLayoutAlgorithm(android.webkit.WebSettings.LayoutAlgorithm">setLayoutAlgorithm</a>). </p>
+device. See <a href="http://developer.android.com/reference/android/webkit/WebSettings.html#setLayoutAlgorithm(android.webkit.WebSettings.LayoutAlgorithm)">setLayoutAlgorithm</a>. </p>
 
 <figure>
 <img src="/multidevice/images/webview/text-autosize.jpg" width="658" alt=""/> 
@@ -147,8 +147,8 @@ easy way to do this is play around with the size of a browser window. But rememb
 actual devices have different screen densities than your monitor, so always test on a 
 range of devices.</aside>
 
-<p>There will be best practices for organising CSS and designing for mobiles on 
-<a href="http://www.html5rocks.com/en/">HTML5Rocks</a> soon.</p>
+<p>For more on designing for mobile devices, see 
+<a href="http://www.html5rocks.com/en/mobile/">HTML5Rocks</a>.</p>
 
 </div><div class="collapsible">
 <h2 id="images">Images</h2>

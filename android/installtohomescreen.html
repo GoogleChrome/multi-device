@@ -1,5 +1,9 @@
 {{+bindTo:partials.standard_multidevice_article}}
 
+<style>
+dd { margin: 0 6px 12px 40px; }
+</style>
+
 <h1>Add to Homescreen</h1>
 
 <div>
@@ -50,7 +54,7 @@ however, they integrate with the Android environment in the following ways.</p>
 <div style="clear:left"></div>
 
 <div class="collapsible">
-<h2 id="supporting">Supporting add to homescreen apps</h2>
+<h2 id="supporting">Supporting Add to homescreen apps</h2>
 
 <p>Chrome will look for the following meta tag in the <code>&lt;head&gt;</code> element of the web-page:</p>
 
@@ -79,6 +83,7 @@ however, they integrate with the Android environment in the following ways.</p>
 
 <p>The following example is the minimum required configuration to support a homescreen launch experience.</p>
 
+<pre>
 &lt;!doctype html&gt;
 &lt;html&gt;
    &lt;head&gt;
@@ -89,11 +94,12 @@ however, they integrate with the Android environment in the following ways.</p>
    &lt;/head&gt;
    &lt;body&gt;&lt;/body&gt;
 &lt;/html&gt;
+</pre>
 
 </div><div class="collapsible">
-<h2 id="comparison-to-ios">Comparison to iOS Safari Add to Homescreen</h2>
+<h2 id="comparison-to-ios">Comparison to iOS Safari Add to homescreen</h2>
 
-<p>Chrome will also allow Web Apps to launch in "App mode" if they embed a meta tag using the "apple-mobile-web-app-capable" name.  Chrome will stop supporting this usage in an upcoming release.  Chrome currently shows a deprecation warning in the Developer Tools’ console log when it detects a page with only the "apple-mobile-web-app-capable" meta tag. The warning appears as follows:</p>
+<p>Chrome will also allow web apps to launch in "App mode" if they embed a meta tag using the "apple-mobile-web-app-capable" name.  Chrome will stop supporting this usage in an upcoming release.  Chrome currently shows a deprecation warning in the Developer Tools’ console log when it detects a page with only the "apple-mobile-web-app-capable" meta tag. The warning appears as follows:</p>
 
 <img src="/multidevice/images/home_warning.png" style="width: 75%; height: 75%" />
 
@@ -110,13 +116,15 @@ however, they integrate with the Android environment in the following ways.</p>
 
 <dl>
 	<dt>How do I open links in the user’s browser?</dt>
-	<dd>As you would on the web, adding target=_blank to an anchor will force the user out of the web app and into the browser that the user added the icon from.</dd>
+	<dd>As you would on the web, adding <code>target="_blank"</code> to an anchor forces the user out of the 
+    web app and into the browser that the user added the icon from.</dd>
 
-	<dt>Will this work on Chrome for iOS?</dt>
+	<dt>Does Add to homescreen work on Chrome for iOS?</dt>
 	<dd>No.</dd>
 
-	<dt>If I visit a page that I have already added to the home screen, will it be full screen?</dt>
-	<dd>No, whilst you are browsing you will remain in the browser regardless of the fact your web app might be added to the home screen.  The page will only launch full screen when launched from the homescreen.</dd>
+	<dt>If I visit a page that I have already added to the homescreen, will it be full screen?</dt>
+	<dd>No, while you are browsing you remain in the browser even if you visit a page that's
+    added to your homescreen. The page only launches full screen when launched from the homescreen.</dd>
 
 	<dt>How can I detect if the app is running as an installed app?</dt>
 	<dd>You can’t, directly.</dd>
@@ -128,9 +136,10 @@ however, they integrate with the Android environment in the following ways.</p>
 <ul>
 	<li>Do not prompt the user to add your app to the homescreen. There is no way to detect if the app is running installed or not.</li>
 	<li>Use the large 196px icon format, as in <code>&lt;link rel="shortcut icon" sizes="196x196" href="nice-highres.png"&gt;</code> for the highest quality homescreen icons.</li>
-	<li>Use a noun in your document’s title with no temporal information.</li>
+	<li>Use a noun in your document’s title. Make sure the title doesn't contain any information that may change.
+     For example, for a Calendar app, don't include the current date or time in the app title.<li>
 	<li>Use <a href="http://docs.webplatform.org/wiki/apis/appcache/ApplicationCache">AppCache</a> to ensure that your app works or presents the user with an experience when they are offline.</li>
-	<li>Create a clear icon for use on the home screen following the guidance of <a href="http://developer.android.com/design/style/iconography.html#launcher">Android Iconography</a>.</li>
+	<li>Create a clear icon for use on the homescreen following the guidance of <a href="http://developer.android.com/design/style/iconography.html#launcher">Android Iconography</a>.</li>
 </ul>
 
 </div>

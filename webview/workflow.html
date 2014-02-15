@@ -59,7 +59,7 @@ page each time you change an HTML, CSS or JavaScript file.</p>
 
 <p>Then create a new web app with Yeoman:</p>
 
-<pre><b>yo webapp</b></pre>
+<pre><strong>yo webapp</strong></pre>
 
 <p>Follow the on-screen prompts to select project options.</p>
 
@@ -67,12 +67,12 @@ page each time you change an HTML, CSS or JavaScript file.</p>
 
 <p>Before proceeding to the next step, test the app by running the following command:</p>
 
-<pre><b>grunt server</b></pre>
+<pre><strong>grunt server</strong></pre>
 
 <p>A new tab should open in your browser, connecting to a local server started by Grunt. 
 If you change one of the HTML, CSS or JavaScript files in the project, the page automatically 
-reloads and updates. If you run <code>grunt build</code> a new directory, <code>dist</code>, is created and your webapp 
-is compressed, optimised and made into a production ready version inside this folder.</p>
+reloads and updates. If you run <code>grunt build</code> a new directory, <code>dist</code>, is created and your 
+web app is compressed, optimised and made into a production ready version inside this folder.</p>
 
 </div><div class="collapsible">
 <h2 id="step4">Step 4. Configure the Gradle build</h2>
@@ -114,7 +114,7 @@ Open <code>settings.gradle</code> in the root directory and add the following li
 </div><div class="collapsible">
 <h2 id="step5">Step 5. Build your WebApp when you build the android app</h2>
 
-<p>The final step is to get the webapp to build and then copy the app into the 
+<p>The final step is to get the web app to build and then copy the app into the 
 <code>assets</code> directory of our Android app.</p>
 
 <p>
@@ -150,8 +150,8 @@ Let’s examine each part of this.
 }</code></pre>
 
 <p>
-This <code>Copy</code> task copies your application from the <code>webapp/dist</code> directory, 
-we want to copy the files to <code>src/main/assets/www</code>. This task 
+This <code>Copy</code> task copies your application from the <code>webapp/dist</code> directory. 
+We want to copy the files to <code>src/main/assets/www</code>. This task 
 also creates the necessary file structure if any of the required directories don't exist.
 </p>
 
@@ -196,8 +196,8 @@ of your app. Here it sets a dependency on the <code>assemble</code> tasks to run
 </p>
 
 <p>
-The <code>assemble</code> tasks "assemble the output(s) of the project", so before you do that, 
-you need to copy your application over to the Android project.
+The <code>assemble</code> tasks assembles the output of the project, so the web app needs
+to be copied over to the Android project first.
 </p>
 
 </div><div class="collapsible">
@@ -209,12 +209,14 @@ In Android Studio, you should have no <code>assets</code> directory in your Andr
 </p>
 
 <p>
-Don’t forget you’ll need to set the WebView to use the <code>index.html</code> page and enable 
-JavaScript if you want to use it. For details, see 
-the <a href="gettingstarted.html">Getting Started Guide</a>.
+Don’t forget you’ll need to set the WebView to use the <code>index.html</code> page:
 </p>
 
 <code>mWebView.loadUrl("file:///android_asset/www/index.html");</code>
+
+<p><strong>Note:</strong> If your page uses JavaScript, you need to enable it explicitly.
+For details, see the <a href="gettingstarted#enable_javascript">Getting Started Guide</a>.
+</p>
 
 <p>
 Now press <b>Run</b> and let your application build. You should see an <code>assets</code> directory with your web application in the 
@@ -243,7 +245,7 @@ In your Android app's <code>build.gradle</code> add the following lines in bold 
   defaultConfig {
     ...
   }
-  <b>productFlavors {
+  <strong>productFlavors {
     staticbuild {
       packageName "com.google.chrome.myapplication"
     }
@@ -251,7 +253,7 @@ In your Android app's <code>build.gradle</code> add the following lines in bold 
     liveserver {
       packageName "com.google.chrome.myapplication.liveserver"
     }
-  }</b>
+  }</strong>
 
 }</code></pre>
 

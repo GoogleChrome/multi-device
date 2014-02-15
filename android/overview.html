@@ -24,32 +24,9 @@
   <li><a href="https://bugs.webkit.org/show_bug.cgi?id=84186">Text auto-sizing</a>, also known as font boosting
 </ul>
 
-<p>With these improvements, Chrome for Android enables interactive mobile web experiences, as illustrated in these snapshots:</p>
-
-<div class="foo">
-<p>
-<style>
-  .foo img {
-    float: left;
-    width: 180px;
-    margin: 0 10px 20px 0;
-  }
-  div.clr { clear: both; }
-</style>
-
-<img src="/multidevice/images/samples/gmail.png"/>
-<img src="/multidevice/images/samples/soundcloud.png"/>
-<img src="/multidevice/images/samples/grooveshark.png"/>
-<img src="/multidevice/images/samples/twitter.png"/>
-<img src="/multidevice/images/samples/workflowy.png"/>
-</p>
-</div>
-
-<div class="clr"></div>
+<p>With these improvements, Chrome for Android enables interactive mobile web experiences.</p>
 
 <p>See all the <a href="http://www.google.com/intl/en/chrome/android/features.html">Chrome for Android features</a> such as tabs, incognito mode, and sync across devices for the user's Google account.</p>
-
-<p>Enter <code>chrome://about</code> in the Chrome address bar to see more information about Chrome features.</li>
 
 </div><div class="collapsible">
 <h2 id="performance">Performance</h2>
@@ -68,14 +45,14 @@
 <p>Debugging web pages on the small screen is difficult. There's just not enough real estate to inspect elements and resources on the device. Now you can debug mobile web sites with the full suite of <a href="/devtools/index.html">Chrome Developer Tools</a> running on a desktop browser that's connected to your phone via USB. See <a href="/devtools/docs/remote-debugging.html">Remote Debugging</a> for further details.</p>
 
 <p>In addition to the powerful Chrome Developer Tools, Chrome for Android
-provides more advanced developer features:</p>
+provides more advanced developer features for very specific use cases:</p>
 <ul>
-  <li>GPU diagnostics: <code>chrome://gpu-internals</code></li>
+  <li>GPU diagnostics: <code>chrome://gpu</code></li>
   <li>AppCache debugging: <code>chrome://appcache-internals</code></li>
   <li>Net stack debugging: <code>chrome://net-internals</code></li>
 </ul>
 
-<p>You can also use the <a href="http://docs.webplatform.org/wiki/apis/resource_timing">Resource Timing</a> and <a href="http://docs.webplatform.org/wiki/apis/user_timing">User Timing</a> APIs to analyze application performance.</p>
+<p>You can also use the <a href="http://docs.webplatform.org/wiki/apis/resource_timing">Resource Timing</a> and <a href="http://www.html5rocks.com/en/tutorials/webperformance/usertiming/">User Timing</a> APIs to analyze application performance.</p>
 
 </div><div class="collapsible">
 <h2 id="offline">Working offline</h2>
@@ -99,7 +76,8 @@ HTML5 features that address this concern, including:</p>
 </div><div class="collapsible">
 <h2 id="standards">Standards and APIs</h2>
 
-<p>Chrome for Android supports HTML5 development with many features.</p>
+<p>Chrome for Android supports modern web standards. This section presents a sampling of features;
+for an updated view of features per Chrome release, see <a href="chromestatus.com">chromestatus.com</a>.
 
 <h3 id="css">CSS and presentation</h3>
 
@@ -111,7 +89,7 @@ HTML5 features that address this concern, including:</p>
   <li>The <a href="https://developer.mozilla.org/en-US/docs/CSS/Using_CSS_flexible_boxes">Flexbox</a> layout model is fully supported (prefixed as -webkit-flex)</li>
   <li><a href="https://developer.mozilla.org/en-US/docs/CSS/length">Viewport units</a>, <code>vh</code>, <code>vmin</code>, and <code>vw</code> for responsive design</li>
   <li><a href="http://docs.webplatform.org/wiki/css/atrules/@supports">@supports</a> conditional blocks to test whether Chromium supports certain property/value pairs</li>
-  <li>The <a href="https://plus.google.com/+EricBidelman/posts/bbK5scDoPnc">:unresolved CSS pseudo-class</a> that lets you style a custom element that hasn’t been registered in the browser yet (custom elements are part of the <a href="https://dvcs.w3.org/hg/webcomponents/raw-file/tip/explainer/index.html#introduction">Web Components</a> standard in development)</li>
+  <li>The <a href="http://www.html5rocks.com/en/tutorials/webcomponents/customelements/#fouc">:unresolved CSS pseudo-class</a> that lets you style a custom element that hasn’t been registered in the browser yet (custom elements are part of the <a href="https://dvcs.w3.org/hg/webcomponents/raw-file/tip/explainer/index.html#introduction">Web Components</a> standard in development)</li>
 </ul>
 
 <h3 id="elements">Elements</h3>
@@ -145,7 +123,7 @@ contextual surroundings, from location and device orientation to camera access. 
   <li><a href="http://www.html5rocks.com/en/tutorials/speed/animations/">requestAnimationFrame</a> to achieve optimum animation performance</li>
   <li>Interactive communication between server and client with <a href="https://developer.mozilla.org/en-US/docs/WebSockets">WebSockets</a>.</li>
   <li>Multi-threading with <a href="http://www.html5rocks.com/en/tutorials/workers/basics/">Web Workers</a> (dedicated only)</li>
-  <li><a href="http://docs.webplatform.org/wiki/dom/methods/requestFullscreen">requestFullscreen</a> method (presently via the prefixed call, <code>webkitRequestFullScreen()</code>) to allow you to hide the browser UI (chrome)</li>
+  <li><a href="http://www.html5rocks.com/en/mobile/fullscreen/#toc-request">requestFullscreen</a> method (presently via the prefixed call, <code>webkitRequestFullScreen()</code>) to allow you to hide the browser UI (chrome)</li>
   <li><a href="http://docs.webplatform.org/wiki/apis/webrtc">WebRTC</a> for real-time communication without a plug-in</li>
   <li><a href="http://docs.webplatform.org/wiki/apis/webaudio">WebAudio</a> to process and synthesize audio signals</li>
   <li>Experimental support (via <code>chrome://flags</code> in the Chrome address bar) for the following APIs:
@@ -178,7 +156,7 @@ star the ones you need the most. If you find a new issue, log it using
 </div><div class="collapsible">
 <h2 id="feedback">Share your thoughts</h2>
 
-<p>If you run into a mobile web development problem and would like help, please post it to <a href="http://stackoverflow.com/questions/tagged/google-chrome+android">Stack Overflow</a> using the <a href="http://stackoverflow.com/questions/tagged/google-chrome">[google-chrome]</a> and <a href="http://stackoverflow.com/questions/tagged/android">[android]</a> tags.</p>
+<p>If you run into a mobile web development problem and would like help, please post it to <a href="http://stackoverflow.com/questions/tagged/google-chrome+android">Stack Overflow</a> using the <code>[google-chrome]</code> and <code>[android]</code> tags.</p>
 
 </div>
 
