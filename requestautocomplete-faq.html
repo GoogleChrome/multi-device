@@ -8,81 +8,85 @@ dd {
 
   <h1>requestAutocomplete FAQ</h1>
 
-  <h2>What is <tt>requestAutocomplete</tt>?</h2>
+  <h2>General information</h2>
+  <h3>What is <tt>requestAutocomplete</tt>?</h3>
 
   <p>The <code>requestAutocomplete</code> API is designed to simplify the process of completing online purchase forms, 
   especially on mobile devices.
 See the <a href="http://www.html5rocks.com/en/tutorials/forms/requestautocomplete/">overview of <code>requestAutocomplete</code> on HTML5Rocks</a>.</p>
 
-  <h2>What use cases are supported?</h2>
+  <h3>What use cases are supported?</h3>
 
   <p>While the <code>requestAutocomplete</code> API has the potential to be useful for any form that requests any information outlined in the <a href="http://www.w3.org/TR/html5/forms.html#autofilling-form-controls:-the-autocomplete-attribute">autocomplete spec</a>, Chrome currently only supports using it for facilitating checkout flows that use a credit/debit/prepaid card as the payment method.</p>
 
   <p>For the time being, Chrome only supports sales within the United States. We’re working hard to make this feature available to our users around the world.</p>
 
-  <h2>Does that include sales of digital goods, will-call tickets, or other sales that don’t require a shipping address?</h2>
+  <h3>Can <code>requestAutocomplete</code> be used for digital goods, will-call tickets, or other sales that don’t require a shipping address?</h3>
 
   <p>Yes. If you don’t request any shipping details, Chrome won’t ask the user for a shipping address.</p>
 
-  <h2>What if I only want an address?</h2>
+  <h3>What if I only want an address?</h3>
 
   <p>If you only need an address, we currently recommend you stick with a normal web <code>&lt;form&gt;</code> and mark your inputs with <code>autocomplete</code> attributes.</p>
 
-  <h2>I don’t need a phone number, why does Chrome ask for it anyway?</h2>
+  <h3>I don’t need a phone number, why does Chrome ask for it anyway?</h3>
 
   <p>Since Chrome stores user-entered information to facilitate future purchases, it asks the user to enter all information that is generally relevant to checkout flows on the web. The upside is that if a user has used <code>requestAutocomplete</code> before on any website, all the details your site needs will be stored and ready to go without needing to prompt for more information.</p>
 
-  <h2>What if I need extra details that <code>requestAutocomplete</code> doesn’t support?</h2>
+  <h3>What if I need extra details that <code>requestAutocomplete</code> doesn’t support?</h3>
 
   <p>You can ask for extra details, such as discount codes or rewards account numbers, on the confirmation page which your site shows before the order’s final placement.</p>
 
-  <h2>What if the data I get back from Chrome doesn’t match my expectations?</h2>
+  <h2>Data flow</h2>
+
+  <h3>What if the data I get back from Chrome doesn’t match my expectations?</h3>
 
   <p>Chrome applies standard data verification rules to the data it collects from users. For example, you can be sure the user’s email is in a valid format. However, Chrome does not guarantee the veracity of the information as it is supplied directly by the user. If you do have custom rules for the data values you expect (e.g., if you only ship to some states), you should show the data and error messages to the user, and allow them to either fix the data or start over by trying <code>requestAutocomplete</code> again. <a href="http://www.html5rocks.com/en/tutorials/forms/requestautocomplete/payments-flow.svg">This flow chart</a> covers how you can handle invalid data.</p>
 
-  <h2>How do I calculate shipping costs before asking a user for their credit card?</h2>
+  <h3>How do I calculate shipping costs before asking a user for their credit card?</h3>
 
   <p>If you want to calculate shipping costs before collecting complete payment information, we recommend embedding a zip/postcode-based shipping estimator in your site which is visible on the shopping cart page.</p>
 
-  <h2>How should I handle a user canceling the <code>requestAutocomplete</code> flow?</h2>
+  <h3>How should I handle a user canceling the <code>requestAutocomplete</code> flow?</h3>
 
   <p>We recommend doing nothing. When a user presses cancel, we will dismiss the dialog and the user will be taken back to your checkout page.</p>
 
-  <h2>Why are there references to Google Wallet in the UI?</h2>
+  <h2><tt>requestAutocomplete</tt> and Google Wallet</h2>
+  <h3>Why are there references to Google Wallet in the UI?</h3>
 
   <p>The Chrome implementation of <code>requestAutocomplete</code> allows users to use Google Wallet for additional security and convenience features. With Google Wallet, users may access their payment information from any device, and the users’ saved credit or debit card information is never shared with merchants. If a customer uses Wallet, we’ll pass along a Google Wallet virtual card.</p>
 
-  <h2>What is a Google Wallet virtual card?</h2>
+  <h3>What is a Google Wallet virtual card?</h3>
 
   <p>To protect our users’ privacy and security, Chrome does not share a Google Wallet user’s full credit or debit card information with merchants. Instead, a Google Wallet virtual card is generated and used to complete purchases. Payment is authorized against the Google Wallet virtual card, and then Google charges the user’s credit or debit card for the same amount. See <a href="http://support.google.com/wallet/bin/answer.py?hl=en&amp;answer=2740044">Google Wallet's help pages</a> for more info.</p>
 
-  <h2>Does the Google Wallet virtual card have to be handled differently than traditional credit cards?</h2>
+  <h3>Does the Google Wallet virtual card have to be handled differently than traditional credit cards?</h3>
 
   <p>No, you can use this card number exactly as you would any credit card supplied directly by the user.</p>
 
-  <h2>Do I, as a developer, need to worry if a user uses Google Wallet or not?</h2>
+  <h3>Do I, as a developer, need to worry if a user uses Google Wallet or not?</h3>
 
-  <p>No, you will receive a fully functional credit card number regardless of whether or not your user uses Google Wallet.</p>
+  <p>No, you receive a fully functional credit card number regardless of whether or not your user uses Google Wallet.</p>
 
-  <h2>Does using <code>requestAutocomplete</code> (including Google Wallet) cost me anything?</h2>
+  <h3>Does using <code>requestAutocomplete</code> (including Google Wallet) cost me anything?</h3>
 
   <p>No, this service is free.</p>
 
-  <h2>C’mon, there has to be something in it for you.</h2>
+  <p>We believes that facilitating transactions on the web is good for the entire ecosystem: users and merchants alike benefit.</p>
 
-  <p>Google believes that facilitating transactions on the web is good for the entire ecosystem: users and merchants alike will benefit.</p>
+  <h2>Browser support and feedback</h2>
 
-  <h2>Which browsers &amp; devices support <code>requestAutocomplete</code>?</h2>
+  <h3>Which browsers &amp; devices support <code>requestAutocomplete</code>?</h3>
 
   <p><code>requestAutocomplete</code> is available in the stable release of Chrome for Windows, ChromeOS and Android. On Mac <code>requestAutocomplete</code> is available for testing on Chrome’s beta channel and will move into the stable release within the coming months. There is no support on iOS or Linux at the moment, but support will be added soon.</p>
 
   <p>Browsers and platforms that don’t support <code>requestAutocomplete</code> will get your normal checkout flow.</p>
 
-  <h2>How can I give feedback or get more help?</h2>
+  <h3>How can I give feedback or get more help?</h3>
 
   <p>We have a <a href="https://groups.google.com/a/chromium.org/forum/#!forum/requestautocomplete">requestAutocomplete Google group</a>. This is a public forum for developers to discuss Chrome’s implementation of <code>requestAutocomplete</code> and ask questions.</p>
 
-  <h2>Where can I see the list of known issues?</h2>
+  <h3>Where can I see the list of known issues?</h3>
 
   <p>Chromium's bug tracker has <a href="https://code.google.com/p/chromium/issues/list?can=2&amp;q=Cr%3DUI-Browser-Autofill-Interactive">a tag for <code>requestAutocomplete</code></a></p>
 
