@@ -67,8 +67,8 @@ however, they integrate with the Android environment in the following ways.</p>
 <p>The icon that is used to install to the homescreen is determined by using the largest icon found in one of the following <code>&lt;link&gt;</code> tags:</p>
 
 <ul>
-	<li><code>&lt;link rel="shortcut icon" sizes="196x196" href="nice-highres.png"&gt;</code> (recommended)</li>
-	<li><code>&lt;link rel="shortcut icon" sizes="128x128" href="niceicon.png"&gt;</code></li>
+	<li><code>&lt;link rel="icon" sizes="196x196" href="nice-highres.png"&gt;</code> (recommended)</li>
+	<li><code>&lt;link rel="icon" sizes="128x128" href="niceicon.png"&gt;</code></li>
 	<li><code>&lt;link rel="apple-touch-icon" sizes="128x128" href="niceicon.png"&gt;</code></li>
 	<li><code>&lt;link rel="apple-touch-icon-precomposed" sizes="128x128" href="niceicon.png"&gt;</code></li>
 </ul>
@@ -90,7 +90,7 @@ however, they integrate with the Android environment in the following ways.</p>
      &lt;title&gt;Awesome app &lt;/title&gt;
      &lt;meta name="viewport" content="width=device-width"&gt;
      &lt;meta name="mobile-web-app-capable" content="yes"&gt;
-     &lt;link rel="shortcut icon" sizes="196x196" href="/icon.png"&gt;
+     &lt;link rel="icon" sizes="196x196" href="/icon.png"&gt;
    &lt;/head&gt;
    &lt;body&gt;&lt;/body&gt;
 &lt;/html&gt;
@@ -135,7 +135,7 @@ however, they integrate with the Android environment in the following ways.</p>
 
 <ul>
 	<li>Do not prompt the user to add your app to the homescreen. There is no way to detect if the app is running installed or not.</li>
-	<li>Use the large 196px icon format, as in <code>&lt;link rel="shortcut icon" sizes="196x196" href="nice-highres.png"&gt;</code> for the highest quality homescreen icons.</li>
+	<li>Use the large 196px icon format, as in <code>&lt;link rel="icon" sizes="196x196" href="nice-highres.png"&gt;</code> for the highest quality homescreen icons.</li>
 	<li>Use a noun in your document’s title. Make sure the title doesn't contain any information that may change.
      For example, for a Calendar app, don't include the current date or time in the app title.<li>
 	<li>Use <a href="http://docs.webplatform.org/wiki/apis/appcache/ApplicationCache">AppCache</a> to ensure that your app works or presents the user with an experience when they are offline.</li>
