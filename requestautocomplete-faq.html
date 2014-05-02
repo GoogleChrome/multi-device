@@ -10,8 +10,6 @@ See the <a href="http://www.html5rocks.com/en/tutorials/forms/requestautocomplet
 
   <p>While the <code>requestAutocomplete</code> API has the potential to be useful for any form that requests any information outlined in the <a href="http://www.w3.org/TR/html5/forms.html#autofilling-form-controls:-the-autocomplete-attribute">autocomplete spec</a>, Chrome currently only supports using it for facilitating checkout flows that use a credit/debit/prepaid card as the payment method.</p>
 
-  <p>For the time being, Chrome only supports sales within the United States. We’re working hard to make this feature available to our users around the world.</p>
-
   <h3 id="digital-goods">Can <code>requestAutocomplete</code> be used for digital goods, will-call tickets, or other sales that don’t require a shipping address?</h3>
 
   <p>Yes. If you don’t request any shipping details, Chrome won’t ask the user for a shipping address.</p>
@@ -45,7 +43,7 @@ See the <a href="http://www.html5rocks.com/en/tutorials/forms/requestautocomplet
   <h2><tt>requestAutocomplete</tt> and Google Wallet</h2>
   <h3>Why are there references to Google Wallet in the UI?</h3>
 
-  <p>The Chrome implementation of <code>requestAutocomplete</code> allows users to use Google Wallet for additional security and convenience features. With Google Wallet, users may access their payment information from any device, and the users’ saved credit or debit card information is never shared with merchants. If a customer uses Wallet, we’ll pass along a Google Wallet virtual card.</p>
+  <p>The Chrome implementation of <code>requestAutocomplete</code> allows users to choose Google Wallet for additional security and convenience features. With Google Wallet, users can access their payment information from any device, and the users’ saved credit or debit card information is never shared with merchants. If a customer uses Wallet, we’ll pass along a Google Wallet virtual card.</p>
 
   <h3>What is a Google Wallet virtual card?</h3>
 
@@ -69,13 +67,13 @@ See the <a href="http://www.html5rocks.com/en/tutorials/forms/requestautocomplet
 
   <h3>Which browsers &amp; devices support <code>requestAutocomplete</code>?</h3>
 
-  <p><code>requestAutocomplete</code> is available in the stable release of Chrome for Windows, ChromeOS and Android. On Mac <code>requestAutocomplete</code> is available for testing on Chrome’s beta channel and will move into the stable release within the coming months. There is no support on iOS or Linux at the moment, but support will be added soon.</p>
-
-  <p>Browsers and platforms that don’t support <code>requestAutocomplete</code> will get your normal checkout flow.</p>
+  <p><code>requestAutocomplete</code> is available in Chrome on both desktop and mobile. It's on the stable channel for Windows, Mac, ChromeOS, Android and iOS, and will come to Linux in Chrome 35, which should be stable in the second half of May 2014.</p>
 
   <h3>How can I give feedback or get more help?</h3>
 
-  <p>We have a <a href="https://groups.google.com/a/chromium.org/forum/#!forum/requestautocomplete">requestAutocomplete Google group</a>. This is a public forum for developers to discuss Chrome’s implementation of <code>requestAutocomplete</code> and ask questions.</p>
+  <p>There's more information at the <a href="https://sites.google.com/a/chromium.org/dev/developers/using-requestautocomplete">Chromium wiki</a>.</p>
+
+  <p>We also have a <a href="https://groups.google.com/a/chromium.org/forum/#!forum/requestautocomplete">requestAutocomplete Google group</a>. This is a public forum for developers to discuss Chrome’s implementation of <code>requestAutocomplete</code> and ask questions.</p>
 
   <h3>Where can I see the list of known issues?</h3>
 
