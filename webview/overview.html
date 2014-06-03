@@ -21,13 +21,15 @@ using the Chrome DevTools.</p>
 <h3 id="what_version_of_chrome_is_it_based_on_">What version of Chrome is it based on?</h3>
 
 <p>The WebView shipped with Android 4.4 (KitKat) is based on the same code as
-Chrome for Android version 30.  The WebView does not have full feature parity with 
-Chrome for Android and is currently given the version number 30.0.0.0.</p>
+Chrome for Android version 30.  This WebView does not have full feature parity with 
+Chrome for Android and is given the version number 30.0.0.0.</p>
+
+<p>The updated WebView shipped with Android 4.4.3 has the version number 33.0.0.0.</p>
 
 <h3 id="will_the_new_webview_auto-update_">Will the new WebView auto-update?</h3>
 
 <p>Evergreen browsers (like Chrome and Firefox) auto-update and keep their users up to date so they 
-can view the web through a modern feature set. As a developer, this ensures your choices aren’t 
+can view the web through a modern feature set. As a developer, this ensures your choices aren&#39;t 
 limited to a lowest-common denominator browser from years ago, but rather are keeping pace with the 
 modern web. Your apps inside a WebView are just as important and deserve a runtime that keeps users 
 up to date. There are large engineering and logistical challenges. We're not quite there yet, but 
@@ -48,8 +50,8 @@ Safari/537.36</p></li>
 
 <p>If you&#39;re attempting to differentiate between the WebView and Chrome for Android, 
 you should look for the presence of the <strong>Version/_X.X_</strong> string in the WebView
-user-agent string. Don&#39;t rely on the specific Chrome version number, 
-<strong>30.0.0.0</strong> as this may change with future releases.</p>
+user-agent string. Don&#39;t rely on the specific Chrome version number 
+(for example, 30.0.0.0) as the version numbers changes with each release.</p>
 
 <h3 id="how_do_i_set_the_user_agent_of_the_webview_">How do I set the user-agent of the WebView?</h3>
 
@@ -72,15 +74,90 @@ the new WebView.</p>
 <p>Chrome for Android supports a few features which aren&#39;t enabled in the 
 WebView, including: </p>
 
-<ul>
-<li>WebGL 3D canvas</li>
-<li>WebRTC</li>
-<li>WebAudio</li>
-<li>Fullscreen API</li>
-<li>Form validation</li>
-<li>File input type</li>
-<li>Filesystem API</li>
-</ul>
+<table>
+<tr>
+  <th></th>
+  <th>WebView v30</th>
+  <th>WebView v33</th>
+</tr>
+<tr>
+  <td>WebGL 3D canvas</td>
+  <td>x</td>
+  <td>x</td>
+</tr>
+<tr>
+  <td>WebRTC</td>
+  <td>x</td>
+  <td>x</td>
+</tr>
+<tr>
+  <td>WebAudio</td>
+  <td>x</td>
+  <td>x</td>
+</tr>
+<tr>
+  <td>Fullscreen API</td>
+  <td>x</td>
+  <td>x</td>
+</tr>
+<tr>
+  <td><a href="http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/">Form validation</a></td>
+  <td>x</td>
+  <td>&#10003;</td>
+</tr>
+<tr>
+  <td>File input type</td>
+  <td>x</td>
+  <td>x</td>
+</tr>
+<tr>
+  <td>Filesystem API</td>
+  <td>x</td>
+  <td>x</td>
+</tr>
+<tr>
+  <td><a href="http://updates.html5rocks.com/tag/datalist">&lt;datalist&gt;</a></td>
+  <td>x</td>
+  <td>&#10003;</td>
+</tr>
+</table>
+
+<h3 id="hardware_sensors">What hardware sensor APIs are available to the new WebView?</h3>
+
+<p>Some HTML5 APIs can be used to access the hardware sensors on an Android device. Chrome for Android supports a few of these APIs but not all of them are currently enabled in the WebView.</p>
+
+<table>
+<tr>
+  <th></th>
+  <th>WebView v30</th>
+  <th>WebView v33</th>
+</tr>
+<tr>
+  <td><a href="http://docs.webplatform.org/wiki/apis/geolocation">Geolocation API</a>
+    <br>
+    (requires <code>android.permission.ACCESS_COARSE_LOCATION</code> and/or <code>android.permission.ACCESS_FINE_LOCATION</code> permissions) 
+  </td>
+  <td>&#10003;</td>
+  <td>&#10003;</td>
+</tr>
+<tr>
+  <td><a href="http://docs.webplatform.org/wiki/apis/device_orientation">Device Orientation API</a></td>
+  <td>x</td>
+  <td>x</td>
+</tr>
+<tr>
+  <td><a href="http://docs.webplatform.org/wiki/apis/media_capture_and_streams">Media Capture and Streams</a></td>
+  <td>x</td>
+  <td>x</td>
+</tr>
+<tr>
+  <td><a href="http://docs.webplatform.org/wiki/apis/vibration">Vibration API</a>
+    <br>
+    (requires <code>android.permission.VIBRATE</code> permission)</td>
+  <td>x</td>
+  <td>&#10003;</td>
+</tr>
+</table>
 
 <h3 id="what_does_the_new_webview_mean_for_developers_">What does the new WebView mean for developers?</h3>
 
