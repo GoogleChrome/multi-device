@@ -20,11 +20,17 @@ using the Chrome DevTools.</p>
 
 <h3 id="what_version_of_chrome_is_it_based_on_">What version of Chrome is it based on?</h3>
 
-<p>The WebView shipped with Android 4.4 (KitKat) is based on the same code as
+<p>The WebView shipped with <strong>Android 4.4 (KitKat)</strong> is based on the same code as
 Chrome for Android version 30.  This WebView does not have full feature parity with 
-Chrome for Android and is given the version number 30.0.0.0.</p>
+Chrome for Android and is given the version number <strong>30.0.0.0</strong>.</p>
 
-<p>The updated WebView shipped with Android 4.4.3 has the version number 33.0.0.0.</p>
+<p>The updated WebView shipped with <strong>Android 4.4.3</strong> has the version number <strong>33.0.0.0</strong>.</p>
+
+<p>A developer preview WebView is shipping with the <a href="http://developer.android.com/preview/">Android L Developer Preview</a>. The developer preview version number is <strong>36.0.0.0</strong>.</p>
+
+<p class="warning">  
+  <strong>Caution:</strong> You cannot publish apps using the L Developer Preview to the Google Play store.
+</p>
 
 <h3 id="will_the_new_webview_auto-update_">Will the new WebView auto-update?</h3>
 
@@ -37,21 +43,7 @@ we're working on it.</p>
 
 <h3 id="what_is_the_default_user_agent_">What is the default user-agent?</h3>
 
-<p>The new WebView adds <strong>Chrome/_version_</strong> to the user-agent string. Sample
-old and new user-agent strings:</p>
-
-<ul>
-<li><p><strong>Old UA</strong>: Mozilla/5.0 (Linux; U; Android 4.1.1; en-gb; Build/KLP) 
-AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30</p></li>
-<li><p><strong>New UA</strong>: Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_) 
-AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile 
-Safari/537.36</p></li>
-</ul>
-
-<p>If you&#39;re attempting to differentiate between the WebView and Chrome for Android, 
-you should look for the presence of the <strong>Version/_X.X_</strong> string in the WebView
-user-agent string. Don&#39;t rely on the specific Chrome version number 
-(for example, 30.0.0.0) as the version numbers changes with each release.</p>
+<p>The new WebView adds <strong>Chrome/_version_</strong> to the user-agent string. Refer to <a href="user-agent#webview_user_agent">Chrome User Agent Strings</a> for an example.</p>
 
 <h3 id="how_do_i_set_the_user_agent_of_the_webview_">How do I set the user-agent of the WebView?</h3>
 
@@ -79,24 +71,29 @@ WebView, including: </p>
   <th></th>
   <th>WebView v30</th>
   <th>WebView v33</th>
+  <th>WebView v36</th>
 </tr>
 <tr>
-  <td>WebGL 3D canvas</td>
+  <td><a href="http://www.html5rocks.com/en/tutorials/webgl/webgl_fundamentals/">WebGL</a></td>
   <td>x</td>
   <td>x</td>
+  <td>&#10003;</td>
 </tr>
 <tr>
-  <td>WebRTC</td>
+  <td><a href="http://www.html5rocks.com/en/tutorials/webrtc/basics/">WebRTC</a></td>
   <td>x</td>
   <td>x</td>
+  <td>&#10003;</td>
 </tr>
 <tr>
-  <td>WebAudio</td>
+  <td><a href="http://www.html5rocks.com/en/tutorials/webaudio/intro/">WebAudio</a></td>
   <td>x</td>
   <td>x</td>
+  <td>&#10003;</td>
 </tr>
 <tr>
-  <td>Fullscreen API</td>
+  <td><a href="http://www.html5rocks.com/en/mobile/fullscreen/">Fullscreen API</a></td>
+  <td>x</td>
   <td>x</td>
   <td>x</td>
 </tr>
@@ -104,20 +101,24 @@ WebView, including: </p>
   <td><a href="http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/">Form validation</a></td>
   <td>x</td>
   <td>&#10003;</td>
+  <td>&#10003;</td>
 </tr>
 <tr>
-  <td>File input type</td>
+  <td><a href="http://www.html5rocks.com/en/tutorials/file/filesystem/">Filesystem API</a></td>
+  <td>x</td>
   <td>x</td>
   <td>x</td>
 </tr>
 <tr>
-  <td>Filesystem API</td>
+  <td><a href="http://updates.html5rocks.com/2012/08/Integrating-input-type-file-with-the-Filesystem-API">File input type</a></td>
+  <td>x</td>
   <td>x</td>
   <td>x</td>
 </tr>
 <tr>
   <td><a href="http://updates.html5rocks.com/tag/datalist">&lt;datalist&gt;</a></td>
   <td>x</td>
+  <td>&#10003;</td>
   <td>&#10003;</td>
 </tr>
 </table>
