@@ -19,8 +19,11 @@ This is the source of the official [Chrome Multi-Device documentation](https://d
 
 Once pushed to master, updates will go live to the DCC site within a few minutes or so.
 
-#### Troublshooting
+### Troublshooting
 
+* If you can't find the content with the devtools-docs repo, it might be part of the Chromium repo
+  * CSS, JavaScript, and navigation bugs related to developer.chrome.com can be logged to the [Chromium issue tracker](http://crbug.com) 
+  
 ## License
 
 Except as otherwise noted, the content of the DevTools documentation is licensed under the [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/), and code samples are licensed under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0).
