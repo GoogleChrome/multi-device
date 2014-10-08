@@ -11,9 +11,16 @@ dd { margin: 0 6px 12px 40px; }
 
 <div style="width:500px">
 
-<p style="margin-top:50px">New in Chrome M31 Beta,
+<p style="margin-top:50px">Since Chrome M31,
 you can set up your web app to have an application shortcut icon added to a device's homescreen,
 and have the app launch in full-screen "app mode" using Chrome for Android’s "Add to homescreen" menu item.</p>
+
+<p>New in Chrome M39, you can define the metadata associated with your web application
+in a <a href="https://w3c.github.io/manifest/">JSON-based manifest</a>.
+Using this metadata in conjunction with Add to Homescreen,
+you can create launch experiences more comparable to native applications.</p>
+
+<h2 id="work">How they work</h2>
 
 <p>Homescreen-installed apps work exactly like you would expect a normal web application to work.
 They follow the same sandboxed security policies and have access to the same API’s;
@@ -45,6 +52,11 @@ however, they integrate with the Android environment in the following ways.</p>
 		<img src="/multidevice/images/home_full.png" style="width: 25%; height: 25%" />
 	</div>
 
+        <div>
+                <p><b>Supports a default device orientation</b></p>
+                <p style="width:500px">Web apps will launch and stay locked in the designated orientation, for example, landscape.</p>
+        </div>
+
 	<div>
 		<p><b>Navigating to external pages from a web app highlights them to the user</b></p>
 		<p style="width:500px">Users will always know if the app routes them to a location outside the application’s domain.  This is especially useful for authentication flows, the user is kept in the app experience but the URL of the authentication system is clearly visible to the user.</p>
@@ -54,9 +66,85 @@ however, they integrate with the Android environment in the following ways.</p>
 <div style="clear:left"></div>
 
 <div class="collapsible">
+
 <h2 id="supporting">Supporting Add to homescreen apps</h2>
 
-<p>Chrome will look for the following meta tag in the <code>&lt;head&gt;</code> element of the web-page:</p>
+<p><a href="https://w3c.github.io/manifest/#orientation-member">Manifests</a>
+provide a way to wrap metadata about a web application into a single file.
+Developers seeking to enable "add to homescreen" should link to a manifest
+and define the manifest metadata.</p>
+
+<h3 id="manifestlink">Linking to the manifest</h3>
+
+<p>To associate the manifest with your website,
+include the link element in your web page
+(for example, <a href="https://github.com/GoogleChrome/samples/blob/gh-pages/web-application-manifest/index.html">index.html</a>):</p>
+
+<pre><link rel="manifest" href="manifest.json"></pre>
+
+<h3 id="manifestmetadata">Defining the manifest metadata</h3>
+
+<p>The manifest metadata can define a title, landing page, default orientation,
+and different icons depending on size and screen density.</p>
+
+<p>For example, this
+<a href="https://github.com/GoogleChrome/samples/blob/gh-pages/web-application-manifest/manifest.json">manifest</a>
+includes a title ("Web Application Manifest Sample"),
+different icons to support a range of devices,
+a start page (<code>index.html</code>),
+and the default orientation (<code>landscape</code>).</p>
+
+<pre>
+{
+  "name": "Web Application Manifest Sample",
+  "icons": [
+    {
+      "src": "launcher-icon-0-75x.png",
+      "sizes": "36x36",
+      "type": "image/png",
+      "density": "0.75"
+    },
+    {
+      "src": "launcher-icon-1x.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "density": "1.0"
+    },
+    {
+      "src": "launcher-icon-1-5x.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "density": "1.5"
+    },
+    {
+      "src": "launcher-icon-2x.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "density": "2.0"
+    },
+    {
+      "src": "launcher-icon-3x.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "density": "3.0"
+    },
+    {
+      "src": "launcher-icon-4x.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "density": "4.0"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "landscape"
+}
+</pre>
+
+<h2 id="fallback">Providing fallbacks for legacy browsers</h2>
+
+<p>Prior to M39,
+Chrome will look for the following meta tag in the <code>&lt;head&gt;</code> element of the web-page:</p>
 
 <pre>&lt;meta name="mobile-web-app-capable" content="yes"&gt;</pre>
 
@@ -81,7 +169,8 @@ however, they integrate with the Android environment in the following ways.</p>
 
 <h3 id="configuration">Configuration</h3>
 
-<p>The following example is the minimum required configuration to support a homescreen launch experience.</p>
+<p>The following example is the minimum required configuration
+to support a homescreen launch experience before Chrome 39.</p>
 
 <pre>
 &lt;!doctype html&gt;
@@ -137,7 +226,7 @@ however, they integrate with the Android environment in the following ways.</p>
 	<li>Do not prompt the user to add your app to the homescreen. There is no way to detect if the app is running installed or not.</li>
 	<li>Use the large 192px icon format, as in <code>&lt;link rel="icon" sizes="192x192" href="nice-highres.png"&gt;</code> for the highest quality homescreen icons.</li>
 	<li>Use a noun in your document’s title. Make sure the title doesn't contain any information that may change.
-     For example, for a Calendar app, don't include the current date or time in the app title.<li>
+     For example, for a Calendar app, don't include the current date or time in the app title.</li>
 	<li>Use <a href="http://docs.webplatform.org/wiki/apis/appcache/ApplicationCache">AppCache</a> to ensure that your app works or presents the user with an experience when they are offline.</li>
 	<li>Create a clear icon for use on the homescreen following the guidance of <a href="http://developer.android.com/design/style/iconography.html#launcher">Android Iconography</a>.</li>
 </ul>
