@@ -17,13 +17,14 @@ and have the app launch in full-screen "app mode" using Chrome for Android’s "
 
 <p>New in Chrome M39, you can define the metadata associated with your web application
 in a <a href="https://w3c.github.io/manifest/">JSON-based manifest</a>.
+The manifest provides a way to wrap metadata about a web application into a single file.
 Using this metadata in conjunction with Add to Homescreen,
 you can create launch experiences more comparable to native applications.</p>
 
-<h2 id="work">How they work</h2>
+<h2 id="work">How homescreen-installed apps work</h2>
 
 <p>Homescreen-installed apps work exactly like you would expect a normal web application to work.
-They follow the same sandboxed security policies and have access to the same API’s;
+They follow the same sandboxed security policies and have access to the same APIs;
 however, they integrate with the Android environment in the following ways.</p>
 </div>
 </div>
@@ -33,7 +34,7 @@ however, they integrate with the Android environment in the following ways.</p>
 <div>
 	<div>
 		<p><b>Installs directly to the homescreen</b></p>
-		<p style="width:500px">When a user clicks "Add to homescreen" they will see the app being added on the homescreen.</p>
+		<p style="width:500px">When a user clicks "Add to homescreen", they will see the app being added on the homescreen.</p>
 		<img src="/multidevice/images/home_home.png" style="width: 25%; height: 25%" />
 	</div>
 
@@ -67,11 +68,9 @@ however, they integrate with the Android environment in the following ways.</p>
 
 <div class="collapsible">
 
-<h2 id="supporting">Supporting Add to homescreen apps</h2>
+<h2 id="supporting">Supporting homescreen-installed apps</h2>
 
-<p><a href="https://w3c.github.io/manifest/#orientation-member">Manifests</a>
-provide a way to wrap metadata about a web application into a single file.
-Developers seeking to enable "add to homescreen" should link to a manifest
+<p>Developers seeking to enable "add to homescreen" should link to a manifest
 and define the manifest metadata.</p>
 
 <h3 id="manifestlink">Linking to the manifest</h3>
@@ -80,7 +79,7 @@ and define the manifest metadata.</p>
 include the link element in your web page
 (for example, <a href="https://github.com/GoogleChrome/samples/blob/gh-pages/web-application-manifest/index.html">index.html</a>):</p>
 
-<pre><link rel="manifest" href="manifest.json"></pre>
+<pre>&lt;link rel="manifest" href="manifest.json"&gt;</pre>
 
 <h3 id="manifestmetadata">Defining the manifest metadata</h3>
 
@@ -92,7 +91,7 @@ and different icons depending on size and screen density.</p>
 includes a title ("Web Application Manifest Sample"),
 different icons to support a range of devices,
 a start page (<code>index.html</code>),
-and the default orientation (<code>landscape</code>).</p>
+and the default orientation (<code>"landscape"</code>).</p>
 
 <pre>
 {
@@ -141,9 +140,9 @@ and the default orientation (<code>landscape</code>).</p>
 }
 </pre>
 
-<h2 id="fallback">Providing fallbacks for legacy browsers</h2>
+<h2 id="fallback">Supporting Add to homescreen apps prior to M39</h2>
 
-<p>Prior to M39,
+<p>Since M31,
 Chrome will look for the following meta tag in the <code>&lt;head&gt;</code> element of the web-page:</p>
 
 <pre>&lt;meta name="mobile-web-app-capable" content="yes"&gt;</pre>
