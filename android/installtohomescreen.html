@@ -55,7 +55,7 @@ however, they integrate with the Android environment in the following ways.</p>
 
         <div>
                 <p><b>Supports a default device orientation</b></p>
-                <p style="width:500px">Web apps will launch and stay locked in the designated orientation, for example, landscape.</p>
+                <p style="width:500px">Web apps will launch and stay in the designated orientation, for example, landscape.</p>
         </div>
 
 	<div>
@@ -84,14 +84,27 @@ include the link element in your web page
 <h3 id="manifestmetadata">Defining the manifest metadata</h3>
 
 <p>The manifest metadata can define a title, landing page, default orientation,
-and different icons depending on size and screen density.</p>
+and different icons depending on size and screen density.
+The display represents how developers would like the user agent
+to present the web application to a user (for example, in fullscreen).
+</p>
 
 <p>For example, this
 <a href="https://github.com/GoogleChrome/samples/blob/gh-pages/web-application-manifest/manifest.json">manifest</a>
 includes a title ("Web Application Manifest Sample"),
 different icons to support a range of devices,
 a start page (<code>index.html</code>),
-and the default orientation (<code>"landscape"</code>).</p>
+and the default orientation (<code>"landscape"</code>).
+</p>
+
+<p></p>
+The <code>display</code> property is <code>"standalone"</code>.
+The web app has the look and feel of a standalone native application.
+This can include the application having a different window,
+its own icon in the application launcher, etc.
+In this mode, the user agent will exclude UI elements for controlling navigation,
+but can include other UI elements such as a status bar.
+</p>
 
 <pre>
 {
@@ -143,11 +156,16 @@ and the default orientation (<code>"landscape"</code>).</p>
 <h2 id="fallback">Supporting homescreen-installed apps prior to M39</h2>
 
 <p>Since M31,
-Chrome will look for the following meta tag in the <code>&lt;head&gt;</code> element of the web-page:</p>
+Chrome will look for the following meta tag in the <code>&lt;head&gt;</code> element of the web-page
+(if there's a manifest with <code>display</code> specified, this is ignored):</p>
 
 <pre>&lt;meta name="mobile-web-app-capable" content="yes"&gt;</pre>
 
-<p>The name attribute MUST be "mobile-web-app-capable" and the content attribute must be "yes" (case in-sensitive). If there is any other value in the content attribute the web app will be added as a regular bookmark.</p>
+<p>The name attribute MUST be "mobile-web-app-capable" and the content attribute must be "yes" (case in-sensitive).
+If there is any other value in the content attribute the web app will be added as a regular bookmark.</p>
+
+<p>
+</p>
 
 <h3 id="icon">Icon</h3>
 
