@@ -26,8 +26,20 @@
 
   	<p>See the <a href="https://code.google.com/p/android-source-browsing/source/browse/core/java/android/content/Intent.java?repo=platform--frameworks--base#6514">Android source</a> for parsing details.</p>
 
+        <p>Also, you may choose to specify fallback URL by adding the following string extra: <pre>S.browser_fallback_url=[encoded_full_url]</pre></p>
+        <p>When an intent could not be resolved, or an external application could not be launched, then the user will be redirected to the fallback URL if it was given.</p>
+        <p>Some example cases where Chrome does not launch an external application are as follows:</p>
+	<ul>
+		<li>The intent could not be resolved, i.e., no app can handle the intent.</li>
+		<li>JavaScript timer tried to open an application without user gesture.</li>
+	</ul>
+
+
+<p>Note that S.&lt;name&gt; is a way to define string extras. <code>S.browser_fallback_url</code> was chosen for backward compatibility, but the target app won’t see browser_fallback_url value as Chrome removes it.</p>
+
+
 </div><div class="collapsible">
-<h2 id="example">Example</h2>
+<h2 id="example">Examples</h2>
 
   	<p>Here's an intent that launches the Zxing barcode scanner app. It follows the syntax thus:</p>
 
@@ -47,6 +59,14 @@
 
   	<p>See the <a href="https://code.google.com/p/zxing/source/browse/trunk/android/AndroidManifest.xml#97">Android Zxing Manifest</a>, which defines the package and the host.</p>
 
+<p>Also, if fallback URL is specified, the full URL will look like this:</p>
+ <pre>
+   &lt;a href="intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;S.browser_fallback_url=http%3A%2F%2Fzxing.org;end"&gt; Take a QR code &lt;/a&gt;
+ </pre>
+<p>Now the URL will get you to zxing.org if the app could not be found, or the link was triggered from JavaScript without user gesture (or for other cases where we don’t launch an external application.)</p>
+
+
+
 </div><div class="collapsible">
 <h2 id="considerations">Considerations</h2>
 
@@ -61,6 +81,13 @@
   		<li><a href="http://developer.android.com/guide/components/intents-filters.html">Android Intents and Intent Filters</a></li>
   		<li><a href="http://developer.android.com/guide/components/activities.html">Android Activities</a></li>
   	</ul>
+  	
+  	<p>And Chrome doesn’t launch an external app for a given Intent URI in the following cases.</p>
+	<ul>
+		<li>When the Intent URI is redirected from a typed in URL.</li>
+		<li>When the Intent URI is initiated without user gesture.</li>
+	</ul>
+
 
 </div>
 {{/partials.standard_multidevice_article}}
