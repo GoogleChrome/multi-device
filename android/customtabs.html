@@ -116,8 +116,7 @@ customized interface.</p>
 
 All versions of Chrome supporting Custom Tabs expose a service
  (see the later section “Connect to the Service”). To check whether Chrome supports 
- Custom Tabs, try to bind to the service. If it succeeds, then 
- Custom Tabs can safely be used. 
+ Custom Tabs, try to bind to the service. If it succeeds, then Custom Tabs can safely be used. 
 
 <h2>Configure the color of the address bar</h2>
 
@@ -226,13 +225,12 @@ ArrayList&lt;Bundle&gt; menuItemBundleList = new ArrayList&lt;&gt;();
 
 // For each menu item do:
 Bundle menuItem = new Bundle();
-menuItem.putString(KEY_HOSTED_TITLE, menuItemTitle);
+menuItem.putString(KEY_HOSTED_MENU_TITLE, menuItemTitle);
 menuItem.putParcelable(KEY_HOSTED_PENDING_INTENT, pendingIntent);
 menuItemBundleList.add(menuItem);
 intent.putParcelableArrayList(EXTRA_HOSTED_MENU_ITEMS, menuItemBundleList);</pre>
 
-
-<h2>Warm up Chrome to make pages load instantly</h2>
+<h2>Warm up Chrome to make pages load faster</h2>
 
 <p>By default when startActivity is called with the correctly configured
 ACTION_VIEW intent it will spin up Chrome and launch the URL. This can take up
@@ -246,18 +244,18 @@ the user will visit.  Chrome will then be able to:</p>
 
 <ul>
 	<li>DNS pre-resolution of the main domain</li>
-	<li>DNS resolution of the most likely sub-resources</li>
+	<li>DNS pre-resolution of the most likely sub-resources</li>
 	<li>Pre-connection to the destination including HTTPS/TLS negotiation.</li>
 	</ul>
 	<p>The process for warming up Chrome is as follows:</p>
 	<ul>
 	<li>Connect to the service</li>
-	<li>Attach a navigation callback with `finishCallback` so that you know a page
+	<li>Attach a navigation callback with <code>finishSetup</code> so that you know a page
 	was loaded.</li>
-	<li>On the service call `warmup` to start Chrome behind the scenes</li>
-	<li>Create a `newSession`, this session is used for all requests to the API</li>
-	<li>Tell Chrome which pages the user is likely to load with `mayLaunchUrl`</li>
-	<li>Launch the VIEW intent as per normal.</li>
+	<li>On the service call <code>warmup</code> to start Chrome behind the scenes</li>
+	<li>Create a <code>newSession</code>, this session is used for all requests to the API</li>
+	<li>Tell Chrome which pages the user is likely to load with <code>mayLaunchUrl</code></li>
+	<li>Launch the VIEW intent with the session ID.</li>
 </ul>
 
 <h2>Connect to the Service</h2>
@@ -272,7 +270,7 @@ automatically creates a proxy service class for you.</p>
 // Stable = com.android.chrome
 // Beta = com.chrome.beta
 // Dev = com.chrome.dev
-private static final String CHROME_PACKAGE_NAME;
+private static final String CHROME_PACKAGE_NAME = "com.chrome.dev";
 private static final String SERVICE_CLASS_NAME = "org.chromium.chrome.browser.hosted.ChromeConnectionService";
 Intent serviceIntent = new Intent();
 serviceIntent.setClassName(CHROME_PACKAGE_NAME, SERVICE_CLASS_NAME);
@@ -303,24 +301,30 @@ value indicates that the request has been accepted.</p>
 <h2>Create a new tab session</h2>
 
 <p>long newSession()</p>
+
 <p>Session ID is used in subsequent calls to link mayLaunchUrl call, the VIEW
 intent and the tab generated to each other. Using this ID, it is possible to
 send mayLunchUrl calls and intents to an already created tab as well.</p>
+
 <p>Returns the sessionID. A negative number to signal an error, or a positive new
 session ID.</p>
 
 <h2>Tell Chrome what URL's the user is likely to open</h2>
+
 <p>long mayLaunchUrl(long sessionId, String url, Bundle extras, List&lt;Bundle&gt;
 otherLikelyBundles)</p>
+
 <p>Indicate to the browser of a likely future navigation to a URL so that it can
 pre-cache and prepare the connection and the page before it is shown to the
 user. The most likely URL must be specified first. Optionally, a list of other
 likely URLs can be provided. They are treated as less likely than the first one,
 and have to be sorted in decreasing priority order. These additional URLs may be
 ignored.</p>
+
 <p><strong>Note</strong>: The method warmup() has to be called first. Each bundle inside
 otherLikelyBundles has to provide a url string value. All previous calls to this
 method will be deprioritized.</p>
+
 <p>Returns the sessionId if it is known by the service, a number &lt; 0 to signal
 an error.</p>
 
