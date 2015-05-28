@@ -2,11 +2,18 @@
 
 <h1 id="webview_for_android">WebView for Android</h1>
 
-<p>Android 4.4 (KitKat) includes a new WebView component based on the Chromium
-open source project. The new WebView includes an updated version of the V8
-JavaScript engine and support for modern web standards that were missing in 
-the old WebView. It also shares the same rendering engine as Chrome for Android,
+<p>Since Android 4.4 (KitKat), the WebView component is based on the Chromium
+open source project. WebViews now include an updated version of the V8
+JavaScript engine and support for modern web standards
+previously missing in old WebViews.
+New Webviews also share the same rendering engine as Chrome for Android,
 so rendering should be much more consistent between the WebView and Chrome.</p>
+
+<p>In Android 5.0 (Lollipop), the WebView has moved to an APK
+so it can be updated seperately to the Android platform.
+To see what version of Chrome is currently used on a Lollipop device,
+simply go to Settings &lt; Apps &lt; Android System WebView
+and look at the version.</p>
 
 <p>If you&#39;re a web developer looking to start developing a WebView-based Android application, see <a href="gettingstarted">Getting Started: WebView-based Applications for Web Developers</a>.</p>
 
@@ -32,14 +39,17 @@ Chrome for Android and is given the version number <strong>30.0.0.0</strong>.</p
   <strong>Caution:</strong> You cannot publish apps using the L Developer Preview to the Google Play store.
 </p>
 
+<p>The WebView in Android L can be updated via the Play Store, so you need to
+check the latest version on the device under App Settings.</p>
+
 <h3 id="will_the_new_webview_auto-update_">Will the new WebView auto-update?</h3>
 
-<p>Evergreen browsers (like Chrome and Firefox) auto-update and keep their users up to date so they 
-can view the web through a modern feature set. As a developer, this ensures your choices aren&#39;t 
-limited to a lowest-common denominator browser from years ago, but rather are keeping pace with the 
-modern web. Your apps inside a WebView are just as important and deserve a runtime that keeps users 
-up to date. There are large engineering and logistical challenges. We're not quite there yet, but 
-we're working on it.</p>
+<p>The WebView will auto-update for mobile devices with Android L and above.</p>
+
+<p>For future proofing you app, you can use the Beta WebView to test
+versions of the WebView before it's launched.
+Checkout this
+[Android Developer blog post for more details](http://android-developers.blogspot.com/2015/02/beta-channel-for-android-webview.html).</p>
 
 <h3 id="what_is_the_default_user_agent_">What is the default user-agent?</h3>
 

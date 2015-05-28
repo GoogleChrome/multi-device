@@ -1,44 +1,39 @@
 {{+bindTo:partials.standard_multidevice_article}}
 
-<h1>Data Compression Proxy</h1>
+<h1>Data Saver</h1>
 
-<p>Get faster, safer, and cheaper mobile web browsing with data compression.</p>
+<p>Get faster, safer, and cheaper web browsing with data compression.</p>
 
 <section class="collapsible">
 <h2 id="reduce-data-usage">Reduce data usage</h2>
 
 <p>
-The latest <a href="https://play.google.com/store/apps/details?id=com.android.chrome">Chrome browser for Android</a> and <a href="https://itunes.apple.com/us/app/chrome/id535886823?mt=8">Chrome browser for iOS</a> can significantly reduce cellular data usage by using proxy servers hosted at Google to optimize website content. This feature has been shown to <strong>reduce the size of web pages by 50%.</strong> To enable it, visit <b>Settings &gt; Bandwidth Management &gt; Reduce data usage</b> and toggle the option.
+The latest <a href="https://play.google.com/store/apps/details?id=com.android.chrome">Chrome browser for Android</a> and <a href="https://itunes.apple.com/us/app/chrome/id535886823?mt=8">Chrome browser for iOS</a> can significantly reduce cellular data usage by using proxy servers hosted at Google to optimize website content. This feature has been shown to <strong>reduce the size of web pages by 50%.</strong> To enable it, visit <b>Settings &gt; Data Saver</b> and toggle the option.
 </p>
 
 <p>
-Starting with the <a href="http://developer.android.com/preview/">Android L Developer Preview</a>, developers can preview bandwidth savings of WebViews inside Android apps. On a development-enabled device, users can enable this feature by going to <b>Settings &gt; Developer Options &gt; Reduce WebView network usage</b>.
-</p>
-
-<p class="warning">
-Note that WebView bandwidth management is under development and may change in the future. The Safe Browsing feature in not yet supported in WebView. 
+Data Saver is also available as an extension for Chrome desktop and ChromeOS. <a href="https://chrome.google.com/webstore/detail/data-saver-beta/pfmgfdlgomnbgkofeojodiodmgpgmkac">Get the Data Saver extension here.</a>
 </p>
 
 </section>
-
 
 <section class="collapsible">
 <h2 id="features">Features and implementation</h2>
 
 <p>
-The core optimizations that allow us to reduce overall data usage are performed by Google servers. When the Data Compression Proxy feature is enabled, Chrome Mobile opens a connection between your phone and one of the optimization servers running in Google's datacenters and relays all non-encrypted HTTP requests over this connection.
+The core optimizations that allow us to reduce overall data usage are performed by Google servers. When Data Saver is enabled, Chrome opens a connection between your phone and one of the optimization servers running in Google's datacenters and relays all non-encrypted HTTP requests over this connection.
 </p>
 
 <figure><img alt="How data compression proxy works" src="images/data-compression/compression-proxy.png"></figure>
 
 <p>
-The proxy server receives the request initiated on the mobile device, initiates a request for the required resource on your behalf, and then optimizes each response before delivering it back to the client. The content optimization is performed by our <a href="https://developers.google.com/speed/pagespeed/">open-source PageSpeed libraries</a>, which are specifically tuned for Chrome Mobile. The rendering of the page, and all JavaScript execution, is performed by the client’s browser.
+The proxy server receives the request initiated on your device, initiates a request for the required resource on your behalf, and then optimizes each response before delivering it back to the client. The content optimization is performed by our <a href="https://developers.google.com/speed/pagespeed/">open-source PageSpeed libraries</a>, which are specifically tuned for Chrome. The rendering of the page, and all JavaScript execution, is performed by the client’s browser.
 </p>
 
 <p>For your security and privacy:</p>
 
 <ul>
-  <li>Secure connections (HTTPS) are routed directly from your mobile device to the destination, bypassing the compression proxy.</li>
+  <li>Secure connections (HTTPS) are routed directly from your device to the destination, bypassing the compression proxy.</li>
   <li>The use of the compression proxy does not require a Google account.</li>
   <li>Navigation in incognito tabs bypasses the compression proxy.</li>
 </ul>
@@ -53,16 +48,16 @@ Curious to see the bandwidth savings provided by the proxy? Visit your browser s
 Let’s take a closer look at some of the specific optimizations enabled by the data compression proxy.
 </p>
 
-<h3 id="spdy">SPDY for speed</h3>
+<h3 id="spdy">HTTP/2 for speed</h3>
 
 <p>
-Where possible the connection from the mobile device to the proxy runs over <a href="http://www.chromium.org/spdy">SPDY</a>, an optimized protocol for the Web that is supported by Chrome, Firefox and Opera, and is also the basis for the forthcoming HTTP/2.0 standard being developed in the IETF. If a SPDY connection cannot be made, a regular HTTP/1.1 proxy connection is established.
+Where possible the connection from the browser to the proxy runs over <a href="http://tools.ietf.org/html/draft-ietf-httpbis-http2/">HTTP/2</a>. If an HTTP/2 connection cannot be made, a regular HTTP/1.1 proxy connection is established.
 </p>
 
-<figure><img alt="SPDY to http-https" src="images/data-compression/http-https.png"></figure>
+<figure><img alt="HTTP/2 to http-https" src="images/data-compression/http-https.png"></figure>
 
 <p>
-By using SPDY, the proxy is able to multiplex multiple request and response streams in parallel over a single TCP connection, which has numerous performance benefits: it amortizes TCP handshake overhead for multiple requests, enables higher throughput by removing the TCP slow-start phase incurred by each new connection, and enables intelligent request and response prioritization between the streams. In fact, our studies show that just the <a href="http://googledevelopers.blogspot.com/2012/05/spdy-performance-on-mobile-networks.html">use of SPDY alone can reduce page load times by 23% on cellular networks</a>, and this is before we have even talked about optimizing any of the content!
+By using HTTP/2, the proxy is able to multiplex multiple request and response streams in parallel over a single TCP connection, which has numerous performance benefits: it amortizes TCP handshake overhead for multiple requests, enables higher throughput by removing the TCP slow-start phase incurred by each new connection, and enables intelligent request and response prioritization between the streams.
 </p>
 
 <p>
@@ -110,11 +105,11 @@ This is just the beginning of what a powerful proxy service can provide to make 
 
 <ul>
   <li><strong>Is my secure traffic optimized by the compression proxy?</strong><br>
-	No, data compression proxy operates on non-encrypted traffic: HTTPS requests are sent directly from the mobile device to the destination server.</li>
+	No, data compression proxy operates on non-encrypted traffic: HTTPS requests are sent directly from your device to the destination server.</li>
   <li><strong>As a site owner, how do I perform IP geo-targeting?</strong><br>
-	The IP address of the mobile device is forwarded to the destination server via the <code>X-Forwarded-For</code> header. Site owners should check for this header to correctly determine the location of the user based on client's IP address.</li>
+	The IP address of your device is forwarded to the destination server via the <code>X-Forwarded-For</code> header. Site owners should check for this header to correctly determine the location of the user based on client's IP address.</li>
   <li><strong>As a site owner, how do I opt-out from content optimization?</strong><br>
-	Data compression proxy respects the standard <code>Cache-Control: no-transform</code> directive. Site owners can mark individual resources with this directive and the proxy will pass them through directly to the mobile browser.</li>
+	Data compression proxy respects the standard <code>Cache-Control: no-transform</code> directive. Site owners can mark individual resources with this directive and the proxy will pass them through directly to the browser.</li>
 </ul>
 
 </section>
