@@ -9,7 +9,7 @@ img.inline {
 
 <h1>Chrome custom tabs</h1>
 
-<h2>What are Chrome custom tabs?</h2>
+<h2 id="whatarethey">What are Chrome custom tabs?</h2>
 <p>App developers face a choice when a user taps a URL to either launch a
 browser, or build their own in-app browser using WebViews.</p>
 
@@ -37,7 +37,7 @@ content for faster loading.</p>
 	You can test this now with our <a href="https://github.com/GoogleChrome/custom-tabs-client">Chrome custom tab sample</a> on Github. 
 </p>
 
-<h2>When should I use Chrome custom tabs vs WebView?</h2>
+<h2 id="whentouse">When should I use Chrome custom tabs vs WebView?</h2>
 
 <p>The WebView is good solution if you are hosting your own content inside your
 app.  If your app directs people to URLs outside your domain  we recommend
@@ -78,7 +78,7 @@ an external navigation.</li>
 	(auto updating WebView) instead of older WebViews</li>
 </ul>
 
-<h2>When will this be available?</h2>
+<h2 id="whencaniuseit">When will this be available?</h2>
 
 <p>As of Chome 44, Chrome custom tabs are available in 
 	<a href="https://play.google.com/store/apps/details?id=com.chrome.dev&hl=en">Chrome Dev Channel</a> and is 
@@ -89,7 +89,7 @@ Chrome's support Android versions (Jellybean onwards). Please note that the API 
 encourage you to file issues on <a href="https://crbug.com">crbug.com</a> and ask questions to our Twitter account
 <a href="https://twitter.com/chromium_dev">@ChromiumDev</a>.</p>
 
-<h2>Implementation Guide</h2>
+<h2 id="implementationguide">Implementation Guide</h2>
 
 <p>A complete example is available at https://github.com/GoogleChrome/custom-tabs-client. It contains re-usable classes to customize the UI, 
 	connect to the background service and handle the lifecycle of both the application and the custom tab activity. 
@@ -364,7 +364,7 @@ method will be deprioritized.</p>
 <p>Returns the sessionId if it is known by the service, a number &lt; 0 to signal
 an error.</p>
 
-<h2>FAQ</h2>
+<h2 id="FAQ">FAQ</h2>
 <ul>
 <li>Is this available on iOS
 <ul>
