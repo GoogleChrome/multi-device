@@ -34,7 +34,7 @@ can change things like:</p>
 content for faster loading.</p>
 
 <p>
-	You can test this now with our <a href="https://github.com/GoogleChrome/custom-tab-client">Chrome custom tab sample</a> on Github. 
+	You can test this now with our <a href="https://github.com/GoogleChrome/custom-tabs-client">Chrome custom tab sample</a> on Github. 
 </p>
 
 <h2>When should I use Chrome custom tabs vs WebView?</h2>
@@ -86,13 +86,28 @@ available in <code>chrome://flags</code></a> and is called "enable hosted mode" 
 Chrome's support Android versions (Jellybean onwards). Please note that the API will change slightly over the coming weeks.</p>
 
 <p>We are looking for feedback, questions and suggestions on this project so we
-encourage you to file issues on <a href="https://crbug.com">crbug.com</a> and ask questions in our forum
-Chromium Dev.</p>
+encourage you to file issues on <a href="https://crbug.com">crbug.com</a> and ask questions to our Twitter account
+<a href="https://twitter.com/chromium_dev">@ChromiumDev</a>.</p>
 
 <h2>Implementation Guide</h2>
 
+<p>A complete example is available at https://github.com/GoogleChrome/custom-tabs-client. It contains re-usable classes to customize the UI, 
+	connect to the background service and handle the lifecycle of both the application and the custom tab activity. 
+	It also contains the <a href="http://developer.android.com/guide/components/aidl.html">AIDL</a> files required to connect to the service, as the ones contained in the Chromium repository are not directly usable with Android Studio.</p>
+
 <p>If you follow the guidance from this page you will be able to create a great
 integration.</p>
+
+<ul>
+	<li>Customizing the UI and interaction with the custom tabs</li>
+	<li>Making the page load faster, and keeping the application alive</li>
+</ul>
+
+<p>The first one is done by appending extras into the ACTION_VIEW Intent sent to Chrome; the second by connecting to a service exported by Chrome.</p>
+
+<p><strong>Note</strong>: These notes are accurate for Chrome 44, there will be several changes that will be required to be made in Chrome 45.</p>
+
+<h3>Enable Chrome Custom Tabs</h3>
 
 <pre>
 /*
@@ -104,6 +119,18 @@ private static final String EXTRA_HOSTED_MODE = "com.android.chrome.append_task"
 String url = ¨https://paul.kinlan.me/¨;
 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 intent.putExtra(EXTRA_HOSTED_MODE, true);</pre>
+
+<p><strong>Note</strong>: Along with other changes, Chrome 45 we will be requiring
+that you add a Category to the intent.</p>
+
+<pre>
+// Category to add to the VIEW intent. This must be set for getting a custom 
+// tab launched.This category can be used as a way generically pick apps that 
+// handle custom tabs for both activity and service side implementations.
+public static final String CATEGORY_CUSTOM_TABS =
+“android.intent.category.CUSTOM_TABS”;
+intent.addCategory(CATEGORY_CUSTOM_TABS);
+</pre>
 
 <h3>What happens if the user doesn’t have a recent version of Chrome installed?</h3>
 
@@ -281,10 +308,10 @@ right after the service connection, and must be called again if the service gets
 disconnected. Only one call to this method is allowed, following ones will
 return an error.</p>
 
-<p>If you plan to warm up Chrome this must also be called before the VIEW
-Intent is sent to the browser, otherwise it won't be possible to link the tab
-created to the provided callback and you will not receive notifications of
-navigation.</p>
+<p>If you plan to warm up Chrome Chrome this must also be called immediately after 
+your app is bound to service and before the VIEW Intent issent to the browser, 
+otherwise it won't be possible to link the tab created to the provided callback 
+and you will not receive notifications of navigation.</p>
 
 <p>Returns 0 for success.</p>
 
