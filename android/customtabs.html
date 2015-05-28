@@ -1,0 +1,389 @@
+{{+bindTo:partials.standard_multidevice_article}}
+
+<style>
+dd { margin: 0 6px 12px 40px; }
+img.inline {
+	margin: 1em;
+}
+</style>
+
+<h1>Chrome custom tabs</h1>
+
+<h2>What are Chrome custom tabs?</h2>
+<p>App developers face a choice when a user taps a URL to either launch a
+browser, or build their own in-app browser using WebViews.</p>
+
+<p>Both options present challenges &mdash; launching the browser is a heavy context
+switch that isn't customizable, while WebWiews don't share state with the
+browser and add overhead to maintain.</p>
+
+<p>Chrome custom tabs give apps more control over their web experience, and making
+transitions between native and web content more seamless without having to
+resort to a WebView.</p>
+
+<p>Chrome custom tabs allow an app to customize how Chrome looks and feels. An app
+can change things like:</p>
+
+<ul>
+	<li>Toolbar color</li>
+	<li>Enter and exit animations</li>
+	<li>Add custom actions to the Chrome toolbar and overflow menu</li>
+</ul>
+
+<p>Chrome custom tabs also allow the developer to pre-start Chrome and pre-fetch
+content for faster loading.</p>
+
+<p>
+	You can test this now with our <a href="https://github.com/GoogleChrome/custom-tabs-client">Chrome custom tab sample</a> on Github. 
+</p>
+
+<h2>When should I use Chrome custom tabs vs WebView?</h2>
+
+<p>The WebView is good solution if you are hosting your own content inside your
+app.  If your app directs people to URLs outside your domain  we recommend
+that you use Chrome custom tabs because:</p>
+
+<ul>
+	<li>Simple to implement.  No need to build code to manage requests, permission
+	grants or cookie stores.</li>
+	<li>UI customization:
+		<ul>
+		<li>Toolbar color</li>
+		<li>Action button</li>
+		<li>Custom menu items</li>
+		<li>Custom in/out animations</li>
+		</ul>
+	</li>
+	<li>Navigation awareness: the browser delivers a callback to the application upon
+an external navigation.</li>
+	<li>Performance optimization:
+	<ul>
+	<li>Pre-warming of the Browser in the background, while avoiding stealing
+	resources from the application</li>
+	<li>Providing a likely URL in advance to the browser, which may perform
+	speculative work, speeding up page load time.</li>
+	</ul></li>
+	<li>Lifecycle management: the browser prevents the application from being evicted
+	by the system while on top of it, by raising its importance to the
+	"foreground" level.</li>
+	</ul>
+	<li>Shared Cookie Jar and permissions model so users don't have to log in to sites
+	they are already connected to, or re-grant permissions they have already
+	granted.</li>
+	<li>If the user has turned on Data Saver they will still benefit from it</li>
+	<li>Synchronised AutoComplete across devices for better form completion</li>
+	<li>Simple customization model</li>
+	<li>Quickly return to app with a single tap</li>
+	<li>You want to use the latest browser implementations on devices pre-Lollipop
+	(auto updating WebView) instead of older WebViews</li>
+</ul>
+
+<h2>When will this be available?</h2>
+
+<p>As of Chome 44, Chrome custom tabs are available in 
+	<a href="https://play.google.com/store/apps/details?id=com.chrome.dev&hl=en">Chrome Dev Channel</a> and is 
+available in <code>chrome://flags</code></a> and is called "enable hosted mode" on all of 
+Chrome's support Android versions (Jellybean onwards). Please note that the API will change slightly over the coming weeks.</p>
+
+<p>We are looking for feedback, questions and suggestions on this project so we
+encourage you to file issues on <a href="https://crbug.com">crbug.com</a> and ask questions to our Twitter account
+<a href="https://twitter.com/chromium_dev">@ChromiumDev</a>.</p>
+
+<h2>Implementation Guide</h2>
+
+<p>A complete example is available at https://github.com/GoogleChrome/custom-tabs-client. It contains re-usable classes to customize the UI, 
+	connect to the background service and handle the lifecycle of both the application and the custom tab activity. 
+	It also contains the <a href="http://developer.android.com/guide/components/aidl.html">AIDL</a> files required to connect to the service, as the ones contained in the Chromium repository are not directly usable with Android Studio.</p>
+
+<p>If you follow the guidance from this page you will be able to create a great
+integration.</p>
+
+<ul>
+	<li>Customizing the UI and interaction with the custom tabs</li>
+	<li>Making the page load faster, and keeping the application alive</li>
+</ul>
+
+<p>The first one is done by appending extras into the ACTION_VIEW Intent sent to Chrome; the second by connecting to a service exported by Chrome.</p>
+
+<p><strong>Note</strong>: These notes are accurate for Chrome 44, there will be several changes that will be required to be made in Chrome 45.</p>
+
+<h3>Enable Chrome Custom Tabs</h3>
+
+<pre>
+/*
+  Note: The extra hosted mode will change to the following in the near future.
+  private static final String EXTRA_HOSTED_MODE = "com.android.chrome.hosted_mode";
+*/
+
+private static final String EXTRA_HOSTED_MODE = "com.android.chrome.append_task";
+String url = ¨https://paul.kinlan.me/¨;
+Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+intent.putExtra(EXTRA_HOSTED_MODE, true);</pre>
+
+<p><strong>Note</strong>: Along with other changes, Chrome 45 we will be requiring
+that you add a Category to the intent.</p>
+
+<pre>
+// Category to add to the VIEW intent. This must be set for getting a custom 
+// tab launched.This category can be used as a way generically pick apps that 
+// handle custom tabs for both activity and service side implementations.
+public static final String CATEGORY_CUSTOM_TABS =
+“android.intent.category.CUSTOM_TABS”;
+intent.addCategory(CATEGORY_CUSTOM_TABS);
+</pre>
+
+<h3>What happens if the user doesn’t have a recent version of Chrome installed?</h3>
+
+<p>We are using the ACTION_VIEW Intent, this means that by default the page will
+open in the system browser, or the user's default browser.</p>
+
+<p>If the user has Chrome installed and it is the default browser, it will
+automatically pick up the EXTRAS and present a customized UI.  It is also
+possible for another browser to use the Intent extras to provide a similar
+customized interface.</p>
+
+<h3>How can I check whether Chrome supports Chrome custom tabs?</h3>
+
+<p>All versions of Chrome supporting Chrome custom tabs expose a service
+ (see the later section “Connect to the Service”). To check whether Chrome supports 
+ custom tabs, try to bind to the service. If it succeeds, then custom tabs can safely be used. 
+</p>
+
+<h3>Configure the color of the address bar</h3>
+
+<p>One of the most important (and simplest to implement) aspects of Chrome Custom
+Tabs is the ability for you to change the colour of the address bar to be
+consistent with your theme.
+</p>
+
+<pre>
+// Extra that changes the background color for the omnibox. colorInt is an int
+// that specifies a <a href="http://developer.android.com/reference/android/graphics/Color.html">Color</a>.
+
+private static final String EXTRA_HOSTED_TOOLBAR_COLOR = "hosted:toolbar_color";
+intent.putExtra(EXTRA_HOSTED_TOOLBAR_COLOR, colorInt);
+</pre>
+
+<h3>Configure custom Enter and exit animations</h3>
+
+<p>Many Android applications use custom View Entrance and Exit animations when
+transition between Activities on Android.  Chrome custom tabs is no different,
+you can change the entrance and exit (when the user presses Back) animations to
+keep them consistent with the rest of your application.</p>
+
+<pre>// Bundle constructed out of
+<a href="http://developer.android.com/reference/android/app/ActivityOptions.html#makeCustomAnimation(android.content.Context,%20int,%20int)">ActivityOptions</a> that Chrome will be running when
+// it finishes HostedActivity. A similar ActivityOptions for starting
+// Chrome should be constructed and given to the <a href="http://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent,%20android.os.Bundle)">startActivity</a>() call that
+// launches Chrome.
+private static final String EXTRA_HOSTED_EXIT_ANIMATION_BUNDLE = "hosted:exit_animation_bundle";
+
+Bundle finishBundle = ActivityOptions.makeCustomAnimation(context, R.anim.clientEnterAnimResId, R.anim.ChromeExitAnimResId).toBundle;
+intent.putExtra(EXTRA_HOSTED_EXIT_ANIMATION_BUNDLE, finishBundle);
+Bundle startBundle = ActivityOptions.makeCustomAnimation(context, R.anim.ChromeEnterAnimResId, R.anim.clientExitAnimResId).toBundle;
+
+startActivity(intent, startBundle);</pre>
+
+<h3>Configure a custom action button</h3>
+
+<img class="inline" src="/multidevice/images/customtab/action.jpg" style="float: left; max-width: 250px;">
+
+<p>As the developer of your app you have full control over the Action Button that
+is presented to your users inside the Chrome tab.</p>
+
+<p>In most cases this will be a primary action such as Share, or another common
+activity that your users will perform.</p>
+
+<p>The Action Button is represented as a Bundle with an icon of the action button
+and a pendingIntent that will be called by Chrome when your user hits the action
+button.  The icon is currenlty 24dp in height and 24-48 dp in width.</p>
+
+<pre style="clear: both">
+// Key that specifies the <a href="http://developer.android.com/reference/android/graphics/Bitmap.html">Bitmap</a> to be used as the <a href="http://developer.android.com/reference/android/widget/ImageView.html#setImageDrawable(android.graphics.drawable.Drawable)">image source</a> for the
+// action button.
+
+private static final String KEY_HOSTED_ICON = "hosted:icon";
+// Key that specifies the PendingIntent to launch when the action button
+// or menu item was tapped. Chrome will be calling <a href="http://developer.android.com/reference/android/app/PendingIntent.html#send(android.content.Context,%20int,%20android.content.Intent)">PendingIntent#send()</a> on
+// taps after adding the url as data. The client app can call
+// <a href="http://developer.android.com/reference/android/content/Intent.html#getDataString()">Intent#getDataString()</a> to get the url.
+private static final String KEY_HOSTED_PENDING_INTENT = "hosted:pending_intent";
+// Use a bundle for the action button parameters.
+private static final String EXTRA_HOSTED_ACTION_BUTTON_BUNDLE = "hosted:action_button_bundle"
+
+Bundle actionButtonBundle = new Bundle();
+actionButtonBundle.putParcelable(KEY_HOSTED_ICON, icon);
+actionButtonBundle.putParcelable(KEY_HOSTED_PENDING_INTENT, pendingIntent);
+
+// Associate the action button bundle with the VIEW Intent
+intent.putExtra(EXTRA_HOSTED_ACTION_BUTTON_BUNDLE, actionButtonBundle);</pre>
+
+<p>Configure a custom menu</p>
+
+<img class="inline" src="/multidevice/images/customtab/menu.jpg" style="float: left; max-width: 250px;">
+<p>The Chrome browser has a comprehensive menu of actions that users will perform
+frequently inside a browser, however they may not be relevant to your
+application context.</p>
+
+<p>Chrome custom tabs will have a three icon row with &quot;Forward&quot;,&quot;Page Info&quot; and
+&quot;Refresh&quot; on top at all times, with &quot;Find page&quot; and &quot;Open in Browser&quot; on the
+footer of the menu.</p>
+
+<p>As the developer you can add and customize up to menu three items that will appear
+between the icon row and foot items.</p>
+
+<p>The menu is represented as an Array of Bundles (currently without an icon), menu
+text and a pendingIntent that Chrome will call on your behalf when the user taps
+the item.</p>
+
+<pre style="clear: both">
+// Key for the title string for a given custom menu item
+private static final String KEY_HOSTED_MENU_TITLE = "hosted:menu_title";
+// Use an ArrayList&lt;Bundle&gt; for specifying menu related params. There should be
+// a separate Bundle for each custom menu item.
+private static final String EXTRA_HOSTED_MENU_ITEMS = "hosted:menu_items";
+ArrayList&lt;Bundle&gt; menuItemBundleList = new ArrayList&lt;&gt;();
+
+// For each menu item do:
+Bundle menuItem = new Bundle();
+menuItem.putString(KEY_HOSTED_MENU_TITLE, menuItemTitle);
+menuItem.putParcelable(KEY_HOSTED_PENDING_INTENT, pendingIntent);
+menuItemBundleList.add(menuItem);
+intent.putParcelableArrayList(EXTRA_HOSTED_MENU_ITEMS, menuItemBundleList);</pre>
+
+<h3>Warm up Chrome to make pages load faster</h3>
+
+<p>By default when startActivity is called with the correctly configured
+ACTION_VIEW Intent it will spin up Chrome and launch the URL. This can take up
+precious time and impact on the perception of smoothness.</p>
+
+<p>We believe that users demand a near instantaneous experience, so we have
+provided a Service in Chrome that your app can connect to and tell Chrome to
+warm up the browser and the native components.  We are also experimenting with
+the ability for you, the developer to tell Chrome the likely set of web pages
+the user will visit.  Chrome will then be able to perform:</p>
+
+<ul>
+	<li>DNS pre-resolution of the main domain</li>
+	<li>DNS pre-resolution of the most likely sub-resources</li>
+	<li>Pre-connection to the destination including HTTPS/TLS negotiation.</li>
+</ul>
+
+<p>The process for warming up Chrome is as follows:</p>
+	<ul>
+	<li>Connect to the service</li>
+	<li>Attach a navigation callback with <code>finishSetup</code> so that you know a page
+	was loaded</li>
+	<li>On the service call <code>warmup</code> to start Chrome behind the scenes</li>
+	<li>Create a <code>newSession</code>, this session is used for all requests to the API</li>
+	<li>Tell Chrome which pages the user is likely to load with <code>mayLaunchUrl</code></li>
+	<li>Launch the VIEW Intent with the session ID</li>
+</ul>
+
+<h3>Connect to the Chrome Service</h3>
+
+<p>If you are not familiar with Connecting to Android Services the interface is created with
+<a href="http://developer.android.com/guide/components/aidl.html">AIDL</a> and
+automatically creates a proxy service class for you.</p>
+	
+<pre>
+// Package name for the Chrome channel the client wants to connect to. This
+// depends on the channel name.
+// Stable = com.android.chrome
+// Beta = com.chrome.beta
+// Dev = com.chrome.dev
+private static final String CHROME_PACKAGE_NAME = "com.chrome.dev";  // Change when in stable
+private static final String SERVICE_CLASS_NAME = "org.chromium.chrome.browser.hosted.ChromeConnectionService";
+Intent serviceIntent = new Intent();
+serviceIntent.setClassName(CHROME_PACKAGE_NAME, SERVICE_CLASS_NAME);
+context.bindService(serviceIntent, mServiceConnection, flags);
+</pre>
+
+<h3>Attach Navigation Callback</h3>
+
+<code>long finishSetup(IBrowserConnectionCallback callback)</code>
+
+<p>Set the callback triggered on an external navigation. This method must be called
+right after the service connection, and must be called again if the service gets
+disconnected. Only one call to this method is allowed, following ones will
+return an error.</p>
+
+<p>If you plan to warm up Chrome Chrome this must also be called immediately after 
+your app is bound to service and before the VIEW Intent issent to the browser, 
+otherwise it won't be possible to link the tab created to the provided callback 
+and you will not receive notifications of navigation.</p>
+
+<p>Returns 0 for success.</p>
+
+<h3>Warm up the Browser Process</h3>
+
+<code>long warmup(long flags)</code>
+
+<p>Warm up the browser process and loads the native libraries so that the Chome
+custom tab lauches instantly.  The Warmup process is asynchronous, and the return
+value indicates that the request has been accepted.</p>
+<p>Returns 0 for success.</p>
+
+<h3>Create a new tab session</h3>
+
+<code>long newSession()</code>
+
+<p>Session ID is used in subsequent calls to link mayLaunchUrl call, the VIEW
+Intent and the tab generated to each other. Using this ID, it is possible to
+send mayLunchUrl calls and intents to an already created tab as well.</p>
+
+<p>Returns the sessionID. A negative number to signal an error, or a positive new
+session ID.</p>
+
+<p>Now this sessionID can be used to associate the VIEW Intent with any preparation
+that has been done for the given session.</p>
+
+<pre>
+// Extra used to match the session. Its value is a long returned by
+// ChromeConnectionService. See newSession() below.
+private static final String EXTRA_HOSTED_SESSION_ID = "hosted:session_id";
+intent.putExtra(EXTRA_HOSTED_SESSION_ID, sessionId);
+</pre>
+
+<h3>Tell Chrome what URL's the user is likely to open</h3>
+
+<code>long mayLaunchUrl(long sessionId, String url, Bundle extras, List&lt;Bundle&gt;
+otherLikelyBundles)</code>
+
+<p>Indicate to the browser of a likely future navigation to a URL so that it can
+pre-cache and prepare the connection and the page before it is shown to the
+user. The most likely URL must be specified first. Optionally, a list of other
+likely URLs can be provided. They are treated as less likely than the first one,
+and have to be sorted in decreasing priority order. These additional URLs may be
+ignored.</p>
+
+<p><strong>Note</strong>: The method warmup() has to be called first. Each bundle inside
+otherLikelyBundles has to provide a url string value. All previous calls to this
+method will be deprioritized.</p>
+
+<p>Returns the sessionId if it is known by the service, a number &lt; 0 to signal
+an error.</p>
+
+<h2>FAQ</h2>
+<ul>
+<li>Is this available on iOS
+<ul>
+<li>No. There is a project that allows you to <a href="https://developer.chrome.com/multidevice/ios/links">integrate Chrome into your app on iOS</a>
+	 but in completely separate way.</li>
+</ul>
+</li>
+<li>When will this be available on stable channel?
+<ul>
+<li>We don't have a fixed date or version of Chrome yet. The normal release
+cycle from being in the Dev Channel of Chrome is about 12 weeks, however
+we are looking for feedback from developers first.</li>
+</ul>
+</li>
+<li>Where can I ask questions
+<ul>
+<li>Chromium-discuss</li>
+<li>Stackoverflow tag: Chrome custom tabs</li>
+</ul>
+</li>
+</ul>
+{{/partials.standard_multidevice_article}}
