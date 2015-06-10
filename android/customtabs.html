@@ -115,10 +115,10 @@ integration.</p>
   private static final String EXTRA_HOSTED_MODE = "com.android.chrome.hosted_mode";
 */
 
-private static final String EXTRA_HOSTED_MODE = "com.android.chrome.append_task";
+private static final String EXTRA_CUSTOM_TABS_SESSION_ID = "android.support.CUSTOM_TABS:session_id";
 String url = ¨https://paul.kinlan.me/¨;
 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-intent.putExtra(EXTRA_HOSTED_MODE, true);</pre>
+intent.putExtra(EXTRA_CUSTOM_TABS_SESSION_ID, true);</pre>
 
 <p><strong>Note</strong>: Along with other changes, Chrome 45 we will be requiring
 that you add a Category to the intent.</p>
@@ -160,8 +160,8 @@ consistent with your theme.
 // Extra that changes the background color for the omnibox. colorInt is an int
 // that specifies a <a href="http://developer.android.com/reference/android/graphics/Color.html">Color</a>.
 
-private static final String EXTRA_HOSTED_TOOLBAR_COLOR = "hosted:toolbar_color";
-intent.putExtra(EXTRA_HOSTED_TOOLBAR_COLOR, colorInt);
+private static final String EXTRA_CUSTOM_TABS_TOOLBAR_COLOR = "android.support.CUSTOM_TABS:toolbar_color";
+intent.putExtra(EXTRA_CUSTOM_TABS_TOOLBAR_COLOR, colorInt);
 </pre>
 
 <h3>Configure custom Enter and exit animations</h3>
@@ -173,15 +173,15 @@ keep them consistent with the rest of your application.</p>
 
 <pre>// Bundle constructed out of
 <a href="http://developer.android.com/reference/android/app/ActivityOptions.html#makeCustomAnimation(android.content.Context,%20int,%20int)">ActivityOptions</a> that Chrome will be running when
-// it finishes HostedActivity. A similar ActivityOptions for starting
-// Chrome should be constructed and given to the <a href="http://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent,%20android.os.Bundle)">startActivity</a>() call that
-// launches Chrome.
-private static final String EXTRA_HOSTED_EXIT_ANIMATION_BUNDLE = "hosted:exit_animation_bundle";
+// it finishes CustomTabActivity. If you start the Custom Tab with 
+// a customized animation, you can specify a matching animation when Custom Tab 
+// returns to your app.
 
-Bundle finishBundle = ActivityOptions.makeCustomAnimation(context, R.anim.clientEnterAnimResId, R.anim.ChromeExitAnimResId).toBundle;
-intent.putExtra(EXTRA_HOSTED_EXIT_ANIMATION_BUNDLE, finishBundle);
-Bundle startBundle = ActivityOptions.makeCustomAnimation(context, R.anim.ChromeEnterAnimResId, R.anim.clientExitAnimResId).toBundle;
-
+public static final String EXTRA_CUSTOM_TABS_EXIT_ANIMATION_BUNDLE =
+“android.support.CUSTOM_TABS:exit_animation_bundle”;
+Bundle finishBundle = ActivityOptions.makeCustomAnimation(context, R.anim.clientEnterAnimResId, R.anim.CustomTabExitAnimResId).toBundle; 
+intent.putExtra(EXTRA_CUSTOM_TABS_EXIT_ANIMATION_BUNDLE, finishBundle);
+Bundle startBundle = ActivityOptions.makeCustomAnimation(context, R.anim.CustomTabEnterAnimResId, R.anim.clientExitAnimResId).toBundle; 
 startActivity(intent, startBundle);</pre>
 
 <h3>Configure a custom action button</h3>
@@ -202,21 +202,19 @@ button.  The icon is currenlty 24dp in height and 24-48 dp in width.</p>
 // Key that specifies the <a href="http://developer.android.com/reference/android/graphics/Bitmap.html">Bitmap</a> to be used as the <a href="http://developer.android.com/reference/android/widget/ImageView.html#setImageDrawable(android.graphics.drawable.Drawable)">image source</a> for the
 // action button.
 
-private static final String KEY_HOSTED_ICON = "hosted:icon";
+private static final String KEY_CUSTOM_TABS_ICON = "android.support.CUSTOM_TABS:icon";
 // Key that specifies the PendingIntent to launch when the action button
 // or menu item was tapped. Chrome will be calling <a href="http://developer.android.com/reference/android/app/PendingIntent.html#send(android.content.Context,%20int,%20android.content.Intent)">PendingIntent#send()</a> on
 // taps after adding the url as data. The client app can call
 // <a href="http://developer.android.com/reference/android/content/Intent.html#getDataString()">Intent#getDataString()</a> to get the url.
-private static final String KEY_HOSTED_PENDING_INTENT = "hosted:pending_intent";
-// Use a bundle for the action button parameters.
-private static final String EXTRA_HOSTED_ACTION_BUTTON_BUNDLE = "hosted:action_button_bundle"
-
+public static final String KEY_CUSTOM_TABS_PENDING_INTENT = "android.support.CUSTOM_TABS:pending_intent";
+// Optional. Use a bundle for parameters if an the action button is specified.
+public static final String EXTRA_CUSTOM_TABS_ACTION_BUTTON_BUNDLE = 
+"android.support.CUSTOM_TABS:action_button_bundle";
 Bundle actionButtonBundle = new Bundle();
-actionButtonBundle.putParcelable(KEY_HOSTED_ICON, icon);
-actionButtonBundle.putParcelable(KEY_HOSTED_PENDING_INTENT, pendingIntent);
-
-// Associate the action button bundle with the VIEW Intent
-intent.putExtra(EXTRA_HOSTED_ACTION_BUTTON_BUNDLE, actionButtonBundle);</pre>
+actionButtonBundle.putParcelable(KEY_CUSTOM_TABS_ICON, icon);
+actionButtonBundle.putParcelable(KEY_CUSTOM_TABS_PENDING_INTENT, pendingIntent);
+intent.putExtra(EXTRA_CUSTOM_TABS_ACTION_BUTTON_BUNDLE, actionButtonBundle);</pre>
 
 <p>Configure a custom menu</p>
 
@@ -238,18 +236,19 @@ the item.</p>
 
 <pre style="clear: both">
 // Key for the title string for a given custom menu item
-private static final String KEY_HOSTED_MENU_TITLE = "hosted:menu_title";
-// Use an ArrayList&lt;Bundle&gt; for specifying menu related params. There should be
-// a separate Bundle for each custom menu item.
-private static final String EXTRA_HOSTED_MENU_ITEMS = "hosted:menu_items";
-ArrayList&lt;Bundle&gt; menuItemBundleList = new ArrayList&lt;&gt;();
+public static final String KEY_CUSTOM_TABS_MENU_TITLE = "android.support.CUSTOM_TABS:menu_title";
+// Use an ArrayList<Bundle> for specifying menu related params. There 
+// should be a separate Bundle for each custom menu item.
+public static final String EXTRA_CUSTOM_TABS_MENU_ITEMS = "android.support.CUSTOM_TABS:menu_items";
+ArrayList<Bundle> menuItemBundleList = new ArrayList<>();
 
 // For each menu item do:
 Bundle menuItem = new Bundle();
-menuItem.putString(KEY_HOSTED_MENU_TITLE, menuItemTitle);
-menuItem.putParcelable(KEY_HOSTED_PENDING_INTENT, pendingIntent);
+menuItem.putString(KEY_CUSTOM_TABS_MENU_TITLE, menuItemTitle);
+menuItem.putParcelable(KEY_CUSTOM_TABS_PENDING_INTENT, pendingIntent);
 menuItemBundleList.add(menuItem);
-intent.putParcelableArrayList(EXTRA_HOSTED_MENU_ITEMS, menuItemBundleList);</pre>
+
+intent.putParcelableArrayList(EXTRA_CUSTOM_TABS_MENU_ITEMS, menuItemBundleList);</pre>
 
 <h3>Warm up Chrome to make pages load faster</h3>
 
@@ -292,10 +291,13 @@ automatically creates a proxy service class for you.</p>
 // Stable = com.android.chrome
 // Beta = com.chrome.beta
 // Dev = com.chrome.dev
-private static final String CHROME_PACKAGE_NAME = "com.chrome.dev";  // Change when in stable
-private static final String SERVICE_CLASS_NAME = "org.chromium.chrome.browser.hosted.ChromeConnectionService";
-Intent serviceIntent = new Intent();
-serviceIntent.setClassName(CHROME_PACKAGE_NAME, SERVICE_CLASS_NAME);
+public static final String CUSTOM_TAB_PACKAGE_NAME = "com.chrome.dev";  // Change when in stable
+
+Intent serviceIntent = new Intent(Intent.ACTION_MAIN);
+
+public static final String CATEGORY_CUSTOM_TABS = "android.intent.category.CUSTOM_TABS";
+serviceIntent.addCategory(CATEGORY_CUSTOM_TABS);
+serviceIntent.setPackage(CUSTOM_TAB_PACKAGE_NAME);
 context.bindService(serviceIntent, mServiceConnection, flags);
 </pre>
 
@@ -364,6 +366,18 @@ method will be deprioritized.</p>
 <p>Returns the sessionId if it is known by the service, a number &lt; 0 to signal
 an error.</p>
 
+<h3>Custom Tabs Connection Callback</h3>
+
+<code>void onUserNavigationStarted(long sessionId, String url, Bundle extras)</code>
+
+<p>To be called when the user triggers a navigation inside a custom tab, providing the url 
+	and more extras. The session ID for the corresponding tab is also provided.</p>
+
+<code>void onUserNavigationFinished(long sessionId, String url, Bundle extras)</code>
+
+<p>To be called when a navigation is done loading inside a custom tab with the above 
+given parameters.</p>
+
 <h2>FAQ</h2>
 <ul>
 <li>Is this available on iOS
@@ -381,7 +395,6 @@ we are looking for feedback from developers first.</li>
 </li>
 <li>Where can I ask questions
 <ul>
-<li>Chromium-discuss</li>
 <li>Stackoverflow tag: Chrome custom tabs</li>
 </ul>
 </li>
