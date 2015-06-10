@@ -340,13 +340,6 @@ session ID.</p>
 <p>Now this sessionID can be used to associate the VIEW Intent with any preparation
 that has been done for the given session.</p>
 
-<pre>
-// Extra used to match the session. Its value is a long returned by
-// ChromeConnectionService. See newSession() below.
-private static final String EXTRA_HOSTED_SESSION_ID = "hosted:session_id";
-intent.putExtra(EXTRA_HOSTED_SESSION_ID, sessionId);
-</pre>
-
 <h3>Tell Chrome what URL's the user is likely to open</h3>
 
 <code>long mayLaunchUrl(long sessionId, String url, Bundle extras, List&lt;Bundle&gt;
