@@ -7,17 +7,18 @@ img.inline {
 }
 </style>
 
-<h1>Chrome custom tabs</h1>
+<h1>Chrome Custom Tabs</h1>
 
-<h2>What are Chrome custom tabs?</h2>
+<h2 id="whatarethey">What are Chrome custom tabs?</h2>
+
 <p>App developers face a choice when a user taps a URL to either launch a
 browser, or build their own in-app browser using WebViews.</p>
 
 <p>Both options present challenges &mdash; launching the browser is a heavy context
-switch that isn't customizable, while WebWiews don't share state with the
-browser and add overhead to maintain.</p>
+switch that isn't customizable, while WebViews don't share state with the
+browser and add maintenance overhead.</p>
 
-<p>Chrome custom tabs give apps more control over their web experience, and making
+<p>Chrome custom tabs give apps more control over their web experience, and make
 transitions between native and web content more seamless without having to
 resort to a WebView.</p>
 
@@ -34,17 +35,18 @@ can change things like:</p>
 content for faster loading.</p>
 
 <p>
-	You can test this now with our <a href="https://github.com/GoogleChrome/custom-tabs-client">Chrome custom tab sample</a> on Github. 
+You can test this now with our
+<a href="https://github.com/GoogleChrome/custom-tabs-client">Chrome custom tab sample</a> on Github. 
 </p>
 
-<h2>When should I use Chrome custom tabs vs WebView?</h2>
+<h2 id="whentouse">When should I use Chrome custom tabs vs WebView?</h2>
 
 <p>The WebView is good solution if you are hosting your own content inside your
-app.  If your app directs people to URLs outside your domain  we recommend
-that you use Chrome custom tabs because:</p>
+app. If your app directs people to URLs outside your domain, we recommend
+that you use Chrome custom tabs for these reasons:</p>
 
 <ul>
-	<li>Simple to implement.  No need to build code to manage requests, permission
+	<li>Simple to implement. No need to build code to manage requests, permission
 	grants or cookie stores.</li>
 	<li>UI customization:
 		<ul>
@@ -59,7 +61,7 @@ an external navigation.</li>
 	<li>Performance optimization:
 	<ul>
 	<li>Pre-warming of the Browser in the background, while avoiding stealing
-	resources from the application</li>
+	resources from the application.</li>
 	<li>Providing a likely URL in advance to the browser, which may perform
 	speculative work, speeding up page load time.</li>
 	</ul></li>
@@ -70,42 +72,51 @@ an external navigation.</li>
 	<li>Shared Cookie Jar and permissions model so users don't have to log in to sites
 	they are already connected to, or re-grant permissions they have already
 	granted.</li>
-	<li>If the user has turned on Data Saver they will still benefit from it</li>
-	<li>Synchronised AutoComplete across devices for better form completion</li>
-	<li>Simple customization model</li>
-	<li>Quickly return to app with a single tap</li>
+	<li>If the user has turned on Data Saver, they will still benefit from it.</li>
+	<li>Synchronized AutoComplete across devices for better form completion.</li>
+	<li>Simple customization model.</li>
+	<li>Quickly return to app with a single tap.</li>
 	<li>You want to use the latest browser implementations on devices pre-Lollipop
-	(auto updating WebView) instead of older WebViews</li>
+	(auto updating WebView) instead of older WebViews.</li>
 </ul>
 
-<h2>When will this be available?</h2>
+<h2 id="whencaniuseit">When will this be available?</h2>
 
-<p>As of Chome 44, Chrome custom tabs are available in 
-	<a href="https://play.google.com/store/apps/details?id=com.chrome.dev&hl=en">Chrome Dev Channel</a> and is 
-available in <code>chrome://flags</code></a> and is called "enable hosted mode" on all of 
-Chrome's support Android versions (Jellybean onwards). Please note that the API will change slightly over the coming weeks.</p>
+<p>As of Chrome 44, Chrome custom tabs are available in
+<a href="https://play.google.com/store/apps/details?id=com.chrome.dev&hl=en">Chrome Dev Channel</a>,
+in <code>chrome://flags</code></a>, and called "enable hosted mode" on all of 
+Chrome's support Android versions (Jellybean onwards).
+Please note that the API will change slightly over the coming weeks.</p>
 
-<p>We are looking for feedback, questions and suggestions on this project so we
-encourage you to file issues on <a href="https://crbug.com">crbug.com</a> and ask questions to our Twitter account
-<a href="https://twitter.com/chromium_dev">@ChromiumDev</a>.</p>
+<p>We are looking for feedback, questions and suggestions on this project,
+so we encourage you to file issues on
+<a href="https://crbug.com">crbug.com</a> and ask questions to our Twitter account
+<a href="https://twitter.com/ChromiumDev">@ChromiumDev</a>.</p>
 
-<h2>Implementation Guide</h2>
+<h2 id="implementationguide">Implementation guide</h2>
 
-<p>A complete example is available at https://github.com/GoogleChrome/custom-tabs-client. It contains re-usable classes to customize the UI, 
-	connect to the background service and handle the lifecycle of both the application and the custom tab activity. 
-	It also contains the <a href="http://developer.android.com/guide/components/aidl.html">AIDL</a> files required to connect to the service, as the ones contained in the Chromium repository are not directly usable with Android Studio.</p>
+<p>A complete example is available at
+<a href="https://github.com/GoogleChrome/custom-tabs-client">https://github.com/GoogleChrome/custom-tabs-client</a>.
+It contains re-usable classes to customize the UI,
+connect to the background service, and handle the lifecycle of both the application and the custom tab activity.
+It also contains the
+<a href="http://developer.android.com/guide/components/aidl.html">AIDL files</a>
+required to connect to the service,
+as the ones contained in the Chromium repository are not directly usable with Android Studio.</p>
 
-<p>If you follow the guidance from this page you will be able to create a great
-integration.</p>
+<p>If you follow the guidance from this page,
+you will be able to create a great integration.</p>
 
 <ul>
-	<li>Customizing the UI and interaction with the custom tabs</li>
-	<li>Making the page load faster, and keeping the application alive</li>
+	<li>Customizing the UI and interaction with the custom tabs.</li>
+	<li>Making the page load faster, and keeping the application alive.</li>
 </ul>
 
-<p>The first one is done by appending extras into the ACTION_VIEW Intent sent to Chrome; the second by connecting to a service exported by Chrome.</p>
+<p>The first one is done by appending extras into the ACTION_VIEW Intent sent to Chrome;
+the second by connecting to a service exported by Chrome.</p>
 
-<p><strong>Note</strong>: These notes are accurate for Chrome 44, there will be several changes that will be required to be made in Chrome 45.</p>
+<p><strong>Note</strong>: These notes are accurate for Chrome 44;
+several changes will need to be made in Chrome 45.</p>
 
 <h3>Enable Chrome Custom Tabs</h3>
 
@@ -138,7 +149,7 @@ intent.addCategory(CATEGORY_CUSTOM_TABS);
 open in the system browser, or the user's default browser.</p>
 
 <p>If the user has Chrome installed and it is the default browser, it will
-automatically pick up the EXTRAS and present a customized UI.  It is also
+automatically pick up the EXTRAS and present a customized UI. It is also
 possible for another browser to use the Intent extras to provide a similar
 customized interface.</p>
 
@@ -152,7 +163,7 @@ customized interface.</p>
 <h3>Configure the color of the address bar</h3>
 
 <p>One of the most important (and simplest to implement) aspects of Chrome Custom
-Tabs is the ability for you to change the colour of the address bar to be
+Tabs is the ability for you to change the color of the address bar to be
 consistent with your theme.
 </p>
 
@@ -164,10 +175,10 @@ private static final String EXTRA_CUSTOM_TABS_TOOLBAR_COLOR = "android.support.C
 intent.putExtra(EXTRA_CUSTOM_TABS_TOOLBAR_COLOR, colorInt);
 </pre>
 
-<h3>Configure custom Enter and exit animations</h3>
+<h3>Configure custom enter and exit animations</h3>
 
 <p>Many Android applications use custom View Entrance and Exit animations when
-transition between Activities on Android.  Chrome custom tabs is no different,
+transition between Activities on Android. Chrome custom tabs is no different,
 you can change the entrance and exit (when the user presses Back) animations to
 keep them consistent with the rest of your application.</p>
 
@@ -188,15 +199,15 @@ startActivity(intent, startBundle);</pre>
 
 <img class="inline" src="/multidevice/images/customtab/action.jpg" style="float: left; max-width: 250px;">
 
-<p>As the developer of your app you have full control over the Action Button that
-is presented to your users inside the Chrome tab.</p>
+<p>As the developer of your app,
+you have full control over the Action Button that is presented to your users inside the Chrome tab.</p>
 
-<p>In most cases this will be a primary action such as Share, or another common
+<p>In most cases, this will be a primary action such as Share, or another common
 activity that your users will perform.</p>
 
 <p>The Action Button is represented as a Bundle with an icon of the action button
 and a pendingIntent that will be called by Chrome when your user hits the action
-button.  The icon is currenlty 24dp in height and 24-48 dp in width.</p>
+button. The icon is currenlty 24dp in height and 24-48 dp in width.</p>
 
 <pre style="clear: both">
 // Key that specifies the <a href="http://developer.android.com/reference/android/graphics/Bitmap.html">Bitmap</a> to be used as the <a href="http://developer.android.com/reference/android/widget/ImageView.html#setImageDrawable(android.graphics.drawable.Drawable)">image source</a> for the
@@ -227,7 +238,7 @@ application context.</p>
 &quot;Refresh&quot; on top at all times, with &quot;Find page&quot; and &quot;Open in Browser&quot; on the
 footer of the menu.</p>
 
-<p>As the developer you can add and customize up to menu three items that will appear
+<p>As the developer, you can add and customize up to menu three items that will appear
 between the icon row and foot items.</p>
 
 <p>The menu is represented as an Array of Bundles (currently without an icon), menu
@@ -252,7 +263,7 @@ intent.putParcelableArrayList(EXTRA_CUSTOM_TABS_MENU_ITEMS, menuItemBundleList);
 
 <h3>Warm up Chrome to make pages load faster</h3>
 
-<p>By default when startActivity is called with the correctly configured
+<p>By default, when startActivity is called with the correctly configured
 ACTION_VIEW Intent it will spin up Chrome and launch the URL. This can take up
 precious time and impact on the perception of smoothness.</p>
 
@@ -270,20 +281,21 @@ the user will visit.  Chrome will then be able to perform:</p>
 
 <p>The process for warming up Chrome is as follows:</p>
 	<ul>
-	<li>Connect to the service</li>
+	<li>Connect to the service.</li>
 	<li>Attach a navigation callback with <code>finishSetup</code> so that you know a page
-	was loaded</li>
-	<li>On the service call <code>warmup</code> to start Chrome behind the scenes</li>
-	<li>Create a <code>newSession</code>, this session is used for all requests to the API</li>
-	<li>Tell Chrome which pages the user is likely to load with <code>mayLaunchUrl</code></li>
-	<li>Launch the VIEW Intent with the session ID</li>
+	was loaded.</li>
+	<li>On the service, call <code>warmup</code> to start Chrome behind the scenes.</li>
+	<li>Create a <code>newSession</code>, this session is used for all requests to the API.</li>
+	<li>Tell Chrome which pages the user is likely to load with <code>mayLaunchUrl</code>.</li>
+	<li>Launch the VIEW Intent with the session ID.</li>
 </ul>
 
 <h3>Connect to the Chrome Service</h3>
 
-<p>If you are not familiar with Connecting to Android Services the interface is created with
-<a href="http://developer.android.com/guide/components/aidl.html">AIDL</a> and
-automatically creates a proxy service class for you.</p>
+<p>If you are not familiar with Connecting to Android Services,
+the interface is created with
+<a href="http://developer.android.com/guide/components/aidl.html">AIDL</a>
+and automatically creates a proxy service class for you.</p>
 	
 <pre>
 // Package name for the Chrome channel the client wants to connect to. This
@@ -310,9 +322,10 @@ right after the service connection, and must be called again if the service gets
 disconnected. Only one call to this method is allowed, following ones will
 return an error.</p>
 
-<p>If you plan to warm up Chrome Chrome this must also be called immediately after 
-your app is bound to service and before the VIEW Intent issent to the browser, 
-otherwise it won't be possible to link the tab created to the provided callback 
+<p>If you plan to warm up Chrome,
+this must also be called immediately after your app is bound to service and
+before the VIEW Intent is sent to the browser.
+Otherwise it won't be possible to link the tab created to the provided callback 
 and you will not receive notifications of navigation.</p>
 
 <p>Returns 0 for success.</p>
@@ -322,8 +335,9 @@ and you will not receive notifications of navigation.</p>
 <code>long warmup(long flags)</code>
 
 <p>Warm up the browser process and loads the native libraries so that the Chome
-custom tab lauches instantly.  The Warmup process is asynchronous, and the return
+custom tab lauches instantly. The Warmup process is asynchronous, and the return
 value indicates that the request has been accepted.</p>
+
 <p>Returns 0 for success.</p>
 
 <h3>Create a new tab session</h3>
@@ -371,12 +385,14 @@ an error.</p>
 <p>To be called when a navigation is done loading inside a custom tab with the above 
 given parameters.</p>
 
-<h2>FAQ</h2>
+<h2 id="FAQ">FAQ</h2>
+
 <ul>
-<li>Is this available on iOS
+<li>Is this available on iOS?
 <ul>
-<li>No. There is a project that allows you to <a href="https://developer.chrome.com/multidevice/ios/links">integrate Chrome into your app on iOS</a>
-	 but in completely separate way.</li>
+<li>No. There is a project that allows you to
+<a href="https://developer.chrome.com/multidevice/ios/links">integrate Chrome into your app on iOS</a>
+but in a completely separate way.</li>
 </ul>
 </li>
 <li>When will this be available on stable channel?
@@ -386,7 +402,7 @@ cycle from being in the Dev Channel of Chrome is about 12 weeks, however
 we are looking for feedback from developers first.</li>
 </ul>
 </li>
-<li>Where can I ask questions
+<li>Where can I ask questions?
 <ul>
 <li>Stackoverflow tag: Chrome custom tabs</li>
 </ul>
