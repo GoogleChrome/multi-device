@@ -139,7 +139,7 @@ that you add a Category to the intent.</p>
 // tab launched.This category can be used as a way generically pick apps that 
 // handle custom tabs for both activity and service side implementations.
 public static final String CATEGORY_CUSTOM_TABS =
-“android.intent.category.CUSTOM_TABS”;
+"android.intent.category.CUSTOM_TABS";
 intent.addCategory(CATEGORY_CUSTOM_TABS);
 </pre>
 
@@ -156,7 +156,7 @@ customized interface.</p>
 <h3>How can I check whether Chrome supports Chrome custom tabs?</h3>
 
 <p>All versions of Chrome supporting Chrome custom tabs expose a service
- (see the later section “Connect to the Service”). To check whether Chrome supports 
+ (see the later section "Connect to the Service"). To check whether Chrome supports 
  custom tabs, try to bind to the service. If it succeeds, then custom tabs can safely be used. 
 </p>
 
@@ -189,7 +189,7 @@ keep them consistent with the rest of your application.</p>
 // returns to your app.
 
 public static final String EXTRA_CUSTOM_TABS_EXIT_ANIMATION_BUNDLE =
-“android.support.CUSTOM_TABS:exit_animation_bundle”;
+"android.support.CUSTOM_TABS:exit_animation_bundle";
 Bundle finishBundle = ActivityOptions.makeCustomAnimation(context, R.anim.clientEnterAnimResId, R.anim.CustomTabExitAnimResId).toBundle; 
 intent.putExtra(EXTRA_CUSTOM_TABS_EXIT_ANIMATION_BUNDLE, finishBundle);
 Bundle startBundle = ActivityOptions.makeCustomAnimation(context, R.anim.CustomTabEnterAnimResId, R.anim.clientExitAnimResId).toBundle; 
