@@ -9,6 +9,8 @@ img.inline {
 
 <h1>Chrome Custom Tabs</h1>
 
+<p>Last updated: Thursday June 11.</p>
+
 <h2 id="whatarethey">What are Chrome custom tabs?</h2>
 
 <p>App developers face a choice when a user taps a URL to either launch a
@@ -82,11 +84,12 @@ an external navigation.</li>
 
 <h2 id="whencaniuseit">When will this be available?</h2>
 
-<p>As of Chrome 44, Chrome custom tabs are available in
+<p>As of Chrome 45, Chrome custom tabs are available in
 <a href="https://play.google.com/store/apps/details?id=com.chrome.dev&hl=en">Chrome Dev Channel</a>,
-in <code>chrome://flags</code></a>, and called "enable hosted mode" on all of 
-Chrome's support Android versions (Jellybean onwards).
+ on all of Chrome's supported Android versions (Jellybean onwards).
 Please note that the API will change slightly over the coming weeks.</p>
+
+<p>The below spec only applies to Chrome 45.</p>
 
 <p>We are looking for feedback, questions and suggestions on this project,
 so we encourage you to file issues on
@@ -121,15 +124,15 @@ several changes will need to be made in Chrome 45.</p>
 <h3>Enable Chrome Custom Tabs</h3>
 
 <pre>
-/*
-  Note: The extra hosted mode will change to the following in the near future.
-  private static final String EXTRA_HOSTED_MODE = "com.android.chrome.hosted_mode";
-*/
+//  Must have. Extra used to match the session. Its value is a long returned by
+//  BrowserConnectionService. See newSession() below. Even if the service is not 
+//  used and there is no valid session id to be provided, this extra has to be present 
+//  to launch a custom tab.
 
 private static final String EXTRA_CUSTOM_TABS_SESSION_ID = "android.support.CUSTOM_TABS:session_id";
 String url = ¨https://paul.kinlan.me/¨;
 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-intent.putExtra(EXTRA_CUSTOM_TABS_SESSION_ID, true);</pre>
+intent.putExtra(EXTRA_CUSTOM_TABS_SESSION_ID, -1); // -1 or any valid session id returned from newSession() call</pre>
 
 <p><strong>Note</strong>: Along with other changes, Chrome 45 we will be requiring
 that you add a Category to the intent.</p>
@@ -306,6 +309,10 @@ and automatically creates a proxy service class for you.</p>
 public static final String CUSTOM_TAB_PACKAGE_NAME = "com.chrome.dev";  // Change when in stable
 
 Intent serviceIntent = new Intent(Intent.ACTION_MAIN);
+
+// Category to add to the service intent. This category can be used as a 
+// way generically pick apps //that handle custom tabs for both activity and service 
+// side implementations.
 
 public static final String CATEGORY_CUSTOM_TABS = "android.intent.category.CUSTOM_TABS";
 serviceIntent.addCategory(CATEGORY_CUSTOM_TABS);
