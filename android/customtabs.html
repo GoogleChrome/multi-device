@@ -9,7 +9,7 @@ img.inline {
 
 <h1>Chrome Custom Tabs</h1>
 
-<p>Last updated: Thursday June 11.</p>
+<p>Last updated: Friday June 12, 2015.</p>
 
 <h2 id="whatarethey">What are Chrome custom tabs?</h2>
 
@@ -133,18 +133,6 @@ private static final String EXTRA_CUSTOM_TABS_SESSION_ID = "android.support.CUST
 String url = ¨https://paul.kinlan.me/¨;
 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 intent.putExtra(EXTRA_CUSTOM_TABS_SESSION_ID, -1); // -1 or any valid session id returned from newSession() call</pre>
-
-<p><strong>Note</strong>: Along with other changes, Chrome 45 we will be requiring
-that you add a Category to the intent.</p>
-
-<pre>
-// Category to add to the VIEW intent. This must be set for getting a custom 
-// tab launched.This category can be used as a way generically pick apps that 
-// handle custom tabs for both activity and service side implementations.
-public static final String CATEGORY_CUSTOM_TABS =
-"android.intent.category.CUSTOM_TABS";
-intent.addCategory(CATEGORY_CUSTOM_TABS);
-</pre>
 
 <h3>What happens if the user doesn’t have a recent version of Chrome installed?</h3>
 
