@@ -9,7 +9,10 @@ img.inline {
 
 <h1>Chrome Custom Tabs</h1>
 
-<p>Last updated by Paul Kinlan: Friday July 17, 2015.</p>
+<p>Last updated by Paul Kinlan: Monday August 10, 2015.</p>
+<p>Note: In the latest version we have removed two of the navigation callbacks
+  in the Chrome Custom Tabs Service.
+</p>
 
 <h2 id="whatarethey">What are Chrome custom tabs?</h2>
 
@@ -85,7 +88,7 @@ an external navigation.</li>
 <h2 id="whencaniuseit">When will this be available?</h2>
 
 <p>As of Chrome 45, Chrome custom tabs are available in
-<a href="https://play.google.com/store/apps/details?id=com.chrome.dev&hl=en">Chrome Dev Channel</a>,
+<a href="https://play.google.com/store/apps/details?id=com.chrome.beta&hl=en">Chrome Beta Channel</a>,
  on all of Chrome's supported Android versions (Jellybean onwards).
 Please note that the API will change slightly over the coming weeks.</p>
 
@@ -359,14 +362,14 @@ context.bindService(serviceIntent, mServiceConnection,
 
 <h3>Custom Tabs Connection Callback</h3>
 
-<code>void onUserNavigationStarted(Uri url, Bundle extras)</code>
+<code>void onNavigationEvent(int navigationEvent, Bundle extras)</code>
 
-<p>To be called when the user triggers a navigation inside a custom tab, 
-   providing the url and more extras.</p>
+To be called when a navigation event happens.
 
-<code>void onUserNavigationFinished(Uri url, Bundle extras)</code>
+<h3>Using the support library on the client side</h3>
 
-<p>To be called when a navigation is done loading inside a custom tab with the above given parameters.</p>
+<p>See the sample application <a href="https://github.com/GoogleChrome/custom-tabs-client">here</a>.</p>
+
 
 <h2 id="FAQ">FAQ</h2>
 
