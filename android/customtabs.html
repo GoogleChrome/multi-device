@@ -9,7 +9,7 @@ img.inline {
 
 <h1>Chrome Custom Tabs</h1>
 
-<p>Last updated by Paul Kinlan: Monday August 10, 2015.</p>
+<p>Last updated by Paul Kinlan: Monday August 30, 2015.</p>
 <p>Note: In the latest version we have removed two of the navigation callbacks
   in the Chrome Custom Tabs Service.
 </p>
@@ -364,7 +364,41 @@ context.bindService(serviceIntent, mServiceConnection,
 
 <code>void onNavigationEvent(int navigationEvent, Bundle extras)</code>
 
-<p>To be called when a navigation event happens.</p>
+<p>Will be called when a navigation event happens in the Custome tab. The `navigationEvent int` 
+is one of 6 values that defines the state of the the page is in.  See below for more information.</p>
+
+<pre style="clear: both">
+/**
+* Sent when the tab has started loading a page.
+*/
+public static final int NAVIGATION_STARTED = 1;
+
+/**
+* Sent when the tab has finished loading a page.
+*/
+public static final int NAVIGATION_FINISHED = 2;
+
+/**
+* Sent when the tab couldn't finish loading due to a failure.
+*/
+public static final int NAVIGATION_FAILED = 3;
+
+/**
+* Sent when loading was aborted by a user action before it finishes like clicking on a link
+* or refreshing the page.
+*/
+public static final int NAVIGATION_ABORTED = 4;
+
+/**
+* Sent when the tab becomes visible.
+*/
+public static final int TAB_SHOWN = 5;
+
+/**
+* Sent when the tab becomes hidden.
+*/
+public static final int TAB_HIDDEN = 6;
+</pre>
 
 <h3>Using the support library on the client side</h3>
 
