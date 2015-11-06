@@ -1,0 +1,143 @@
+{{+bindTo:partials.standard_multidevice_article}}
+
+<h1>Chrome Data Compression Proxy for Network Administrators, Carriers, and ISPs</h1>
+
+<p>
+This document provides technical background for network administrators on
+the Chrome Data Compression Proxy for Android or iOS (henceforth referred
+to as DCP). It also describes mechanisms that the DCP provides to allow
+network administrators to restrict access to the proxy for specific
+users and URLs.
+</p>
+
+<section class="collapsible">
+<h2 id="proxy-connection">Proxy Connection</h2>
+
+<p>
+Enabling the <a href="data-compression.html">Data Saver</a> feature
+in Chrome establishes a connection between the browser and Google's
+servers to proxy HTTP requests. HTTPS requests and pages loaded in
+Incognito tabs are not proxied.
+</p>
+
+<p>
+When possible, the proxy connection is encrypted using SSL, and uses the
+HTTP/2 protocol to optimize data transfers. In certain cases, as described
+below, the proxy connection may use unencrypted HTTP/1.1.
+</p>
+
+<p>
+Google's proxy servers perform various optimizations on the Web page
+content, with the goal of reducing bandwidth usage. The DCP transcodes
+images to the WebP format, reduces image quality, compresses and minifies
+Javascript and CSS resources, and applies gzip and other transport-level
+compression.
+</p>
+
+<p>
+Requests made by the DCP on behalf of users will carry the header
+<code>Via: 1.1 Chrome-Compression-Proxy</code>. The DCP also acts as an
+HTTP-compliant proxy cache. It respects <code>Cache-Control</code> directives,
+including <code>Cache-Control: no-transform</code> which informs the DCP not to
+transcode a given resource.
+</p>
+
+</section>
+
+<section class="collapsible">
+<h2 id="client-ip">Identifying the Client IP Address</h2>
+
+<p>
+Because requests to destination websites are sent from Google's
+servers, the IP address of the client making the connection will reflect
+the location of Google's servers, not the user. The DCP sends the IP
+address of the client in the <code>X-Forwarded-For</code> header with each
+request, for example: <code>X-Forwarded-For: 74.125.239.111</code>
+</p>
+
+<p>
+Websites should use the <code>X-Forwarded-For</code> header to determine the IP
+address of the client for the purpose of IP geolocation.
+</p>
+
+</section>
+
+<section class="collapsible">
+<h2 id="disabling-encryption">Disabling Encryption</h2>
+
+<p>
+By default, the connection between the browser and the proxy is over
+an encrypted channel. A network administrator can restrict the use
+of encryption for a specific user by blocking access to a canary URL
+(<code>http://check.googlezip.net/connect</code>) and returning a response
+other than a status code 200 with a response body of <code>OK</code>.
+As described below, Chrome issues an in-the-clear request to this URL
+prior to connecting to the DCP. The canary URL is only used for this
+purpose and does not serve any other content.
+</p>
+
+<p>
+Because downgrading to HTTP does not allow the DCP to use HTTP/2 and other
+protocol-level enhancements, this will incur a performance penalty for
+the user.
+</p>
+
+<p>
+It is preferable to send an immediate response for the canary URL, rather
+than inducing a DNS or connection timeout, which will not disable use
+of the DCP.
+</p>
+
+<h3 id="details">Details</h3>
+
+<p>
+When Chrome starts with the DCP setting enabled, the DCP is
+enabled by the user, or a network interface change occurs, Chrome
+asynchronously issues an in-the-clear HTTP request to the canary URL,
+<code>http://check.googlezip.net/connect</code>.
+</p>
+
+<p>
+There are three possible outcomes of the canary URL request:
+</p>
+
+<ul>
+  <li>If the response status code is 200 and the response body is <code>OK</code>,
+Chrome uses an encrypted proxy connection for subsequent HTTP requests.</li>
+  <li>If the response status code is anything other than 200 or the response
+body is anything other than <code>OK</code>, Chrome uses an unencrypted proxy
+connection.</li>
+  <li>If the canary URL request times out or a DNS error occurs, Chrome
+uses an encrypted proxy connection.</li>
+</ul>
+
+</section>
+
+<section class="collapsible">
+<h2 id="proxy-bypass">Proxy Bypass</h2>
+
+<p>
+The Chrome DCP issues a proxy bypass response for URLs matching a list
+of restricted URLs maintained by Google. A proxy bypass causes Chrome to
+disable the use of SSL for the DCP connection for a short time (randomly
+chosen between 1 and 5 minutes). Carriers or network administrators can
+then block or take appropriate action on the request.
+</p>
+
+<p>
+Proxy Bypass is used mainly for:
+</p>
+
+<ul>
+  <li>Child sexual abuse material, which includes NCMEC, IWF and other lists
+used globally by Google for restricting access to such illegal material</li>
+  <li>URLs subject to court-ordered DMCA and other takedowns on Google services</li>
+  <li>Country-specific takedown lists, which are applied only to users with IP
+addresses originating in the associated country</li>
+  <li>A small number of other sites known not to work well with the DCP (e.g.,
+known carrier billing portal and intranet sites)</li>
+</ul>
+
+</section>
+
+{{/partials.standard_multidevice_article}}
