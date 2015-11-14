@@ -11,11 +11,11 @@ dd { margin: 0 6px 12px 40px; }
 
 <div style="width:500px">
 
-<p style="margin-top:50px">Since Chrome M31,
+<p style="margin-top:50px">Since Chrome 31,
 you can set up your web app to have an application shortcut icon added to a device's homescreen,
 and have the app launch in full-screen "app mode" using Chrome for Android’s "Add to homescreen" menu item.</p>
 
-<p>New in Chrome M39, you can define the metadata associated with your web application
+<p>New in Chrome 39, you can define the metadata associated with your web application
 in a <a href="https://w3c.github.io/manifest/">JSON-based manifest</a>.
 The manifest provides a way to wrap metadata about a web application into a single file.
 Using this metadata in conjunction with Add to Homescreen,
@@ -97,7 +97,7 @@ a start page (<code>index.html</code>),
 and the default orientation (<code>"landscape"</code>).
 </p>
 
-<p></p>
+<p>
 The <code>display</code> property is <code>"standalone"</code>.
 The web app has the look and feel of a standalone native application.
 This can include the application having a different window,
@@ -105,6 +105,9 @@ its own icon in the application launcher, etc.
 In this mode, the user agent will exclude UI elements for controlling navigation,
 but can include other UI elements such as a status bar.
 </p>
+
+<p>The example below doesn't show everything that can be in a manifest. For that 
+you can check out the <a href="https://developer.mozilla.org/en-US/docs/Web/Manifest">reference on MDN</a>. 
 
 <pre>
 {
