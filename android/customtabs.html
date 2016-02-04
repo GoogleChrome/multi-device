@@ -11,7 +11,7 @@ img.inline {
 
 <p>Last updated by Paul Kinlan: Monday August 30, 2015.</p>
 
-<h2 id="whatarethey">What are Chrome custom tabs?</h2>
+<h2 id="whatarethey">What are Chrome Custom Tabs?</h2>
 
 <p>App developers face a choice when a user taps a URL to either launch a
 browser, or build their own in-app browser using WebViews.</p>
@@ -20,11 +20,11 @@ browser, or build their own in-app browser using WebViews.</p>
 switch that isn't customizable, while WebViews don't share state with the
 browser and add maintenance overhead.</p>
 
-<p>Chrome custom tabs give apps more control over their web experience, and make
+<p>Chrome Custom Tabs give apps more control over their web experience, and make
 transitions between native and web content more seamless without having to
 resort to a WebView.</p>
 
-<p>Chrome custom tabs allow an app to customize how Chrome looks and feels. An app
+<p>Chrome Custom Tabs allow an app to customize how Chrome looks and feels. An app
 can change things like:</p>
 
 <ul>
@@ -33,21 +33,21 @@ can change things like:</p>
 	<li>Add custom actions to the Chrome toolbar and overflow menu</li>
 </ul>
 
-<p>Chrome custom tabs also allow the developer to pre-start Chrome and pre-fetch
+<p>Chrome Custom Tabs also allow the developer to pre-start Chrome and pre-fetch
 content for faster loading.</p>
 
 <img src="/multidevice/images/customtab/performance.gif">
 
 <p>
 You can test this now with our
-<a href="https://github.com/GoogleChrome/custom-tabs-client">Chrome custom tab sample</a> on Github. 
+<a href="https://github.com/GoogleChrome/custom-tabs-client">sample</a> on Github. 
 </p>
 
-<h2 id="whentouse">When should I use Chrome custom tabs vs WebView?</h2>
+<h2 id="whentouse">When should I use Chrome Custom Tabs vs WebView?</h2>
 
 <p>The WebView is good solution if you are hosting your own content inside your
 app. If your app directs people to URLs outside your domain, we recommend
-that you use Chrome custom tabs for these reasons:</p>
+that you use Chrome Custom Tabs for these reasons:</p>
 
 <ul>
 	<li>Simple to implement. No need to build code to manage requests, permission
@@ -73,7 +73,7 @@ an external navigation.</li>
 	by the system while on top of it, by raising its importance to the
 	"foreground" level.</li>
 	</ul>
-	<li>Shared Cookie Jar and permissions model so users don't have to log in to sites
+	<li>Shared cookie jar and permissions model so users don't have to log in to sites
 	they are already connected to, or re-grant permissions they have already
 	granted.</li>
 	<li>If the user has turned on Data Saver, they will still benefit from it.</li>
@@ -86,10 +86,9 @@ an external navigation.</li>
 
 <h2 id="whencaniuseit">When will this be available?</h2>
 
-<p>As of Chrome 45, Chrome custom tabs is now generally available to all users of
+<p>As of Chrome 45, Chrome Custom Tabs is now generally available to all users of
 <a href="https://play.google.com/store/apps/details?id=com.chrome&hl=en">Chrome</a>,
- on all of Chrome's supported Android versions (Jellybean onwards).
-Please note that the API will change slightly over the coming weeks.</p>
+ on all of Chrome's supported Android versions (Jellybean onwards).</p>
 
 <p>The below spec only applies to Chrome 45.</p>
 
@@ -153,9 +152,9 @@ automatically pick up the EXTRAS and present a customized UI. It is also
 possible for another browser to use the Intent extras to provide a similar
 customized interface.</p>
 
-<h3>How can I check whether Chrome supports Chrome custom tabs?</h3>
+<h3>How can I check whether Chrome supports Chrome Custom Tabs?</h3>
 
-<p>All versions of Chrome supporting Chrome custom tabs expose a service
+<p>All versions of Chrome supporting Chrome Custom Tabs expose a service
  (see the later section "Connect to the Service"). To check whether Chrome supports 
  custom tabs, try to bind to the service. If it succeeds, then custom tabs can safely be used. 
 </p>
@@ -215,7 +214,7 @@ intent.putExtra(EXTRA_CUSTOM_TABS_ACTION_BUTTON_BUNDLE, actionButtonBundle);</pr
 frequently inside a browser, however they may not be relevant to your
 application context.</p>
 
-<p>Chrome custom tabs will have a three icon row with &quot;Forward&quot;,&quot;Page Info&quot; and
+<p>Chrome Custom Tabs will have a three icon row with &quot;Forward&quot;,&quot;Page Info&quot; and
 &quot;Refresh&quot; on top at all times, with &quot;Find page&quot; and &quot;Open in Browser&quot; on the
 footer of the menu.</p>
 
@@ -246,7 +245,7 @@ intent.putParcelableArrayList(EXTRA_CUSTOM_TABS_MENU_ITEMS, menuItemBundleList);
 <h3>Configure custom enter and exit animations</h3>
 
 <p>Many Android applications use custom View Entrance and Exit animations when
-transition between Activities on Android. Chrome custom tabs is no different,
+transition between Activities on Android. Chrome Custom Tabs is no different,
 you can change the entrance and exit (when the user presses Back) animations to
 keep them consistent with the rest of your application.</p>
 
@@ -363,7 +362,7 @@ context.bindService(serviceIntent, mServiceConnection,
 
 <code>void onNavigationEvent(int navigationEvent, Bundle extras)</code>
 
-<p>Will be called when a navigation event happens in the Custome tab. The `navigationEvent int` 
+<p>Will be called when a navigation event happens in the custom tab. The `navigationEvent int` 
 is one of 6 values that defines the state of the the page is in.  See below for more information.</p>
 
 <pre style="clear: both">
@@ -416,9 +415,7 @@ but in a completely separate way.</li>
 </li>
 <li>When will this be available on stable channel?
 <ul>
-<li>We don't have a fixed date or version of Chrome yet. The normal release
-cycle from being in the Dev Channel of Chrome is about 12 weeks, however
-we are looking for feedback from developers first.</li>
+<li>Chrome Custom Tabs are available as of Chrome 45.</li>
 </ul>
 </li>
 <li>Where can I ask questions?
