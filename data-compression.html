@@ -110,6 +110,11 @@ This is just the beginning of what a powerful proxy service can provide to make 
 <ul>
   <li><strong>Is my secure traffic optimized by the compression proxy?</strong><br>
 	No, data compression proxy operates on non-encrypted traffic: HTTPS requests are sent directly from your device to the destination server.</li>
+  <li><strong>Can I detect if the user has Data Compression Proxy turned on?</strong><br>
+        Yes, kind of. As of Chrome 49 (Beta in Feb 2nd 2016, Estimated stable date in late March) when the user has enabled the Data Saver feature in Chrome, Chrome will add a <code>save-data</code> HTTP Header with the value '<code>on</code>' to each HTTP Request. The 
+        HTTP Header will not be present when the feature is turned off. Use this as a signal of intent from the user that they 
+        are conscious of the amount of data that they are using and not that their connection is going through the Data Compression Proxy. For instance, the HTTP Header will be set when the user visits a site over HTTPS even though secure connections are not passed through
+        the Data Compression Proxy.</li>
   <li><strong>As a site owner, how do I perform IP geo-targeting?</strong><br>
 	The IP address of your device is forwarded to the destination server via the <code>X-Forwarded-For</code> header. Site owners should check for this header to correctly determine the location of the user based on client's IP address.</li>
   <li><strong>As a site owner, how do I opt-out from content optimization?</strong><br>
