@@ -451,6 +451,13 @@ public static final int TAB_HIDDEN = 6;
    <a href="http://developer.android.com/reference/android/webkit/WebView.html">WebView</a>
    implementation.</p>   
 
+<h3>Add your app as the referrer</h3>
+<p>It's usually very important for websites to track where their traffic is coming from. Make sure you let them know you are sending them users by setting the referrer when launching your Custom Tab</p>
+<pre>
+intent.putExtra(Intent.EXTRA_REFERRER, 
+        Uri.parse(Intent.URI_ANDROID_APP_SCHEME + "//" + context.getPackageName()));
+</pre>
+
 <h3>Add custom animations</h3>
 
 <p>Custom animations will make the transition from your application to the 
