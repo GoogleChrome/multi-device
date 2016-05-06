@@ -9,7 +9,7 @@ img.inline {
 
 <h1>Chrome Custom Tabs</h1>
 
-<p>Last updated by Paul Kinlan: Monday August 30, 2015.</p>
+<p>Last updated by Paul Kinlan: Friday May 6, 2016.</p>
 
 <h2 id="whatarethey">What are Chrome Custom Tabs?</h2>
 
@@ -30,7 +30,7 @@ can change things like:</p>
 <ul>
 	<li>Toolbar color</li>
 	<li>Enter and exit animations</li>
-	<li>Add custom actions to the Chrome toolbar and overflow menu</li>
+	<li>Add custom actions to the Chrome toolbar, overflow menu and bottom toolbar</li>
 </ul>
 
 <p>Chrome Custom Tabs also allow the developer to pre-start Chrome and pre-fetch
@@ -58,6 +58,7 @@ that you use Chrome Custom Tabs for these reasons:</p>
 		<li>Action button</li>
 		<li>Custom menu items</li>
 		<li>Custom in/out animations</li>
+		<li>Bottom toolbar</li>
 		</ul>
 	</li>
 	<li>Navigation awareness: the browser delivers a callback to the application upon
@@ -90,8 +91,6 @@ an external navigation.</li>
 <a href="https://play.google.com/store/apps/details?id=com.chrome&hl=en">Chrome</a>,
  on all of Chrome's supported Android versions (Jellybean onwards).</p>
 
-<p>The below spec only applies to Chrome 45.</p>
-
 <p>We are looking for feedback, questions and suggestions on this project,
 so we encourage you to file issues on
 <a href="https://crbug.com">crbug.com</a> and ask questions to our Twitter account
@@ -103,61 +102,39 @@ so we encourage you to file issues on
 <a href="https://github.com/GoogleChrome/custom-tabs-client">https://github.com/GoogleChrome/custom-tabs-client</a>.
 It contains re-usable classes to customize the UI,
 connect to the background service, and handle the lifecycle of both the application and the custom tab activity.
-It also contains the
-<a href="http://developer.android.com/guide/components/aidl.html">AIDL files</a>
-required to connect to the service,
-as the ones contained in the Chromium repository are not directly usable with Android Studio.</p>
 
 <p>If you follow the guidance from this page,
 you will be able to create a great integration.</p>
 
+<p>The first step for a Custom Tabs integration is adding the <a href="http://developer.android.com/tools/support-library/features.html#custom-tabs">Custom Tabs Support Library</a> to your project. Open your <code>build.gradle</code> file and add the support library to the dependency section.</p>
+<pre>
+dependencies {
+    ...
+    compile 'com.android.support:customtabs:23.3.0'
+}
+</pre>
+
+Once the Support Library is added to your project there are two sets of possible customizations:
 <ul>
 	<li>Customizing the UI and interaction with the custom tabs.</li>
 	<li>Making the page load faster, and keeping the application alive.</li>
 </ul>
 
-<p>The first one is done by appending extras into the ACTION_VIEW Intent sent to Chrome;
-the second by connecting to a service exported by Chrome.</p>
+<p>The first one is done by using the <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsIntent.html">CustomTabsIntent</a></code> and the <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsIntent.Builder.html">CustomTabsIntent.Builder</a></code> classes;
+the second by using the <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html">CustomTabsClient</a></code> to connect the the Custom Tabs service.</p>
 
-<p><strong>Note</strong>: These notes are accurate for Chrome 45;</p>
-
-<h3>Enable Chrome Custom Tabs</h3>
-
-<pre>// Using a VIEW intent for compatibility with any other browsers on device.
-// Caller should not be setting FLAG_ACTIVITY_NEW_TASK or 
-// FLAG_ACTIVITY_NEW_DOCUMENT. 
-String url = ¨https://paul.kinlan.me/¨;
-Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url)); 
-</pre>
+<h3>Opening a Chrome Custom Tab</h3>
 
 <pre>
-//  Must have. Extra used to match the session. Its value is an IBinder passed
-//  whilst creating a news session. See newSession() below. Even if the service is not 
-//  used and there is no valid session id to be provided, this extra has to be present 
-//  with a null value to launch a custom tab.
+// Use a CustomTabsIntent.Builder to configure CustomTabsIntent.
+// Once ready, call CustomTabsIntent.Builder.build() to create a CustomTabsIntent
+// and launch the desired Url with CustomTabsIntent.launchUrl()
 
-private static final String EXTRA_CUSTOM_TABS_SESSION = "android.support.customtabs.extra.SESSION";
-Bundle extras = new Bundle;
-extras.putBinder(EXTRA_CUSTOM_TABS_SESSION, 
-   sessionICustomTabsCallback.asBinder() /* Set to null for no session */);
-intent.putExtras(extras);</pre>
-
-<h3>What happens if the user doesn’t have a recent version of Chrome installed?</h3>
-
-<p>We are using the ACTION_VIEW Intent, this means that by default the page will
-open in the system browser, or the user's default browser.</p>
-
-<p>If the user has Chrome installed and it is the default browser, it will
-automatically pick up the EXTRAS and present a customized UI. It is also
-possible for another browser to use the Intent extras to provide a similar
-customized interface.</p>
-
-<h3>How can I check whether Chrome supports Chrome Custom Tabs?</h3>
-
-<p>All versions of Chrome supporting Chrome Custom Tabs expose a service
- (see the later section "Connect to the Service"). To check whether Chrome supports 
- custom tabs, try to bind to the service. If it succeeds, then custom tabs can safely be used. 
-</p>
+String url = ¨https://paul.kinlan.me/¨;
+CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+CustomTabsIntent customTabsIntent = builder.build();
+customTabsIntent.launchUrl(this, Uri.parse(url));
+</pre>
 
 <h3>Configure the color of the address bar</h3>
 
@@ -167,11 +144,10 @@ consistent with your app's theme.
 </p>
 
 <pre>
-// Extra that changes the background color for the omnibox. colorInt is an int
+// Changes the background color for the omnibox. colorInt is an int
 // that specifies a <a href="http://developer.android.com/reference/android/graphics/Color.html">Color</a>.
 
-private static final String EXTRA_CUSTOM_TABS_TOOLBAR_COLOR = "android.support.customtabs.extra.TOOLBAR_COLOR";
-intent.putExtra(EXTRA_CUSTOM_TABS_TOOLBAR_COLOR, colorInt);
+builder.setToolbarColor(colorInt);
 </pre>
 
 <h3>Configure a custom action button</h3>
@@ -189,23 +165,20 @@ and a pendingIntent that will be called by Chrome when your user hits the action
 button. The icon is currenlty 24dp in height and 24-48 dp in width.</p>
 
 <pre style="clear: both">
-// Key that specifies the <a href="http://developer.android.com/reference/android/graphics/Bitmap.html">Bitmap</a> to be used as the <a href="http://developer.android.com/reference/android/widget/ImageView.html#setImageDrawable(android.graphics.drawable.Drawable)">image source</a> for the
+// Adds an Action Button to the Toolbar.
+// 'icon' is a <a href="http://developer.android.com/reference/android/graphics/Bitmap.html">Bitmap</a> to be used as the <a href="http://developer.android.com/reference/android/widget/ImageView.html#setImageDrawable(android.graphics.drawable.Drawable)">image source</a> for the
 // action button.
 
-private static final String KEY_CUSTOM_TABS_ICON = "android.support.customtabs.customaction.ICON";
-// Key that specifies the PendingIntent to launch when the action button
+// 'description' is a String be used as an accessible description for the button.
+
+// 'pendingIntent is a <a href="http://developer.android.com/reference/android/app/PendingIntent.html">PendingIntent</a> to launch when the action button
 // or menu item was tapped. Chrome will be calling <a href="http://developer.android.com/reference/android/app/PendingIntent.html#send(android.content.Context,%20int,%20android.content.Intent)">PendingIntent#send()</a> on
 // taps after adding the url as data. The client app can call
 // <a href="http://developer.android.com/reference/android/content/Intent.html#getDataString()">Intent#getDataString()</a> to get the url.
-public static final String KEY_CUSTOM_TABS_PENDING_INTENT = "android.support.customtabs.customaction.PENDING_INTENT";
 
-// Optional. Use a bundle for parameters if an the action button is specified.
-public static final String EXTRA_CUSTOM_TABS_ACTION_BUTTON_BUNDLE = 
-"android.support.customtabs.extra.ACTION_BUNDLE_BUTTON";
-Bundle actionButtonBundle = new Bundle();
-actionButtonBundle.putParcelable(KEY_CUSTOM_TABS_ICON, icon);
-actionButtonBundle.putParcelable(KEY_CUSTOM_TABS_PENDING_INTENT, pendingIntent);
-intent.putExtra(EXTRA_CUSTOM_TABS_ACTION_BUTTON_BUNDLE, actionButtonBundle);</pre>
+// 'tint' is a boolean that defines if the Action Button should be tinted.
+
+builder.setActionButton(icon, description, pendingIntent, tint);</pre>
 
 <h3>Configure a custom menu</h3>
 
@@ -214,33 +187,18 @@ intent.putExtra(EXTRA_CUSTOM_TABS_ACTION_BUTTON_BUNDLE, actionButtonBundle);</pr
 frequently inside a browser, however they may not be relevant to your
 application context.</p>
 
-<p>Chrome Custom Tabs will have a three icon row with &quot;Forward&quot;,&quot;Page Info&quot; and
+<p>Chrome Custom Tabs will have a three icon row with &quot;Forward&quot;, &quot;Page Info&quot; and
 &quot;Refresh&quot; on top at all times, with &quot;Find page&quot; and &quot;Open in Browser&quot; on the
 footer of the menu.</p>
 
-<p>As the developer, you can add and customize up to three menu items that will appear
+<p>As the developer, you can add and customize up to five menu items that will appear
 between the icon row and foot items.</p>
 
-<p>The menu is represented as an Array of Bundles (currently without an icon), menu
-text and a pendingIntent that Chrome will call on your behalf when the user taps
-the item.</p>
+<p>The menu item is added by calling <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsIntent.Builder.html#addMenuItem(java.lang.String, android.app.PendingIntent)">CustomTabsIntent.Builder#addMenuItem</a></code> with title and a pendingIntent that Chrome will call on your behalf when the user taps the item are passed as parameters.</p>
 
 <pre style="clear: both">
-// Key for the title string for a given custom menu item
-public static final String KEY_CUSTOM_TABS_MENU_TITLE = "android.support.customtabs.customaction.MENU_ITEM_TITLE";
-
-// Optional. Use an ArrayList<Bundle> for specifying menu related params. There 
-// should be a separate Bundle for each custom menu item.
-public static final String EXTRA_CUSTOM_TABS_MENU_ITEMS = "android.support.customtabs.extra.MENU_ITEMS";
-ArrayList<Bundle> menuItemBundleList = new ArrayList<>();
-
-// For each menu item do:
-Bundle menuItem = new Bundle();
-menuItem.putString(KEY_CUSTOM_TABS_MENU_TITLE, menuItemTitle);
-menuItem.putParcelable(KEY_CUSTOM_TABS_PENDING_INTENT, pendingIntent);
-menuItemBundleList.add(menuItem);
-
-intent.putParcelableArrayList(EXTRA_CUSTOM_TABS_MENU_ITEMS, menuItemBundleList);</pre>
+builder.addMenuItem(menuItemTitle, menuItemPendingIntent);
+</pre>
 
 <h3>Configure custom enter and exit animations</h3>
 
@@ -249,23 +207,14 @@ transition between Activities on Android. Chrome Custom Tabs is no different,
 you can change the entrance and exit (when the user presses Back) animations to
 keep them consistent with the rest of your application.</p>
 
-<pre>// Optional. Bundle constructed out of
-<a href="http://developer.android.com/reference/android/app/ActivityOptions.html#makeCustomAnimation(android.content.Context,%20int,%20int)">ActivityOptions</a> that Chrome will be running when
-// it finishes CustomTabActivity. If you start the Custom Tab with 
-// a customized animation, you can specify a matching animation when Custom Tab 
-// returns to your app.
-
-public static final String EXTRA_CUSTOM_TABS_EXIT_ANIMATION_BUNDLE =
-"android.support.customtabs.extra.EXIT_ANIMATION_BUNDLE";
-Bundle finishBundle = ActivityOptions.makeCustomAnimation(context, R.anim.clientEnterAnimResId, R.anim.CustomTabExitAnimResId).toBundle; 
-intent.putExtra(EXTRA_CUSTOM_TABS_EXIT_ANIMATION_BUNDLE, finishBundle);
-Bundle startBundle = ActivityOptions.makeCustomAnimation(context, R.anim.CustomTabEnterAnimResId, R.anim.clientExitAnimResId).toBundle; 
-startActivity(intent, startBundle);</pre>
+<pre>
+builder.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left);
+builder.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right);
+</pre>
 
 <h3>Warm up Chrome to make pages load faster</h3>
 
-<p>By default, when startActivity is called with the correctly configured
-ACTION_VIEW Intent it will spin up Chrome and launch the URL. This can take up
+<p>By default, when <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsIntent.html#launchUrl(android.app.Activity, android.net.Uri)">CustomTabsIntent#launchUrl</a></code> is called, it will spin up Chrome and launch the URL. This can take up
 precious time and impact on the perception of smoothness.</p>
 
 <p>We believe that users demand a near instantaneous experience, so we have
@@ -282,24 +231,22 @@ the user will visit.  Chrome will then be able to perform:</p>
 
 <p>The process for warming up Chrome is as follows:</p>
 	<ul>
-	<li>Connect to the service.</li>
-	<li>Attach a navigation callback with <code>finishSetup</code> so that you know a page
+	<li>Use <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html#bindCustomTabsService(android.content.Context, java.lang.String, android.support.customtabs.CustomTabsServiceConnection)">CustomTabsClient#bindCustomTabsService</a></code> to connect to the service.</li>
+	<li>Once the service is connected, call <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html#warmup(long)">CustomTabsClient#warmup</a></code> to start Chrome behind the scenes.</li>	
+	<li>Call <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html#newSession(android.support.customtabs.CustomTabsCallback)">CustomTabsClient#newSession</a></code> to create a new session. This session is used for all requests to the API.</li>	
+	<li>Optionally, attach a <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsCallback.html">CustomTabsCallback</a></code> as a parameter when creating a new session, so that you know a page
 	was loaded.</li>
-	<li>On the service, call <code>warmup</code> to start Chrome behind the scenes.</li>
-	<li>Create a <code>newSession</code>, this session is used for all requests to the API.</li>
-	<li>Tell Chrome which pages the user is likely to load with <code>mayLaunchUrl</code>.</li>
-	<li>Launch the VIEW Intent with the session ID.</li>
+	<li>Tell Chrome which pages the user is likely to load with <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsSession.html#mayLaunchUrl(android.net.Uri, android.os.Bundle, java.util.List<android.os.Bundle>)">CustomTabsSession#mayLaunchUrl</a></code>.</li>
+	<li>Call the <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsIntent.Builder.html">CustomTabsIntent.Builder</a></code> constructor passing the created <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsSession.html">CustomTabsSession</a></code> as a parameter.</li>
 </ul>
 
 <h3>Connect to the Chrome Service</h3>
 
-<p>If you are not familiar with Connecting to Android Services,
-the interface is created with
-<a href="http://developer.android.com/guide/components/aidl.html">AIDL</a>
-and automatically creates a proxy service class for you.</p>
+<p>The <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html#bindCustomTabsService(android.content.Context, java.lang.String, android.support.customtabs.CustomTabsServiceConnection)">CustomTabsClient#bindCustomTabsService</a></code> method takes away the complexity fo 
+connecting to the Custom Tabs service.</p>
 
-<p>The AIDL that defines this service interface can be found in our 
-	<a href="https://github.com/GoogleChrome/custom-tabs-client/tree/master/Application/src/main/aidl/org/chromium/chrome/browser/customtabs">Sample on Github</a>.</p>
+<p>Create a class that extends <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsServiceConnection.html">CustomTabsServiceConnection</a></code> and use <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsServiceConnection.html#onCustomTabsServiceConnected(android.content.ComponentName, android.support.customtabs.CustomTabsClient)">onCustomTabsServiceConnected</a></code>
+to get an instance of the <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html">CustomTabsClient</a></code>. This instance will be needed on the next steps.</p>
 	
 <pre>
 // Package name for the Chrome channel the client wants to connect to. This
@@ -307,51 +254,51 @@ and automatically creates a proxy service class for you.</p>
 // Stable = com.android.chrome
 // Beta = com.chrome.beta
 // Dev = com.chrome.dev
-public static final String CUSTOM_TAB_PACKAGE_NAME = "com.chrome.dev";  // Change when in stable
+public static final String CUSTOM_TAB_PACKAGE_NAME = "com.android.chrome";  // Change when in stable
 
-// Action to add to the service intent. This action can be used as a way 
-// generically pick apps that handle custom tabs for both activity and service 
-// side implementations.
-public static final String ACTION_CUSTOM_TABS_CONNECTION =
-       "android.support.customtabs.action.CustomTabsService";
-Intent serviceIntent = new Intent(ACTION_CUSTOM_TABS_CONNECTION);
+CustomTabsServiceConnection connection = new CustomTabsServiceConnection() {
+    @Override
+    public void onCustomTabsServiceConnected(ComponentName name, CustomTabsClient client) {
+        mCustomTabsClient = client;
+    }
 
-serviceIntent.setPackage(CUSTOM_TAB_PACKAGE_NAME);
-context.bindService(serviceIntent, mServiceConnection,
-                    Context.BIND_AUTO_CREATE | Context.BIND_WAIVE_PRIORITY);
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+
+    }
+};
+boolean ok = CustomTabsClient.bindCustomTabsService(this, mPackageNameToBind, connection);
 </pre>
 
 <h3>Warm up the Browser Process</h3>
 
-<code>boolean warmup(long flags)</code>
+<code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html#warmup(long)">boolean warmup(long flags)</a></code>
 
 <p>Warms up the browser process and loads the native libraries. Warmup is 
 	asynchronous, the return value indicates whether the request has been 
 	accepted. Multiple successful calls will also return true.
 </p>
 
-<p>Returns true for success.</p>
+<p>Returns <code>true</code> for success.</p>
 
 <h3>Create a new tab session</h3>
 
-<code>boolean newSession(ICustomTabsCallback callback)</code>
+<code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html#newSession(android.support.customtabs.CustomTabsCallback)">boolean newSession(CustomTabsCallback  callback)</a></code>
 
 <p>Session is used in subsequent calls to link mayLaunchUrl call, 
-   the VIEW intent and the tab generated to each other. The callback IInterface
-   provided here is associated with the created session and should be passed 
-   for any consecutive mayLaunchUrl calls. Any updates for the created 
+   the CustomTabsIntent and the tab generated to each other. The callback 
+   provided here is associated with the created session. Any updates for the created 
    session (see Custom Tabs Callback below) is also received through this
-   IInterface. Returns whether a session was created successfully. Multiple
-   calls with the same ICustomTabsCallback or a null value will return false.
+   callback. Returns whether a session was created successfully. Multiple
+   calls with the same CustomTabsCallback or a null value will return false.
 </p>
 
 <h3>Tell Chrome what URL's the user is likely to open</h3>
 
-<code>boolean mayLaunchUrl(ICustomTabsCallback sessionCallback, Uri url, 
-	Bundle extras,List<Bundle> otherLikelyBundles)</code>
+<code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsSession.html#mayLaunchUrl(android.net.Uri, android.os.Bundle, java.util.List<android.os.Bundle>)">boolean mayLaunchUrl(Uri url, Bundle extras, List<Bundle> otherLikelyBundles)</a></code>
 
-<p>Tells the browser of a likely future navigation to a URL. The method warmup()
-   should be called first as a best practice. The most likely URL has to be
+<p>This CustomTabsSession method tells the browser of a likely future navigation to a URL. 
+   The method <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html#warmup(long)">warmup()</a></code> should be called first as a best practice. The most likely URL has to be
    specified first. Optionally, a list of other likely URLs can be provided. 
    They are treated as less likely than the first one, and have to be sorted 
    in decreasing priority order. These additional URLs may be ignored. All
@@ -360,7 +307,7 @@ context.bindService(serviceIntent, mServiceConnection,
 
 <h3>Custom Tabs Connection Callback</h3>
 
-<code>void onNavigationEvent(int navigationEvent, Bundle extras)</code>
+<code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsCallback.html#onNavigationEvent(int, android.os.Bundle)">void onNavigationEvent(int navigationEvent, Bundle extras)</a></code>
 
 <p>Will be called when a navigation event happens in the custom tab. The `navigationEvent int` 
 is one of 6 values that defines the state of the the page is in.  See below for more information.</p>
@@ -398,9 +345,22 @@ public static final int TAB_SHOWN = 5;
 public static final int TAB_HIDDEN = 6;
 </pre>
 
-<h3>Using the support library on the client side</h3>
+<h3>What happens if the user doesn’t have a recent version of Chrome installed?</h3>
 
-<p>See the sample application <a href="https://github.com/GoogleChrome/custom-tabs-client">here</a>.</p>
+<p>Custom Tabs uses an ACTION_VIEW Intent with key Extras to customize the UI. 
+This means that by default the page willopen in the system browser, or the user's default browser.</p>
+
+<p>If the user has Chrome installed and it is the default browser, it will
+automatically pick up the EXTRAS and present a customized UI. It is also
+possible for another browser to use the Intent extras to provide a similar
+customized interface.</p>
+
+<h3>How can I check whether Chrome supports Chrome Custom Tabs?</h3>
+
+<p>All versions of Chrome supporting Chrome Custom Tabs expose a service.
+To check whether Chrome supports custom tabs, try to bind to the service. If it succeeds, 
+then custom tabs can safely be used. 
+</p>
 
 <h2 id="bestpractices">Best Practices</h2>
 
@@ -622,7 +582,7 @@ webView.setWebViewClient(new WebViewClient() {
         if (url.startsWith("http://www.example.com")) {
             //Handle Internal Link...
         } else {
-            //Open Link in a Custo Tab
+            //Open Link in a Custom Tab
             Uri uri = Uri.parse(url);
             CustomTabsIntent.Builder intentBuilder =
                     new CustomTabsIntent.Builder(mCustomTabActivityHelper.getSession());
@@ -644,6 +604,69 @@ webView.setWebViewClient(new WebViewClient() {
    prepared for when a user clicks multiple times on the same link and does not
    open a Custom Tab multiple times.</p>
 
+<h2 id="LOW_LEVEL_API">Low level API</h2>
+
+<p>Although the recommended method to integrate your application with Custom Tabs is using the Custom Tabs Support Library, a low level implementation is also available.</p>
+
+<p>The complete implementation of the Support Library is available on <a href="https://github.com/GoogleChrome/custom-tabs-client/tree/master/customtabs">Github</a> and an be used as a start point. It also contains the <a href="http://developer.android.com/guide/components/aidl.html">AIDL files</a> required to connect to the service, as the ones contained in the Chromium repository are not directly usable with Android Studio.</p>
+
+<h3>Basics for Launching Custom Tabs using the Low Level API</h3>
+<pre>
+// Using a VIEW intent for compatibility with any other browsers on device.
+// Caller should not be setting FLAG_ACTIVITY_NEW_TASK or 
+// FLAG_ACTIVITY_NEW_DOCUMENT. 
+String url = ¨https://paul.kinlan.me/¨;
+Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url)); 
+//  Must have. Extra used to match the session. Its value is an IBinder passed
+//  whilst creating a news session. See newSession() below. Even if the service is not 
+//  used and there is no valid session id to be provided, this extra has to be present 
+//  with a null value to launch a custom tab.
+
+private static final String EXTRA_CUSTOM_TABS_SESSION = "android.support.customtabs.extra.SESSION";
+Bundle extras = new Bundle;
+extras.putBinder(EXTRA_CUSTOM_TABS_SESSION, 
+   sessionICustomTabsCallback.asBinder() /* Set to null for no session */);
+intent.putExtras(extras);
+</pre>
+
+<h3>Adding UI Customisations</h3>
+
+<p>UI Customizations are included by adding Extras to the ACTION_VIEW Intent. A full list of the
+extras keys used to customise the UI can be found on the <a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsIntent.html">CustomTabsIntent docs</a>. An example on how to add a custom toolbar color follows:</p>
+
+<pre>
+// Extra that changes the background color for the omnibox. colorInt is an int
+// that specifies a Color.
+
+private static final String EXTRA_CUSTOM_TABS_TOOLBAR_COLOR = "android.support.customtabs.extra.TOOLBAR_COLOR";
+intent.putExtra(EXTRA_CUSTOM_TABS_TOOLBAR_COLOR, colorInt);
+</pre>
+
+<h3>Connecting to the Custom Tabs service</h3>
+
+<p>The Custom Tabs service can be used in the same way other Android Services are. The interface is created with AIDL and automatically creates a proxy service class for you.</p>
+
+<p>Use the methods on the proxy service to warm-up, create sessions and pre-fetch</p>
+
+<pre>
+// Package name for the Chrome channel the client wants to connect to. This
+// depends on the channel name.
+// Stable = com.android.chrome
+// Beta = com.chrome.beta
+// Dev = com.chrome.dev
+public static final String CUSTOM_TAB_PACKAGE_NAME = "com.chrome.dev";  // Change when in stable
+
+// Action to add to the service intent. This action can be used as a way 
+// generically pick apps that handle custom tabs for both activity and service 
+// side implementations.
+public static final String ACTION_CUSTOM_TABS_CONNECTION =
+       "android.support.customtabs.action.CustomTabsService";
+Intent serviceIntent = new Intent(ACTION_CUSTOM_TABS_CONNECTION);
+
+serviceIntent.setPackage(CUSTOM_TAB_PACKAGE_NAME);
+context.bindService(serviceIntent, mServiceConnection,
+                    Context.BIND_AUTO_CREATE | Context.BIND_WAIVE_PRIORITY);    
+</pre>
 <h2 id="FAQ">FAQ</h2>
 
 <ul>
