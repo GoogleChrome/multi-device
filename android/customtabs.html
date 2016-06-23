@@ -242,7 +242,7 @@ the user will visit.  Chrome will then be able to perform:</p>
 
 <h3>Connect to the Chrome Service</h3>
 
-<p>The <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html#bindCustomTabsService(android.content.Context, java.lang.String, android.support.customtabs.CustomTabsServiceConnection)">CustomTabsClient#bindCustomTabsService</a></code> method takes away the complexity fo 
+<p>The <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html#bindCustomTabsService(android.content.Context, java.lang.String, android.support.customtabs.CustomTabsServiceConnection)">CustomTabsClient#bindCustomTabsService</a></code> method takes away the complexity of 
 connecting to the Custom Tabs service.</p>
 
 <p>Create a class that extends <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsServiceConnection.html">CustomTabsServiceConnection</a></code> and use <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsServiceConnection.html#onCustomTabsServiceConnected(android.content.ComponentName, android.support.customtabs.CustomTabsClient)">onCustomTabsServiceConnected</a></code>
@@ -498,7 +498,7 @@ intent.putExtra(Intent.EXTRA_REFERRER,
    application opened the link using the browser before adding support for 
    Custom Tabs.</p>
 
-<h3>Let native applications to handle the content</h3>   
+<h3>Let native applications handle the content</h3>   
 
 <p>Some URLs can be handled by native applications. If the user has the Twitter 
    app installed and clicks on a link to a tweet. She expects that the Twitter 
