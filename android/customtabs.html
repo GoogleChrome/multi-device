@@ -120,8 +120,8 @@ Once the Support Library is added to your project there are two sets of possible
 	<li>Making the page load faster, and keeping the application alive.</li>
 </ul>
 
-<p>The first one is done by using the <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsIntent.html">CustomTabsIntent</a></code> and the <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsIntent.Builder.html">CustomTabsIntent.Builder</a></code> classes;
-the second by using the <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html">CustomTabsClient</a></code> to connect the the Custom Tabs service.</p>
+<p>The UI Customizations are done by using the <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsIntent.html">CustomTabsIntent</a></code> and the <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsIntent.Builder.html">CustomTabsIntent.Builder</a></code> classes;
+the performance improvements are achieved by using the <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html">CustomTabsClient</a></code> to connect to the Custom Tabs service, warm-up Chrome and let it know which urls will be opened.</p>
 
 <h3>Opening a Chrome Custom Tab</h3>
 
@@ -152,7 +152,7 @@ builder.setToolbarColor(colorInt);
 
 <h3>Configure a custom action button</h3>
 
-<img class="inline" src="/multidevice/images/customtab/action.jpg" style="float: left; max-width: 250px;">
+<img class="inline" src="/multidevice/images/customtab/tumblr_action.png" style="float: left; max-width: 250px;">
 
 <p>As the developer of your app, you have full control over the Action Button 
    that is presented to your users inside the Chrome tab.</p>
@@ -182,7 +182,7 @@ builder.setActionButton(icon, description, pendingIntent, tint);</pre>
 
 <h3>Configure a custom menu</h3>
 
-<img class="inline" src="/multidevice/images/customtab/menu.jpg" style="float: left; max-width: 250px;">
+<img class="inline" src="/multidevice/images/customtab/twitter_menu.png" style="float: left; max-width: 250px;">
 <p>The Chrome browser has a comprehensive menu of actions that users will perform
 frequently inside a browser, however they may not be relevant to your
 application context.</p>
@@ -242,7 +242,7 @@ the user will visit.  Chrome will then be able to perform:</p>
 
 <h3>Connect to the Chrome Service</h3>
 
-<p>The <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html#bindCustomTabsService(android.content.Context, java.lang.String, android.support.customtabs.CustomTabsServiceConnection)">CustomTabsClient#bindCustomTabsService</a></code> method takes away the complexity fo 
+<p>The <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsClient.html#bindCustomTabsService(android.content.Context, java.lang.String, android.support.customtabs.CustomTabsServiceConnection)">CustomTabsClient#bindCustomTabsService</a></code> method takes away the complexity of 
 connecting to the Custom Tabs service.</p>
 
 <p>Create a class that extends <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsServiceConnection.html">CustomTabsServiceConnection</a></code> and use <code><a href="http://developer.android.com/reference/android/support/customtabs/CustomTabsServiceConnection.html#onCustomTabsServiceConnected(android.content.ComponentName, android.support.customtabs.CustomTabsClient)">onCustomTabsServiceConnected</a></code>
@@ -498,7 +498,7 @@ intent.putExtra(Intent.EXTRA_REFERRER,
    application opened the link using the browser before adding support for 
    Custom Tabs.</p>
 
-<h3>Let native applications to handle the content</h3>   
+<h3>Let native applications handle the content</h3>   
 
 <p>Some URLs can be handled by native applications. If the user has the Twitter 
    app installed and clicks on a link to a tweet. She expects that the Twitter 
@@ -667,6 +667,12 @@ serviceIntent.setPackage(CUSTOM_TAB_PACKAGE_NAME);
 context.bindService(serviceIntent, mServiceConnection,
                     Context.BIND_AUTO_CREATE | Context.BIND_WAIVE_PRIORITY);    
 </pre>
+<h2 id="LINKS">Useful Links</h2>
+<ul>
+    <li><a href="https://github.com/GoogleChrome/custom-tabs-client">Github Demo</a></li>
+    <li><a href="http://stackoverflow.com/questions/tagged/chrome-custom-tabs">Chrome Custom Tabs on StackOverflow</a></li>
+</ul>
+
 <h2 id="FAQ">FAQ</h2>
 
 <ul>
