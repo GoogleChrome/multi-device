@@ -206,30 +206,13 @@ to support a homescreen launch experience before Chrome 39.</p>
 </pre>
 
 </div><div class="collapsible">
-<h2 id="comparison-to-ios">Comparison to iOS Safari Add to homescreen</h2>
 
-<p>Chrome will also allow web apps to launch in "App mode" if they embed a meta tag using the "apple-mobile-web-app-capable" name.  Chrome will stop supporting this usage in an upcoming release.  Chrome currently shows a deprecation warning in the Developer Tools’ console log when it detects a page with only the "apple-mobile-web-app-capable" meta tag. The warning appears as follows:</p>
-
-<img src="/multidevice/images/home_warning.png" style="width: 75%; height: 75%" />
-
-<p>Whilst Chrome temporarily accepts the usage of "apple-mobile-web-app-capable", Chrome does not offer compatibility with the iOS Safari API’s including:</p>
-
-<ul>
-	<li>window.navigator.standalone</li>
-	<li><code>&lt;meta name="apple-mobile-web-app-status-bar-style" content="black"&gt;</code></li>
-	<li><code>&lt;link rel="apple-touch-startup-image" href="/startup.png"&gt;</code></li>
-</ul>
-
-</div><div class="collapsible">
 <h2 id="faq">Frequently asked questions</h2>
 
 <dl>
 	<dt>How do I open links in the user’s browser?</dt>
 	<dd>As you would on the web, adding <code>target="_blank"</code> to an anchor forces the user out of the 
     web app and into the browser that the user added the icon from.</dd>
-
-	<dt>Does Add to homescreen work on Chrome for iOS?</dt>
-	<dd>No.</dd>
 
 	<dt>If I visit a page that I have already added to the homescreen, will it be full screen?</dt>
 	<dd>No, while you are browsing you remain in the browser even if you visit a page that's
