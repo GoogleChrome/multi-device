@@ -13,7 +13,7 @@ _This is a bit of a hack. The pages may look wonky._
 3. You will see the boilerplate with the index.html file already included
 4. To preview another document, add a url paramater with the filename
   * Something like: [http://localhost:8000/_preview.html?data-compression.html](http://localhost:8000/_preview.html?data-compression.html)
-  * Or: [http://localhost:8888/_preview.html?webview/gettingstarted.html](http://localhost:8888/_preview.html?webview/gettingstarted.html)
+  * Or: [http://localhost:8000/_preview.html?webview/gettingstarted.html](http://localhost:8000/_preview.html?webview/gettingstarted.html)
   * Things mostly work but is not exactly the same as viewing through DCC.
 
 ### Deployment
