@@ -85,37 +85,6 @@ in-depth discussion.</dd>
 
 </dl>
 
-
-</div><div class="collapsible">
-<h2 id="chrome-for-ios">Chrome for iOS</h2>
-
-<dl>
-<dt>Why is it called Incognito* and not just Incognito?</dt>
-<dd>The difference is that HTML5 local storage is shared between regular and Incognito* tabs. Chrome must use Apple's UIWebView for loading and rendering web content.  This class does not provide any API to inspect, save, restore, or clear HTML5 local storage.<br/>
-
-As expected, cookies and cache are fully separated in Incognito*.  History is not kept, passwords are not remembered, and OmniBox search suggestions are disabled. The only difference is local storage. Incognito* provides users with the best Incognito mode possible given platform limitations.
-</dd>
-
-<dt>Chrome seems slower when handling Javascript compared to Safari.</dt>
-<dd>Rendering and the Javascript engine are provided by iOS through UIWebView. Because Chrome does not have access to Safari’s Nitro engine, Chrome may have slower javascript performance.</dd>
-
-<dt>Chrome doesn't implement some HTML5 features such as WebGL and some CSS.</dt>
-<dd>Since Chrome for iOS uses the UIWebView, it provides the same HTML5/OWP features that this component provides.</dd>
-
-<dt>What are the differences between UIWebView and Safari?</dt>
-<dd>Mobile Safari uses the Nitro JS engine, which is often faster than the one in the UIWebView. UIWebView scrolling may appear slower, since it renders on the main thread, while Mobile Safari renders in a background thread. There are other differences, some of which are described in this <a href="http://stackoverflow.com/questions/3496505/differences-between-uiwebview-and-mobile-safari">StackOverflow question</a>.</dd>
-
-<dt>I can’t get RSS feeds or XML to load.</dt>
-<dd>UIWebView does not support XML or RSS.</dd>
-
-<dt>How can I get my iOS application to open URLs in Chrome?<dt>
-<dd>
-Use the <code>googlechrome/googlechromes</code> schemes instead of
-<code>http/https</code>. More information can be found in
-<a href="ios/links.html">the article on this topic</a>.
-</dd>
-</dl>
-
 </div>
 
 {{/partials.standard_multidevice_article}}
