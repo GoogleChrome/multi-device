@@ -416,7 +416,7 @@ then custom tabs can safely be used.
 <p>It's usually very important for websites to track where their traffic is coming from. Make sure you let them know you are sending them users by setting the referrer when launching your Custom Tab</p>
 <pre>
 intent.putExtra(Intent.EXTRA_REFERRER, 
-        Uri.parse(Intent.URI_ANDROID_APP_SCHEME + "//" + context.getPackageName()));
+        Uri.parse("android-app://" + context.getPackageName()));
 </pre>
 
 <h3>Add custom animations</h3>
