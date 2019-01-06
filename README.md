@@ -5,14 +5,15 @@ This is the source of the official [Chrome Multi-Device documentation](https://d
 
 ### Running the site
 
+_This is a bit of a hack. The pages may look wonky._
+
 1. In the root of the project, start a server on port 8000
-  * See this [script for Python server](https://github.com/paulirish/dotfiles/blob/3fa2e7dc1f1ea5eaf7f6a2531b937ff8bd8833f9/.functions#L25-L32).
-  * It's easier if your server can also do a directory listing.
+  * For example: `python -m SimpleHTTPServer 8000`
 2. Open [http://localhost:8000/_preview.html](http://localhost:8000/_preview.html)
 3. You will see the boilerplate with the index.html file already included
 4. To preview another document, add a url paramater with the filename
   * Something like: [http://localhost:8000/_preview.html?data-compression.html](http://localhost:8000/_preview.html?data-compression.html)
-  * Or: [http://localhost:8888/_preview.html?webview/gettingstarted.html](http://localhost:8888/_preview.html?webview/gettingstarted.html)
+  * Or: [http://localhost:8000/_preview.html?webview/gettingstarted.html](http://localhost:8000/_preview.html?webview/gettingstarted.html)
   * Things mostly work but is not exactly the same as viewing through DCC.
 
 ### Deployment
