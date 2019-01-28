@@ -14,22 +14,26 @@ users and URLs.
 <h2 id="proxy-connection">Proxy Connection</h2>
 
 <p>
-Enabling the <a href="data-compression.html">Data Saver</a> feature
-in Chrome establishes a connection between the browser and Google's
-servers to proxy HTTP requests. HTTPS requests and pages loaded in
-Incognito tabs are not proxied.
+Enabling the 
+<a href="https://support.google.com/chrome/answer/2392284?co=GENIE.Platform%3DAndroid&hl=en">Data Saver</a>
+feature in Chrome establishes a connection between the browser and Google's
+servers to proxy HTTP requests. Pages loaded in
+Incognito tabs are never proxied or optimized. In the vast majority of cases,
+HTTPS traffic is not affected by Data Saver. On extremely slow page loads, Chrome
+will redirect to a Google-hosted domain which serves a transcoded version of the
+page to save data and load faster. This is only used on very slow page loads, or
+when the page might fail to load at all.
 </p>
 
 <p>
-When possible, the proxy connection is encrypted using SSL, and uses the
-HTTP/2 protocol to optimize data transfers. In certain cases, as described
+When possible, the proxy connection is encrypted using SSL. In certain cases, as described
 below, the proxy connection may use unencrypted HTTP/1.1.
 </p>
 
 <p>
 Google's proxy servers perform various optimizations on the Web page
-content, with the goal of reducing bandwidth usage. The DCP transcodes
-images to the WebP format, reduces image quality, compresses and minifies
+content, with the goal of reducing bandwidth usage and improving performance. The DCP
+transcodes images to the WebP format, reduces image quality, compresses and minifies
 Javascript and CSS resources, and applies gzip and other transport-level
 compression.
 </p>
