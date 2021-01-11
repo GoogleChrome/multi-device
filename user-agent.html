@@ -54,7 +54,6 @@ following can be used to check against Chrome on Android phones and tablets:</p>
 
 </section>
 
-
 <section class="collapsible">
 
 <h2 id="chrome_for_ios_user_agent">Chrome for iOS</h2>
@@ -65,21 +64,24 @@ user agent, with <code>CriOS/&lt;ChromeRevision&gt;</code> instead of
 
 <p>Here’s an example of the <strong>Chrome</strong> UA on iPhone:</p>
 
-<pre class="ua-example">Mozilla/5.0 (iPhone; U; CPU iPhone OS 5_1_1 like Mac OS X; en)
-AppleWebKit/534.46.0 (KHTML, like Gecko) <b>CriOS/19.0.1084.60</b> Mobile/9B206
-Safari/7534.48.3</pre>
+<pre class="ua-example">Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X)
+AppleWebKit/602.1.50 (KHTML, like Gecko) <b>CriOS/56.0.2924.75</b>
+Mobile/14E5239e Safari/602.1</pre>
 
-<p>For comparison, the <strong>Safari</strong> UA:</p>
+<p>For comparison, the <strong>Mobile Safari</strong> UA:</p>
 
-<pre class="ua-example">Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en)
-AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543
-Safari/419.3</pre>
+<pre class="ua-example">Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X)
+AppleWebKit/603.1.23 (KHTML, like Gecko) Version/10.0
+Mobile/14E5239e Safari/602.1</pre>
 
-<p>For more information about Mobile Safari user agent strings, see
-<a href="https://developer.apple.com/library/safari/documentation/appleapplications/reference/safariwebcontent/OptimizingforSafarioniPhone/OptimizingforSafarioniPhone.html#//apple_ref/doc/uid/TP40006517-SW3">Using the Safari User Agent String</a>.</p>
+When the Request Desktop Site feature is enabled, the <strong>Desktop Safari</strong> UA is
+sent:
+
+<pre class="ua-example">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4)
+AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7
+Safari/600.7.12</pre>
 
 </section>
-
 
 <section class="collapsible">
 <h2 id="webview_user_agent">WebView on Android</h2>
@@ -88,26 +90,28 @@ Safari/419.3</pre>
 
 <p>Old WebView UA:</p>
 
-<pre class="ua-example">Mozilla/5.0 (Linux; U; Android 4.1.1; en-gb; Build/KLP) 
+<pre class="ua-example">Mozilla/5.0 (Linux; U; Android 4.1.1; en-gb; Build/KLP)
 AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30</pre>
 
 <p><strong>WebView UA in KitKat to Lollipop</strong></p>
 
-<pre class="ua-example">Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_) 
+<pre class="ua-example">Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_)
 AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 <b>Chrome/30.0.0.0 Mobile</b>
 Safari/537.36</pre>
 
-<p>If you’re attempting to differentiate between the WebView and Chrome for Android, 
+<p>If you’re attempting to differentiate between the WebView and Chrome for Android,
 you should look for the presence of the <strong>Version/_X.X_</strong> string in the WebView
-user-agent string. Don’t rely on the specific Chrome version number 
+user-agent string. Don’t rely on the specific Chrome version number
 (for example, 30.0.0.0) as the version numbers changes with each release.</p>
 
 <p><strong>WebView UA in Lollipop and Above</strong></p>
 
-<p>In the newer versions of WebView you can differentiate the WebView by looking for the wv field as highlighted below.</p>
+<p>In the newer versions of WebView,
+you can differentiate the WebView by looking for the wv field as highlighted below.</p>
 
-<pre class="ua-example">Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; <b>wv</b>) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 <b>Chrome/43.0.2357.65 Mobile</b> Safari/537.36</pre>
-
+<pre class="ua-example">Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; <b>wv</b>)
+AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 <b>Chrome/43.0.2357.65 Mobile</b>
+Safari/537.36</pre>
 
 </section>
 
