@@ -1,7 +1,7 @@
 The Chrome Multi-Device documentation
 ============
 
-This is the source of the official [Chrome Multi-Device documentation](https://developer.chrome.com/multidevice/index) on developer.chrome.com (aka "DCC").
+This is the source of the official [Chrome Multi-Device documentation](https://developer.chrome.com/multidevice/overview/) on developer.chrome.com (aka "DCC").
 
 ### Running the site
 
